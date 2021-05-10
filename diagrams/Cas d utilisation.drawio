@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-10T14:37:10.722Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="BzXQJhcBruLBrPe7Npkc" version="14.6.11" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-10T14:39:01.207Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="eZxrVPRh_XSxdg6B9Kfq" version="14.6.11" type="github">
   <diagram id="pA5avtuYv_vaAWWeR1O9" name="Page-1">
     <mxGraphModel dx="1813" dy="1272" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -73,7 +73,7 @@
             <mxPoint x="550" y="540" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Cn7OezhNlx5GUGJKHajz-26" value="Consulter article" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="Cn7OezhNlx5GUGJKHajz-26" value="Consulter article&lt;br&gt;partiel" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="170" y="770" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="Cn7OezhNlx5GUGJKHajz-27" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Cn7OezhNlx5GUGJKHajz-5" target="Cn7OezhNlx5GUGJKHajz-26">
@@ -143,6 +143,24 @@
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="390" y="520" as="sourcePoint" />
             <mxPoint x="550" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cn7OezhNlx5GUGJKHajz-41" value="Créer un compte" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="210" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Cn7OezhNlx5GUGJKHajz-42" value="" style="endArrow=open;endFill=1;endSize=12;html=1;" edge="1" parent="1" source="Cn7OezhNlx5GUGJKHajz-5" target="Cn7OezhNlx5GUGJKHajz-41">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="390" y="520" as="sourcePoint" />
+            <mxPoint x="550" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cn7OezhNlx5GUGJKHajz-43" value="Changer son mot de passe" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="70" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Cn7OezhNlx5GUGJKHajz-44" value="" style="endArrow=open;endFill=1;endSize=12;html=1;" edge="1" parent="1" source="Cn7OezhNlx5GUGJKHajz-5" target="Cn7OezhNlx5GUGJKHajz-43">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="390" y="510" as="sourcePoint" />
+            <mxPoint x="550" y="510" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
