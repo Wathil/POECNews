@@ -1,5 +1,5 @@
 # POEC News
-<!-- Groupe: POECNews, Slimane et Yannick
+ Groupe: POECNews, Slimane et Yannick
 Sujet: Site de diffusion d’informations payantes
 Le site s’articule autour de la gestion de rôles
 Liste des fonctionnalités:
@@ -53,4 +53,4 @@ ADMINISTRATEUR
 	
 Ce que le site ne fait pas:
 	Gestion des abonnements
-	Pré-achat d’articles  -->
+	Pré-achat d’articles 
