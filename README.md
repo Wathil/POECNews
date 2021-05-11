@@ -53,4 +53,4 @@ ADMINISTRATEUR
 	
 Ce que le site ne fait pas:
 	Gestion des abonnements
-	Pré-achat d’articles -->
+	Pré-achat d’articles  -->
