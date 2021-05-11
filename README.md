@@ -42,13 +42,13 @@
 #	A2 Enregistrer un nouveau rédacteur ou le modifier ou le désactiver
 #	A3 Modifier un article d'un rédacteur
 #	A4 Désactiver un article d'un rédacteur
-#	A4 Ajouter supprimer des photos (droit à l’image) dans la bibliothèque d'image
-#	A5 Consulter la liste des clients enregistrés avec les commentaires associés et les articles achetés
-#	A6 Répondre aux réclamations des clients reçues de l’interface par email
-#	A7 Rembourser le client en lui offrant l’article de son choix (crédit d’article)
-#	A8 Consulter la liste des commentaires non modérés (nouveaux et modifiés)
-#	A9 Modérer les commentaires (effacés de la consultation mais garder en mémoire) si il enfreint les règles en justifiant la raison
-#	A10 L'administrateur gère les tags
+#	A5 Ajouter supprimer des photos (droit à l’image) dans la bibliothèque d'image
+#	A6 Consulter la liste des clients enregistrés avec les commentaires associés et les articles achetés
+#	A7 Répondre aux réclamations des clients reçues de l’interface par email
+#	A8 Rembourser le client en lui offrant l’article de son choix (crédit d’article)
+#	A9 Consulter la liste des commentaires non modérés (nouveaux et modifiés)
+#	A10 Modérer les commentaires (effacés de la consultation mais garder en mémoire) si il enfreint les règles en justifiant la raison
+#	A11 L'administrateur gère les tags
 #	Le client est bien informé qu’en cas de litige (erreur d’article acheté, désactivation de l’article) il ne recevra qu’un crédit d’article et non du cash
 #	
 #Ce que le site ne fait pas:
