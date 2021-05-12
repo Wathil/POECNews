@@ -1,5 +1,5 @@
 # POEC News
-# Groupe: POECNews, Slimane et Yannick
+# Groupe: POECNews, El Hassane, Slimane et Yannick
 #Sujet: Site de diffusion d’informations payantes
 #Le site s’articule autour de la gestion de rôles
 #Liste des fonctionnalités:
