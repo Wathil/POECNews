@@ -6,7 +6,7 @@ USE POECNewsDBMySQL;
 DROP TABLE IF EXISTS redacteur ;
 
 CREATE TABLE IF NOT EXISTS redacteur(
-	id numeric,
+	id INTEGER AUTO_INCREMENT,
 	userlogin varchar(45),
     passwd varchar(45),
     penname varchar(45),

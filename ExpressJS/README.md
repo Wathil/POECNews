@@ -6,6 +6,12 @@
 # npm i mysql2
 # npm i sequelize
 # 
+# HOST: "localhost"
+# USER: "root"
+# PASSWORD: "root"
+# DB: "POECNewsDBMySQL"
+# dialect: "mysql"
+#
 # node --trace-deprecation index
 #
 # http://localhost:8080/redacteurs

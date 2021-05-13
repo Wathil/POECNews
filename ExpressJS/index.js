@@ -21,7 +21,7 @@ app.use(express.urlencoded());
 
 function initial() {
     redacteur.create({
-        id: 1,
+        //id: 1,
         userlogin: "userlogin",
         passwd: "passwd",
         penname: "test rédacteur",

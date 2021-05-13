@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
     const redacteur = sequelize.define('redacteur', {
         id: {
             type: Sequelize.INTEGER,
+            autoIncrement: true,
             primaryKey: true
         },
         userlogin: {
