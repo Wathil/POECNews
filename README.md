@@ -1,4 +1,7 @@
 # POEC News
+#
+# github: https://github.com/Wathil/POECNews
+#
 # Groupe: POECNews, El Hassane, Slimane et Yannick
 #Sujet: Site de diffusion d’informations payantes
 #Le site s’articule autour de la gestion de rôles
