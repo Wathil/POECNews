@@ -7,7 +7,5 @@
 # npm i @koa/cors
 # npm i koa-bodyparser@2
 
-# node my-koa-app.js
+# node index
 #
-# 
-# https://babeljs.io/docs/en/babel-register/
