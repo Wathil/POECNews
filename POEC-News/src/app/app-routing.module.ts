@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'rec-mdp',
     pathMatch: 'full'
   },
   // {
@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'gerer-info',
     loadChildren: () => import('./pages/gerer-info/gerer-info.module').then( m => m.GererInfoPageModule)
+  },
+  {
+    path: 'rec-mdp',
+    loadChildren: () => import('./pages/rec-mdp/rec-mdp.module').then( m => m.RecMdpPageModule)
   }
 ];
 

@@ -3,13 +3,23 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>  
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <img class="logo" src="./../../../assets/img/logo-POECNews.png">
   </ion-list>
-
+  <ion-list class="connect" >
+    <ion-item>
+      <ion-input id="pseudo" placeholder="IDENTIFIANT" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input id="mdp" placeholder="MOT DE PASSE" type="password"></ion-input>
+    </ion-item>
+    <ion-button id="buttonConnect" expand="block">CONNEXION</ion-button>
+    <a href="">Mot de passe oublié</a>
+    <ion-button id="buttonIns" color="secondary" >S'INSCRIRE</ion-button>
+  </ion-list>
 
 </ion-content>
