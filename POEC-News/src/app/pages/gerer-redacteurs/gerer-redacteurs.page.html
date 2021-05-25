@@ -3,11 +3,68 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <img class="logo" src="./../../../assets/img/logo-POECNewsBlanc.png">
+    <!-- <ion-title>POEC-News</ion-title> -->
+    <!-- <img class="logo" src="./../../../assets/img/logo-POECNewsBlanc.png"> -->
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-title>Gérer les rédacteurs</ion-title>
-  
+<ion-content [fullscreen]="true">
+  <ion-list>
+
+    <ion-list-header>
+      <h4 class="titreUser">Gérer les rédacteurs</h4>
+      <ion-icon name="person-add" class="iconAddUser" (click)="ajouterRedacteur()"></ion-icon>
+      <!-- TS: ajouterRedacteur() -->
+    </ion-list-header>
+
+    <form class="addRedacteur" [class.close]="hide" [formGroup]="redacteurForm" (ngSubmit)="saveRedateur()">
+      <!-- TS: saveRedateur() -->
+      <ion-item>
+        <ion-label position="floating">Login Name :</ion-label>
+        <ion-input formControlName="redacteurloginname" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email :</ion-label>
+        <ion-input formControlName="email" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password :</ion-label>
+        <ion-input formControlName="password" type="password" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button type="submit" mdc-button raised style="width:100%">Ajouter Rédacteur</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+  <ion-list>
+    <div *ngIf="redacteurs.length; else spinner"> <!-- TS: redacteurs: Array<Redacteur> -->
+      <ion-item lines="inset" *ngFor="let elt of redacteurs">
+        <ion-label>
+          <p>{{ elt.id }}</p>
+          <p>{{ elt.username }}</p>
+          <p>{{ elt.email }}</p>
+        </ion-label>
+        <div>
+          <ion-icon name="create" style="zoom:1.6" [routerLink]="['/redacteurs-details/', elt.id]"></ion-icon>
+          <ion-icon name="trash" style="zoom:1.6" (click)="deleteRedacteur(elt.id)"></ion-icon> <!-- TS: deleteRedacteur(number) -->
+        </div>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ng-template #spinner>
+    <div id="spinner">
+      <ion-spinner name="lines"></ion-spinner>
+    </div>
+  </ng-template>
+
 </ion-content>
