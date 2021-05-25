@@ -1,3 +1,5 @@
+<!-- http://localhost:8102/gerer-redacteurs -->
+
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
@@ -13,12 +15,12 @@
   <ion-list>
 
     <ion-list-header>
-      <h4 class="titreUser">Gérer les rédacteurs</h4>
-      <ion-icon name="person-add" class="iconAddUser" (click)="ajouterRedacteur()"></ion-icon>
+      <h4 class="titre">Gérer les rédacteurs</h4>
+      <ion-icon name="person-add" class="iconAdd" (click)="ajouterRedacteur()"></ion-icon>
       <!-- TS: ajouterRedacteur() -->
     </ion-list-header>
 
-    <form class="addRedacteur" [class.close]="hide" [formGroup]="redacteurForm" (ngSubmit)="saveRedateur()">
+    <form class="formRedacteur" [class.close]="hide" [formGroup]="redacteurForm" (ngSubmit)="saveRedateur()">
       <!-- TS: saveRedateur() -->
       <ion-item>
         <ion-label position="floating">Login Name :</ion-label>
@@ -39,7 +41,8 @@
 
       <ion-row>
         <ion-col>
-          <button type="submit" mdc-button raised style="width:100%">Ajouter Rédacteur</button>
+          <!-- https://material.angular.io/components/button/examples -->
+          <button type="submit" mat-raised-button color="primary" style="width:100%">Ajouter Rédacteur</button>
         </ion-col>
       </ion-row>
     </form>

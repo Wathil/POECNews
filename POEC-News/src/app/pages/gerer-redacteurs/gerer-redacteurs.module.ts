@@ -8,13 +8,16 @@ import { GererRedacteursPageRoutingModule } from './gerer-redacteurs-routing.mod
 
 import { GererRedacteursPage } from './gerer-redacteurs.page';
 
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    GererRedacteursPageRoutingModule
+    GererRedacteursPageRoutingModule,
+    MatButtonModule
   ],
   declarations: [GererRedacteursPage]
 })
