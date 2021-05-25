@@ -14,6 +14,26 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'gerer-articles',
+    loadChildren: () => import('./pages/gerer-articles/gerer-articles.module').then( m => m.GererArticlesPageModule)
+  },
+  {
+    path: 'gerer-redacteurs',
+    loadChildren: () => import('./pages/gerer-redacteurs/gerer-redacteurs.module').then( m => m.GererRedacteursPageModule)
+  },
+  {
+    path: 'gerer-utilisateurs',
+    loadChildren: () => import('./pages/gerer-utilisateurs/gerer-utilisateurs.module').then( m => m.GererUtilisateursPageModule)
+  },
+  {
+    path: 'connexion',
+    loadChildren: () => import('./pages/connexion/connexion.module').then( m => m.ConnexionPageModule)
+  },
+  {
+    path: 'gerer-info',
+    loadChildren: () => import('./pages/gerer-info/gerer-info.module').then( m => m.GererInfoPageModule)
   }
 ];
 

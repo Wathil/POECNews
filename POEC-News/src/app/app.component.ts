@@ -9,44 +9,35 @@ export class AppComponent implements OnInit {
 
   userStatus = "admin";
 
-  // utilisateurMenu = [
-  //   { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-  //   { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-  //   { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-  //   { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-  //   { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-  //   { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  // ];
-
   public appPages = {
-    admin : [
-      { title: 'Gerer les articles', url: '/folder/Inbox', icon: 'mail' },
-      { title: 'Gerer les utilisateurs', url: '/folder/Outbox', icon: 'paper-plane' },
-      { title: 'Gerer les rédacteurs', url: '/folder/Favorites', icon: 'heart' },
-  ],
-  utilisateur : [
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ],
-  redacteur : [
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ],
-  default : [
-    { title: 'Home', url: '/home', icon: undefined },
-    { title: 'Connexion', url: '/home', icon: undefined },
-  ]
-};
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+    admin: [
+      { title: 'Accueil', url: '/home', icon: 'home' },
+      { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
+      { title: 'Gérer les utilisateurs', url: 'gerer-utilisateurs', icon: 'people' },
+      { title: 'Gérer les rédacteurs', url: 'gerer-redacteurs', icon: 'people-circle' },
+    ],
+    utilisateur: [
+      { title: 'Accueil', url: '/home', icon: 'home' },
+      { title: 'Gérer mes informations', url: 'gerer-info', icon: 'settings' },
+    ],
+    redacteur: [
+      { title: 'Accueil', url: '/home', icon: 'home' },
+      { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
+      { title: 'Gérer mes informations', url: 'gerer-info', icon: 'settings' },
+    ],
+    default: [
+      { title: 'Accueil', url: '/home', icon: 'home' },
+      { title: 'Connexion', url: '/connexion', icon: 'log-in' },
+    ]
+  };
+  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
     // setTimeout(()=> {
     //   this.userStatus = "admin";
     // }, 8000);
   }
- 
+
 
 }
