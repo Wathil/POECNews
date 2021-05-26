@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Redacteur } from 'src/app/classes/redacteur';
+import { User } from 'src/app/classes/User';
 
 @Component({
   selector: 'app-gerer-redacteurs',
@@ -13,23 +13,30 @@ export class GererRedacteursPage implements OnInit {
 
   // redacteurs: Array<Redacteur> = new Array<Redacteur>();
 
-  redacteurs: Array<Redacteur> = [{
+  redacteurs: Array<User> = [{
     id: 1,
-    redacteurloginname: "test1",
+    loginName: "test1",
     email: "test1@test.com",
-    password: "p1"
+    password: "p1",
+    penName: "penName1",
+    accredit: 1,
+    category: 1
   }, {
     id: 2,
-    redacteurloginname: "test2",
+    loginName: "test2",
     email: "test2@test.com",
-    password: "p2"
+    password: "p2",
+    penName: "penName2",
+    accredit: 1,
+    category: 1
   }];
 
   redacteurForm = this.formBuilder.group({
     id: [null],
-    redacteurloginname: [''],
+    loginName: [''],
     email: [''],
-    password: ['']
+    password: [''],
+    penName: ['']
   })
 
   constructor(private formBuilder: FormBuilder) { }

@@ -20,6 +20,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.redacteur = require('../models/redacteur.model')(sequelize, Sequelize);
+db.user = require('./user.model')(sequelize, Sequelize);
 
 module.exports = db;
