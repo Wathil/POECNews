@@ -1,4 +1,7 @@
 #
+# -- Création d'une base de données
+# CREATE DATABASE IF NOT EXISTS poecnewsdbmysql;
+#
 # npm i koa
 # npm i sequelize
 # npm i mysql2
