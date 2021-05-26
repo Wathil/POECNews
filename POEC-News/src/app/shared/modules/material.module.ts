@@ -6,8 +6,6 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
