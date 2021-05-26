@@ -4,12 +4,31 @@
 }
 
 .connect {
-    width: 50%;
-    margin-left: 25%;
+    padding: 0 13.5%;
+    display: flex;
+    flex-direction: column;
 }
 
 a{
     font-size: x-small;
     display: flex;
-    justify-content:right;
+    justify-content:flex-end;
 }
+
+::ng-deep .mat-form-field-wrapper  {
+        padding-bottom: 0;
+}    
+
+
+mat-form-field{
+    display: flex;
+    justify-content:center;    
+}
+
+#buttonIns{
+    background-color: #6e7fe0;
+    color: #fff;
+}
+
+
+

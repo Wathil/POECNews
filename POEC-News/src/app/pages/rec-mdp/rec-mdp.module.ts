@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RecMdpPageRoutingModule } from './rec-mdp-routing.module';
 
 import { RecMdpPage } from './rec-mdp.page';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RecMdpPageRoutingModule
+    RecMdpPageRoutingModule,
+    MaterialModule  
   ],
   declarations: [RecMdpPage]
 })

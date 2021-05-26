@@ -8,18 +8,22 @@
 
 <ion-content>
   <ion-list>
-    <img class="logo" src="./../../../assets/img/logo-POECNews.png">
+    <img class="logo" src="./assets/img/logo-POECNews.png">
   </ion-list>
-  <ion-list class="connect" >
-    <ion-item>
-      <ion-input id="pseudo" placeholder="IDENTIFIANT" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input id="mdp" placeholder="MOT DE PASSE" type="password"></ion-input>
-    </ion-item>
-    <ion-button id="buttonConnect" expand="block">CONNEXION</ion-button>
-    <a href="">Mot de passe oublié</a>
-    <ion-button id="buttonIns" color="secondary" >S'INSCRIRE</ion-button>
+  <ion-list>
+    <form class="connect">
+      <mat-form-field appearance="outline">
+        <mat-label>IDENTIFIANT</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>MOT DE PASSE</mat-label>
+        <input matInput type="password">
+      </mat-form-field>
+      <button id="buttonConnect" mat-raised-button color="primary" (click)="goConnect()">CONNEXION</button>
+      <a routerLink="/rec-mdp">Mot de passe oublié</a>
+      <button id="buttonIns" mat-raised-button color="secondary">S'INSCRIRE</button>
+    </form>
   </ion-list>
 
 </ion-content>
