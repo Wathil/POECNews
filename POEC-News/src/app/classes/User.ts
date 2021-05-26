@@ -6,4 +6,16 @@ export class User {
     penName!: string; // For Redacteur Writer Author
     accredit!: number;
     category!: number; // 0: Admin; 1: Rédacteur; 2: Utilisateur
+
+    constructor(user: any) {
+        if (user) {
+            this.id = user.id;
+            this.loginName = user.loginName;
+            this.email = user.email;
+            this.password = user.password;
+            this.penName = user.penName;
+            this.accredit = user.accredit;
+            this.category = user.category;
+        }
+    }
 }

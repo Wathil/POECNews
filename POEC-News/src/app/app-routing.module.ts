@@ -4,8 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    //redirectTo: 'rec-mdp',
-    redirectTo: 'gerer-redacteurs',
+    redirectTo: 'connexion',
     pathMatch: 'full'
   },
   // {
