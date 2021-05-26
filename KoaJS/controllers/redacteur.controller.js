@@ -6,12 +6,12 @@ module.exports = {
     async getRedacteurs(ctx) {
         try {
             const redacteurCollection = await redacteur.findAll();
-            ctx.status=201;
+            ctx.status = 201;
             ctx.body = redacteurCollection;
         }
         catch (e) {
             console.log(e);
-            ctx.status=500;
+            ctx.status = 500;
             ctx.body = e;
         }
     },
@@ -22,12 +22,12 @@ module.exports = {
             const obj = ctx.request.body;
             console.log(obj); // OK
             const newRedacteur = await redacteur.create(obj);
-            ctx.status=201;
+            ctx.status = 201;
             ctx.body = newRedacteur;
         }
         catch (e) {
             console.log(e);
-            ctx.status=400;
+            ctx.status = 400;
             ctx.body = e;
         }
     }

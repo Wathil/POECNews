@@ -7,17 +7,20 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        userlogin: {
+        redacteurloginname: {
             type: Sequelize.STRING
         },
-        passwd: {
+        email: {
+            type: Sequelize.STRING
+        },
+        password: {
             type: Sequelize.STRING
         },
         penname: {
             type: Sequelize.STRING
         },
         accredit: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER // Sequelize ne fonctionne pas avec les boolean javascript
         }
     }, {
         tableName: 'redacteur' // Sinon sequelize prend POECNewsDBMySQL.redacteurs SELECT `id`, `userlogin`, `passwd`, `penname`, `accredit`, `createdAt`, `updatedAt` FROM `redacteurs` AS `redacteur`;

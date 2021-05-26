@@ -22,11 +22,20 @@ app.use(bodyParser()); // JSON integrated
 
 function initial() {
     redacteur.create({
-        //id: 1,
-        userlogin: "userlogin",
-        passwd: "passwd",
-        penname: "test rédacteur",
+        //id: 1, // AUTO INCREMENT
+        redacteurloginname: "r1",
+        email: "truc@machin.com",
+        password: "123456",
+        penname: "test rédacteur 1",
         accredit: 0
+    });
+    redacteur.create({
+        //id: 2, // AUTO INCREMENT
+        redacteurloginname: "r2",
+        email: "truc@machin.com",
+        password: "123456",
+        penname: "test rédacteur 2",
+        accredit: 1
     });
 }
 
