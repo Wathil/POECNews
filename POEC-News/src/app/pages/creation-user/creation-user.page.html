@@ -8,11 +8,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="title">GÉRER LES INFORMATIONS</ion-title>
+  <ion-title class="title">CRÉATION COMPTE</ion-title>
   <ion-list lines="full">
     <!-- [formGroup]="editForm" (ngSubmit)="saveForm()" -->
     <form >
-
+      <ion-item class="statusForm">
+        <ion-label>Status</ion-label>
+        <ion-select value="util">
+          <ion-select-option value="util">Utilisateur</ion-select-option>
+          <ion-select-option value="redac">Rédacteur</ion-select-option>
+        </ion-select>
+      </ion-item>
       <ion-item>
         <ion-label position="floating">Nom/Pseudo</ion-label>
         <!-- formControlName="username"  -->
@@ -36,7 +42,7 @@
           <ion-button type="submit" color="primary" shape="full" expand="block">Modifier</ion-button>
         </ion-col>
       </ion-row> -->
-      <button class="editInfo" mat-raised-button color="primary">MODIFIER</button>
+      <button class="editInfo" mat-raised-button color="primary">CRÉER</button>
       <button class="annuler" mat-raised-button>ANNULER</button>
 
     </form>

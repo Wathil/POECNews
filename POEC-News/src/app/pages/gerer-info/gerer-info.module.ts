@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GererInfoPageRoutingModule } from './gerer-info-routing.module';
 
 import { GererInfoPage } from './gerer-info.page';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GererInfoPageRoutingModule
+    GererInfoPageRoutingModule,
+    MaterialModule
   ],
   declarations: [GererInfoPage]
 })

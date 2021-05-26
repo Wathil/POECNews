@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'rec-mdp',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   // {
@@ -38,7 +38,12 @@ const routes: Routes = [
   {
     path: 'rec-mdp',
     loadChildren: () => import('./pages/rec-mdp/rec-mdp.module').then( m => m.RecMdpPageModule)
+  },
+  {
+    path: 'creation-user',
+    loadChildren: () => import('./pages/creation-user/creation-user.module').then( m => m.CreationUserPageModule)
   }
+
 ];
 
 @NgModule({

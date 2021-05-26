@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { CreationUserPageRoutingModule } from './creation-user-routing.module';
 
-import { HomePage } from './home.page';
+import { CreationUserPage } from './creation-user.page';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    CreationUserPageRoutingModule,
     MaterialModule
   ],
-  declarations: [HomePage]
+  declarations: [CreationUserPage]
 })
-export class HomePageModule {}
+export class CreationUserPageModule {}
