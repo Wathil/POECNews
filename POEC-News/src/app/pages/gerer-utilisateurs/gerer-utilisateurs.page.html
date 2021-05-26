@@ -3,11 +3,67 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <img class="logo" src="./../../../assets/img/logo-POECNewsBlanc.png">
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-title>Gérer les utilisateurs</ion-title>
-  
+<ion-content [fullscreen]="true">
+  <ion-list>
+
+    <ion-list-header>
+      <h4 class="titre">Gérer les utilisateurs</h4>
+      <ion-icon name="person-add" class="iconAdd" (click)="ajouterUtilisateur()"></ion-icon>
+      <!-- TS: ajouterUtilisateur() -->
+    </ion-list-header>
+
+    <form class="formUtilisateurs" [class.close]="hide" [formGroup]="utilisateurForm" (ngSubmit)="saveUtilisateur()">
+      <!-- TS: saveUtilisateur() -->
+      <ion-item>
+        <ion-label position="floating">Login Name :</ion-label>
+        <ion-input formControlName="utilisateurloginname" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email :</ion-label>
+        <ion-input formControlName="email" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password :</ion-label>
+        <ion-input formControlName="password" type="password" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <!-- https://material.angular.io/components/button/examples -->
+          <button type="submit" mat-raised-button color="primary" style="width:100%">Ajouter Utilisateur</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+  <ion-list>
+    <div *ngIf="utilisateurs.length; else spinner"> <!-- TS: utilisateurs: Array<Utilisateur> -->
+      <ion-item lines="inset" *ngFor="let elt of utilisateurs">
+        <ion-label>
+          <p>{{ elt.id }}</p>
+          <p>{{ elt.username }}</p>
+          <p>{{ elt.email }}</p>
+        </ion-label>
+        <div>
+          <ion-icon name="create" style="zoom:1.6" [routerLink]="['/utilisateurs-details/', elt.id]"></ion-icon>
+          <ion-icon name="trash" style="zoom:1.6" (click)="deleteUtilisateur(elt.id)"></ion-icon> <!-- TS: deleteUtilisateur(number) -->
+        </div>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ng-template #spinner>
+    <div id="spinner">
+      <ion-spinner name="lines"></ion-spinner>
+    </div>
+  </ng-template>
+
 </ion-content>
