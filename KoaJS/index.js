@@ -6,7 +6,7 @@ const router = new Router();
 
 const db = require("./models");
 
-const redacteur = db.redacteur;
+const user = db.user;
 
 db.sequelize.sync({ force: true })
     .then(() => {
@@ -21,25 +21,54 @@ const bodyParser = require('koa-bodyparser');
 app.use(bodyParser()); // JSON integrated
 
 function initial() {
-    redacteur.create({
+    user.create({ // USER
         //id: 1, // AUTO INCREMENT
-        redacteurloginname: "r1",
+        loginName: "r1",
         email: "truc@machin.com",
         password: "123456",
-        penname: "test rédacteur 1",
-        accredit: 0
+        penName: "test rédacteur 1",
+        accredit: 1,
+        category: 1 // 0: Admin; 1: Rédacteur; 2: Utilisateur
     });
-    redacteur.create({
-        //id: 2, // AUTO INCREMENT
-        redacteurloginname: "r2",
+    user.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        loginName: "r2",
         email: "truc@machin.com",
         password: "123456",
-        penname: "test rédacteur 2",
-        accredit: 1
+        penName: "test rédacteur 2",
+        accredit: 0,
+        category: 1 // 0: Admin; 1: Rédacteur; 2: Utilisateur
+    });
+    user.create({
+        //id: 2, // AUTO INCREMENT
+        loginName: "admin1", // pseudo
+        email: "truc@machin.com", 
+        password: "123456",
+        penName: "test admin 1",
+        accredit: 1,
+        category: 0 // 0: Admin; 1: Rédacteur; 2: Utilisateur
+    });
+    user.create({
+        //id: 2, // AUTO INCREMENT
+        loginName: "admin2", // pseudo
+        email: "truc@machin.com", 
+        password: "123456",
+        penName: "test admin 2",
+        accredit: 1,
+        category: 0 // 0: Admin; 1: Rédacteur; 2: Utilisateur
+    });
+    user.create({
+        //id: 2, // AUTO INCREMENT
+        loginName: "user1", // pseudo
+        email: "truc@machin.com", 
+        password: "123456",
+        penName: "test user 1",
+        accredit: 0,
+        category: 2 // 0: Admin; 1: Rédacteur; 2: Utilisateur
     });
 }
 
-require('./routes/redacteur.routes')(router);
+require('./routes/user.routes')(router);
 
 app
     .use(router.routes())
