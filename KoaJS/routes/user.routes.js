@@ -10,7 +10,7 @@ module.exports = function (router) {
 
   router.get("/users/:id", controller.getUser); // ok
 
-  router.post("/users/", controller.addUser); // ok
+  router.post("/users/add/", controller.addUser); // ok
 
   router.delete("/users/:id", controller.deleteUser); // ok
 
