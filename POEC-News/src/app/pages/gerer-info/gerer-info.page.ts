@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class GererInfoPage implements OnInit {
     private router : Router,
     private actRoute: ActivatedRoute,
     private formBuilder : FormBuilder,
-    private zone: NgZone
+    private zone: NgZone,
+    private toast : ToastController
     ) { }
 
   ngOnInit() {
@@ -41,9 +43,13 @@ export class GererInfoPage implements OnInit {
   }
   
   saveForm(){
-    this.userService.updateUser(this.id, this.editForm.value).subscribe(data => {
-      console.log("Edit user :" + data);
-      this.zone.run(() => this.router.navigate(['user']));
+    this.userService.updateUser(this.id, this.editForm.value).subscribe(async data => {
+      let toast = await this.toast.create({
+        message: 'Informations modifiées',
+        duration: 3000
+      });
+      toast.present();
+      // this.zone.run(() => this.router.navigate(['gerer-utilisateurs']));
     })
   }
 }

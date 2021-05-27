@@ -40,7 +40,7 @@ export class UserService {
   }
 
   addUser(data: User): Observable<any> {
-    let API_URL = `${this.url}/add/`;
+    let API_URL = `${this.url}`;
     return this.httpClient.post(API_URL, data)
       .pipe(
         catchError(this.errorMgmt)
