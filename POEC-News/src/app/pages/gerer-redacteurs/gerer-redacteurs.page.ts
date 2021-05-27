@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/classes/User';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-gerer-redacteurs',
@@ -11,27 +12,9 @@ export class GererRedacteursPage implements OnInit {
 
   hide = true;
 
-  // redacteurs: Array<Redacteur> = new Array<Redacteur>();
+  users: Array<User> = new Array<User>();
 
-  redacteurs: Array<User> = [{
-    id: 1,
-    loginName: "test1",
-    email: "test1@test.com",
-    password: "p1",
-    penName: "penName1",
-    accredit: 1,
-    category: 1
-  }, {
-    id: 2,
-    loginName: "test2",
-    email: "test2@test.com",
-    password: "p2",
-    penName: "penName2",
-    accredit: 1,
-    category: 1
-  }];
-
-  redacteurForm = this.formBuilder.group({
+  userForm = this.formBuilder.group({
     id: [null],
     loginName: [''],
     email: [''],
@@ -39,28 +22,47 @@ export class GererRedacteursPage implements OnInit {
     penName: ['']
   })
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private userService: UserService,
+    private formBuilder: FormBuilder
+    ) { }
 
   ngOnInit() {
-    console.log(this.redacteurs.length);
+    console.log(this.users.length);
     this.reloadData();
+  }
+
+  ionViewWillEnter(){
+    this.ngOnInit();
   }
 
   reloadData() {
     console.log("reloadData");
+    this.userService.getUsers().subscribe(data => {
+      console.log(data);
+      this.users = data;
+    });
   }
 
-  ajouterRedacteur() {
-    console.log("ajouterRedacteur");
-    this.hide = !this.hide; 
+  ajouterUser() {
+    this.hide = !this.hide;
   }
 
-  saveRedateur() {
-    console.log("saveRedateur");
+  saveUser() {
+    console.log("saveUser");
+    this.userService.addUser(this.userForm.value).subscribe(async data => {
+      console.log(data);
+      this.reloadData();
+      this.hide = !this.hide;
+    });
   }
 
-  deleteRedacteur(id: number) {
-    console.log("deleteRedacteur");
+  deleteUser(id: number) {
+    console.log("deleteUser");
+    this.userService.deleteUser(id).subscribe(async data => {
+      console.log(data);
+    });
+    this.reloadData();
   }
 
 }

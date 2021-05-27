@@ -7,7 +7,7 @@ import { User } from '../classes/User';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
 
   url: string = 'http://localhost:8080/users/';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -34,7 +34,7 @@ export class UserServiceService {
   }
 
   getUser(id: number): Observable<User> {
-    let API_URL = `${this.url}/${id}`;
+    let API_URL = `${this.url}${id}`;
     return this.httpClient.get(API_URL)
       .pipe(
         map((res: any) => {
@@ -45,7 +45,7 @@ export class UserServiceService {
   }
 
   updateUser(id: number, data: User): Observable<any> {
-    let API_URL = `${this.url}/${id}`;
+    let API_URL = `${this.url}${id}`;
     return this.httpClient.put(API_URL, data)
       .pipe(
         map((res: any) => {
@@ -56,7 +56,7 @@ export class UserServiceService {
   }
 
   deleteUser(id: number): Observable<any> {
-    var API_URL = `${this.url}/${id}`;
+    let API_URL = `${this.url}${id}`;
     return this.httpClient.delete(API_URL)
       .pipe(
         catchError(this.errorMgmt)

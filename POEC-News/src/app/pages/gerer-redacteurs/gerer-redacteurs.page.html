@@ -12,17 +12,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-title class="title">CRÉATION COMPTE</ion-title>
+
+  <ion-list-header>
+    <ion-title class="title">Gérer les rédacteurs</ion-title>
+    <ion-icon name="person-add" class="iconAdd" (click)="ajouterUser()"></ion-icon>
+    <!-- TS: ajouterUser() -->
+  </ion-list-header>
+
   <ion-list>
-
-    <ion-list-header>
-      <h4 class="titre">Gérer les rédacteurs</h4>
-      <ion-icon name="person-add" class="iconAdd" (click)="ajouterRedacteur()"></ion-icon>
-      <!-- TS: ajouterRedacteur() -->
-    </ion-list-header>
-
-    <form class="formRedacteur" [class.close]="hide" [formGroup]="redacteurForm" (ngSubmit)="saveRedateur()">
-      <!-- TS: saveRedateur() -->
+    <form class="formRedacteur" [class.close]="hide" [formGroup]="userForm" (ngSubmit)="saveUser()">
+      <!-- TS: saveUser() -->
       <ion-item>
         <ion-label position="floating">Login Name :</ion-label>
         <ion-input formControlName="loginName" type="text" required></ion-input>
@@ -52,12 +51,14 @@
           <button type="submit" mat-raised-button color="primary" style="width:100%">Ajouter Rédacteur</button>
         </ion-col>
       </ion-row>
-    </form>
-  </ion-list>
 
-  <ion-list>
-    <div *ngIf="redacteurs.length; else spinner"> <!-- TS: redacteurs: Array<Redacteur> -->
-      <ion-item lines="inset" *ngFor="let elt of redacteurs">
+    </form>
+  <!-- </ion-list>
+
+  <ion-list> -->
+    <div *ngIf="users.length; else spinner">
+      <!-- TS: redacteurs: Array<User> -->
+      <ion-item lines="inset" *ngFor="let elt of users">
         <ion-label>
           <p>{{ elt.id }}</p>
           <p>{{ elt.username }}</p>
@@ -65,7 +66,8 @@
         </ion-label>
         <div>
           <ion-icon name="create" style="zoom:1.6" [routerLink]="['/redacteurs-details/', elt.id]"></ion-icon>
-          <ion-icon name="trash" style="zoom:1.6" (click)="deleteRedacteur(elt.id)"></ion-icon> <!-- TS: deleteRedacteur(number) -->
+          <ion-icon name="trash" style="zoom:1.6" (click)="deleteUser(elt.id)"></ion-icon>
+          <!-- TS: deleteUser(number) -->
         </div>
       </ion-item>
     </div>
