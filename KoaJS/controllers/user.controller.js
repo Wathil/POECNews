@@ -10,7 +10,7 @@ module.exports = {
         try {
             const emailPost = obj.email;
             const passwordPost = obj.password;
-            const userCollection = await user.findAll(({
+            const userCollection = await user.findOne(({
                 where: {
                     [Op.and]: [
                       { email: emailPost },

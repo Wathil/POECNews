@@ -11,16 +11,16 @@
     <img class="logo" src="./assets/img/logo-POECNews.png">
   </ion-list>
   <ion-list>
-    <form class="connect">
+    <form class="connect" [formGroup]="loginForm" (ngSubmit)="goConnect()">
       <mat-form-field appearance="outline">
-        <mat-label>IDENTIFIANT</mat-label>
-        <input matInput>
+        <mat-label>EMAIL</mat-label>
+        <input matInput formControlName="email">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>MOT DE PASSE</mat-label>
-        <input matInput type="password">
+        <input matInput formControlName="password" type="password">
       </mat-form-field>
-      <button id="buttonConnect" mat-raised-button color="primary" (click)="goConnect()">CONNEXION</button>
+      <button id="buttonConnect" mat-raised-button color="primary" type="submit">CONNEXION</button>
       <a routerLink="/rec-mdp">Mot de passe oublié</a>
       <button id="buttonIns" mat-raised-button>S'INSCRIRE</button>
     </form>

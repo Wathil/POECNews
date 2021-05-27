@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gerer-redacteurs',
+    redirectTo: 'connexion',
     pathMatch: 'full'
   },
   // {
@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/connexion/connexion.module').then( m => m.ConnexionPageModule)
   },
   {
-    path: 'gerer-info',
+    path: 'gerer-info/:id',
     loadChildren: () => import('./pages/gerer-info/gerer-info.module').then( m => m.GererInfoPageModule)
   },
   {
