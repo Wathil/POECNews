@@ -8,15 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="title">{{user.id ? "MODIFIER COMPTE" : "CRÉATION COMPTE"}}</ion-title>
+  <ion-title class="title">{{user.id ? "MODIFIER INFORMATIONS" : "CRÉATION COMPTE"}}</ion-title>
   <ion-list lines="full">
 
     <form #myForm="ngForm" (ngSubmit)="saveUser()">
       <ion-item class="form-group" *ngIf="user.category==0">
         <ion-label>Status</ion-label>
         <ion-select value="2" class="form-control" name="category" [(ngModel)]="user.category">
-          <ion-select-option value="2">Utilisateur</ion-select-option>
+          <ion-select-option value="0">Admin</ion-select-option>
           <ion-select-option value="1">Rédacteur</ion-select-option>
+          <ion-select-option value="2">Utilisateur</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item class="form-group">
@@ -35,7 +36,7 @@
       </ion-item>
       <div class="bouttons">
         <button mat-raised-button color="primary" type="submit">{{user.id ? "MODIFIER" : "CRÉER"}}</button>
-        <button class="annuler" mat-raised-button>ANNULER</button>
+        <button class="annuler" mat-raised-button [routerLink]="['/home/']">ANNULER</button>
       </div>
 
     </form>

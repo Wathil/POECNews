@@ -10,21 +10,14 @@
     padding-top: 50px;
 }
 
-.titre{
-    flex: 1 1 auto;
+.title{
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .iconAdd{
     padding-right: 10px;
-    margin-top: 3px;
-    font-size: 28px;
+    margin-top: 9px;
+    font-size: 21px;
 }
 
-.close{
-    height: 0 !important;
-}
-
-.formRedacteur{    
-    height: 270px;
-    transition: 0.3s;
-}

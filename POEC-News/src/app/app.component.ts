@@ -12,28 +12,29 @@ export class AppComponent implements OnInit {
   // userCategory = 3;
 
   user = new User({
-    category: 3
+    category: 2
   })
 
   public appPages = [
     // admin
     [
       { title: 'Accueil', url: '/home', icon: 'home' },
-      { title: 'Créer un compte', url: 'creation-admin', icon: 'create' },
+      { title: 'Créer un compte', url: 'creation-admin', icon: 'person-circle' },
       { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
-      { title: 'Gérer les utilisateurs', url: 'gerer-utilisateurs', icon: 'people' },
-      { title: 'Gérer les rédacteurs', url: 'gerer-redacteurs', icon: 'people-circle' },
+      { title: 'Gérer les rédacteurs', url: 'gerer-redacteurs', icon: 'people-circle' },      
+      { title: 'Gérer les utilisateurs', url: 'gerer-utilisateurs', icon: 'people' },      
+      { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' },
     ],
     // redacteur
     [
       { title: 'Accueil', url: '/home', icon: 'home' },
       { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
-      { title: 'Gérer mes informations', url: 'gerer-info', icon: 'settings' },
+      { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' },
     ],
     // utilisateur
     [
       { title: 'Accueil', url: '/home', icon: 'home' },
-      { title: 'Gérer mes informations', url: 'gerer-info', icon: 'settings' },
+      { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' },
     ],
     // default
     [
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUser(3).subscribe(user => {
+    this.userService.getUser(4).subscribe(user => {
       if (user) {
         this.userService.user.next(user);
         this.user = user;

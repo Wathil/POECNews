@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/user.service';
 export class CreationUserPage implements OnInit {
   user: User;
 
-  constructor(private router: Router, private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private toast: ToastController) { }
 
   ngOnInit() {
     this.user = this.userService.user.getValue() || new User(null);
@@ -19,9 +19,15 @@ export class CreationUserPage implements OnInit {
 
   saveUser() {
     if (this.user.id) {
-      this.userService.updateUser(this.user.id, this.user).subscribe();
+      this.userService.updateUser(this.user.id, this.user).subscribe(async data => {
+        let toast = await this.toast.create({
+          message: 'Informations modifiées',
+          duration: 3000
+        });
+        toast.present();
+      });
     } else {
-      if(this.user.category == null){
+      if (this.user.category == null) {
         this.user.category = 2;
       }
       this.userService.addUser(this.user).subscribe(data => {

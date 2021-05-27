@@ -41,7 +41,7 @@ export class GererUtilisateursPage implements OnInit {
   async handleButtonClick(id: number) {
     const alert = await this.alertController.create({
       header: 'Suppression',
-      message: 'Etes-vous sûr de supprimer ce user ?',
+      message: 'Etes-vous sûr de supprimer cet ulitisateur ?',
       buttons: [
         {
           text: 'Non',

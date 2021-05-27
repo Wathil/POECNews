@@ -1,82 +1,39 @@
-<!-- http://localhost:8100/gerer-redacteurs -->
-
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <!-- <ion-title>POEC-News</ion-title> -->
-    <!-- <img class="logo" src="./../../../assets/img/logo-POECNewsBlanc.png"> -->
     <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content>
   <ion-list-header>
-    <ion-title class="title">Gérer les rédacteurs</ion-title>
-    <ion-icon name="person-add" class="iconAdd" (click)="ajouterUser()"></ion-icon>
-    <!-- TS: ajouterUser() -->
+    <ion-title class="title">GÉRER LES RÉDACTEURS</ion-title>
+    <ion-icon name="person-add" class="iconAdd" [routerLink]="['/creation-admin/']"></ion-icon>
   </ion-list-header>
 
   <ion-list>
-    <form class="formRedacteur" [class.close]="hide" [formGroup]="userForm" (ngSubmit)="saveUser()">
-      <!-- TS: saveUser() -->
-      <ion-item>
-        <ion-label position="floating">Login Name :</ion-label>
-        <ion-input formControlName="loginName" type="text" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Email :</ion-label>
-        <ion-input formControlName="email" type="text" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Password :</ion-label>
-        <ion-input formControlName="password" type="password" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Pen Name :</ion-label>
-        <ion-input formControlName="penName" type="text" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-row>
-        <ion-col>
-          <!-- https://material.angular.io/components/button/examples -->
-          <button type="submit" mat-raised-button color="primary" style="width:100%">Ajouter Rédacteur</button>
-        </ion-col>
-      </ion-row>
-
-    </form>
-  <!-- </ion-list>
-
-  <ion-list> -->
     <div *ngIf="users.length; else spinner">
-      <!-- TS: redacteurs: Array<User> -->
-      <ion-item lines="inset" *ngFor="let elt of users">
-        <ion-label>
-          <p>{{ elt.id }}</p>
-          <p>{{ elt.username }}</p>
-          <p>{{ elt.email }}</p>
-        </ion-label>
-        <div>
-          <ion-icon name="create" style="zoom:1.6" [routerLink]="['/redacteurs-details/', elt.id]"></ion-icon>
-          <ion-icon name="trash" style="zoom:1.6" (click)="deleteUser(elt.id)"></ion-icon>
-          <!-- TS: deleteUser(number) -->
-        </div>
-      </ion-item>
+      <div lines="inset" *ngFor="let elt of users">
+        <ion-item *ngIf="elt.category == 1">
+          <ion-label>
+            <p>{{ elt.id }}</p>
+            <p>{{ elt.loginName }}</p>
+            <p>{{ elt.email }}</p>
+          </ion-label>
+          <div>
+            <ion-icon name="create" style="zoom:1.6" [routerLink]="['/gerer-info/']"></ion-icon>
+            <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
+          </div>
+        </ion-item>
+      </div>
     </div>
   </ion-list>
-
-  <ng-template #spinner>
-    <div id="spinner">
-      <ion-spinner name="lines"></ion-spinner>
-    </div>
-  </ng-template>
-
 </ion-content>
+
+<ng-template #spinner>
+  <div id="spinner">
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+</ng-template>

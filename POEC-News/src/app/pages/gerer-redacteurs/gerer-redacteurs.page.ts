@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AlertController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -9,60 +10,53 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./gerer-redacteurs.page.scss'],
 })
 export class GererRedacteursPage implements OnInit {
+  users: User[] = []; 
 
-  hide = true;
-
-  users: Array<User> = new Array<User>();
-
-  userForm = this.formBuilder.group({
-    id: [null],
-    loginName: [''],
-    email: [''],
-    password: [''],
-    penName: ['']
-  })
-
-  constructor(
-    private userService: UserService,
-    private formBuilder: FormBuilder
+  constructor(private userService: UserService, 
+    private toast: ToastController, 
+    private alertController : AlertController
     ) { }
 
   ngOnInit() {
-    console.log(this.users.length);
     this.reloadData();
   }
-
-  ionViewWillEnter(){
-    this.ngOnInit();
-  }
-
-  reloadData() {
-    console.log("reloadData");
+  reloadData() {    
     this.userService.getUsers().subscribe(data => {
-      console.log(data);
-      this.users = data;
+    this.users = data;
     });
   }
 
-  ajouterUser() {
-    this.hide = !this.hide;
-  }
-
-  saveUser() {
-    console.log("saveUser");
-    this.userService.addUser(this.userForm.value).subscribe(async data => {
-      console.log(data);
-      this.reloadData();
-      this.hide = !this.hide;
-    });
-  }
-
-  deleteUser(id: number) {
-    console.log("deleteUser");
+  delUser(id: number) {
     this.userService.deleteUser(id).subscribe(async data => {
       console.log(data);
+      let toast = await this.toast.create({
+        message: 'Rédacteur supprimé',
+        duration: 3000
+      });
+      toast.present();
+      this.reloadData();
+    })
+  }
+
+  async handleButtonClick(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Suppression',
+      message: 'Etes-vous sûr de supprimer ce rédacteur ?',
+      buttons: [
+        {
+          text: 'Non',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Oui',
+          cssClass: 'secondary',
+          handler: () => {
+            this.delUser(id)
+          }
+        }
+      ]
     });
-    this.reloadData();
+    await alert.present();
   }
 
 }
