@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'connexion',
+    redirectTo: 'gerer-utilisateurs',
     pathMatch: 'full'
   },
   // {
@@ -42,7 +42,12 @@ const routes: Routes = [
   {
     path: 'creation-user',
     loadChildren: () => import('./pages/creation-user/creation-user.module').then( m => m.CreationUserPageModule)
+  },
+  {
+    path: 'creation-admin',
+    loadChildren: () => import('./pages/creation-admin/creation-admin.module').then( m => m.CreationAdminPageModule)
   }
+
 
 ];
 

@@ -22,7 +22,7 @@ export class CreationUserPage implements OnInit {
       this.userService.updateUser(this.user.id, this.user).subscribe();
     } else {
       if(this.user.category == null){
-        this.user.category = 3;
+        this.user.category = 2;
       }
       this.userService.addUser(this.user).subscribe(data => {
         console.log(data);

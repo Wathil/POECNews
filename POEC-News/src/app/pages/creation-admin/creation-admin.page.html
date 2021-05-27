@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">CRÉATION COMPTE</ion-title>
+  <ion-list lines="full">
+
+    <form class="addUser" [class.close]="hide" [formGroup]="userForm" (ngSubmit)="saveUser()">
+      <ion-item>
+        <ion-label>Catégorie</ion-label>
+        <ion-select class="form-control" formControlName="category">
+          <ion-select-option value="0">Admin</ion-select-option>
+          <ion-select-option value="1">Rédacteur</ion-select-option>
+          <ion-select-option value="2">Utilisateur</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nom/Pseudo</ion-label>
+        <ion-input formControlName="loginName" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input formControlName="password" type="password" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button type="submit" mat-raised-button color="primary">Ajouter</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+</ion-content>

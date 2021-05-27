@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     // admin
     [
       { title: 'Accueil', url: '/home', icon: 'home' },
+      { title: 'Créer un compte', url: 'creation-admin', icon: 'create' },
       { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
       { title: 'Gérer les utilisateurs', url: 'gerer-utilisateurs', icon: 'people' },
       { title: 'Gérer les rédacteurs', url: 'gerer-redacteurs', icon: 'people-circle' },
@@ -44,16 +45,16 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    // this.userService.getUser(20).subscribe(user => {
-    //   if (user) {
-    //     this.userService.user.next(user);
-    //     this.user = user;
-    //   }
-    // })
-
-    this.userService.user.subscribe(user => {
-      this.user = user;
+    this.userService.getUser(3).subscribe(user => {
+      if (user) {
+        this.userService.user.next(user);
+        this.user = user;
+      }
     })
+
+    // this.userService.user.subscribe(user => {
+    //   this.user = user;
+    // })
   }
 
 

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GererUtilisateursPageRoutingModule } from './gerer-utilisateurs-routing.module';
+import { CreationAdminPageRoutingModule } from './creation-admin-routing.module';
 
-import { GererUtilisateursPage } from './gerer-utilisateurs.page';
+import { CreationAdminPage } from './creation-admin.page';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    GererUtilisateursPageRoutingModule,
+    CreationAdminPageRoutingModule,
     MaterialModule
   ],
-  declarations: [GererUtilisateursPage]
+  declarations: [CreationAdminPage]
 })
-export class GererUtilisateursPageModule {}
+export class CreationAdminPageModule {}

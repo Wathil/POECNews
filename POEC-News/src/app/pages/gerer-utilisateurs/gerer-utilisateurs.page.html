@@ -8,20 +8,26 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="title">GÉRER LES UTILISATEURS</ion-title>
+  <ion-list-header>
+    <ion-title class="title">GÉRER LES UTILISATEURS</ion-title>
+    <ion-icon name="person-add" class="iconAdd" [routerLink]="['/creation-admin/']"></ion-icon>
+  </ion-list-header>
+
   <ion-list>
     <div *ngIf="users.length; else spinner">
-      <ion-item lines="inset" *ngFor="let elt of users">
-        <ion-label>
-          <!-- <p>{{ elt.id }}</p> -->
-          <p>{{ elt.loginName }}</p>
-          <p>{{ elt.email }}</p>
-        </ion-label>
-        <div>
-          <ion-icon name="create" style="zoom:1.6" [routerLink]="['/gerer-info/', elt.id]"></ion-icon>
-          <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
-        </div>
-      </ion-item>
+      <div lines="inset" *ngFor="let elt of users">
+        <ion-item *ngIf="elt.category == 2">
+          <ion-label>
+            <p>{{ elt.id }}</p>
+            <p>{{ elt.loginName }}</p>
+            <p>{{ elt.email }}</p>
+          </ion-label>
+          <div>
+            <ion-icon name="create" style="zoom:1.6" [routerLink]="['/gerer-info/']"></ion-icon>
+            <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
+          </div>
+        </ion-item>
+      </div>
     </div>
   </ion-list>
 </ion-content>
