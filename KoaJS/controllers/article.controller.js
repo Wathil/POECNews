@@ -1,37 +1,28 @@
-const user = require("../models").user;
-const login = require("../models").login;
+const article = require("../models").article;
 const db = require("../models");
 const Op = db.Sequelize.Op;
 
 module.exports = {
-    async login(ctx) {
-        const obj = ctx.request.body;
-        console.log(obj);
+    async getArticlesWithLimitAndOffset(ctx) { // POST http://localhost:8080/articles/ https://sequelize.org/v5/manual/models-usage.html#manipulating-the-dataset-with-limit--offset--order-and-group
+        const obj = ctx.request.body; // {"limit":2, "offset":3} => Les 2 premiers à partir du troisième
+        let limit = obj.limit; console.log("limit=" + limit);
+        let offset = obj.offset; console.log("offset=" + offset);
         try {
-            const emailPost = obj.email;
-            const passwordPost = obj.password;
-            const userCollection = await user.findAll(({
-                where: {
-                    [Op.and]: [
-                      { email: emailPost },
-                      { password: passwordPost }
-                    ]
-                  }
-            }));
+            const articleCollection = await article.findAll({ limit, offset });
             ctx.status = 201;
-            ctx.body = userCollection;
+            ctx.body = articleCollection;
         }
         catch (e) {
             console.log(e);
-            ctx.status = 400;
+            ctx.status = 500;
             ctx.body = e;
-        }
+        };
     },
-    async getUsers(ctx) { // GET http://localhost:8080/users/
+    async getArticles(ctx) { // GET http://localhost:8080/articles/
         try {
-            const userCollection = await user.findAll();
+            const articleCollection = await article.findAll();
             ctx.status = 201;
-            ctx.body = userCollection;
+            ctx.body = articleCollection;
         }
         catch (e) {
             console.log(e);
@@ -39,15 +30,15 @@ module.exports = {
             ctx.body = e;
         }
     },
-    async getUser(ctx) { // GET http://localhost:8080/users/:id
+    async getArticle(ctx) { // GET http://localhost:8080/articles/:id
         const id = ctx.params.id;
         console.log("id=" + id);
         try {
-            const userCollection = await user.findOne({
+            const articleCollection = await article.findOne({
                 where: { id: id }
             });
             ctx.status = 201;
-            ctx.body = userCollection;
+            ctx.body = articleCollection;
         }
         catch (e) {
             console.log(e);
@@ -55,13 +46,13 @@ module.exports = {
             ctx.body = e;
         }
     },
-    async addUser(ctx) { // POST http://localhost:8080/users/add/
+    async addArticle(ctx) { // POST http://localhost:8080/articles/add/
         try {
             const obj = ctx.request.body;
             console.log(obj);
-            const newUser = await user.create(obj);
+            const newArticle = await article.create(obj);
             ctx.status = 201;
-            ctx.body = newUser;
+            ctx.body = newArticle;
         }
         catch (e) {
             console.log(e);
@@ -69,21 +60,21 @@ module.exports = {
             ctx.body = e;
         }
     },
-    async deleteUser(ctx) { // DELETE http://localhost:8080/users/:id
+    async deleteArticle(ctx) { // DELETE http://localhost:8080/articles/:id
         const id = ctx.params.id;
         console.log("id=" + id);
         try {
-            const deletedUser = await user.findOne(({
+            const deletedArticle = await article.findOne(({
                 where: { id: id }
             }));
-            if (deletedUser) {
-                deletedUser.destroy();
+            if (deletedArticle) {
+                deletedArticle.destroy();
                 ctx.status = 201;
                 ctx.body = "Deleted";
             }
             else {
                 ctx.status = 404;
-                ctx.body = "User:" + id +" Not Found";
+                ctx.body = "Article:" + id + " Not Found";
             }
         }
         catch (e) {
@@ -92,23 +83,23 @@ module.exports = {
             ctx.body = e;
         }
     },
-    async updateUser(ctx) { // PUT http://localhost:8080/users/:id
+    async updateArticle(ctx) { // PUT http://localhost:8080/users/:id
         const id = ctx.params.id;
         console.log("id=" + id);
         try {
-            const userCollection = await user.findOne(({
+            const articleCollection = await article.findOne(({
                 where: { id: id }
             }));
-            if (userCollection) {
-                const updatedUser = await user.update(ctx.request.body, {
+            if (articleCollection) {
+                const updatedArticle = await article.update(ctx.request.body, {
                     where: { id: id }
                 })
                 ctx.status = 201;
-                ctx.body = updatedUser;
+                ctx.body = updatedArticle;
             }
             else {
                 ctx.status = 404;
-                ctx.body = "User:" + id +" Not Found";
+                ctx.body = "Article:" + id + " Not Found";
             }
         }
         catch (e) {
@@ -117,5 +108,4 @@ module.exports = {
             ctx.body = e;
         }
     }
-    
 }
