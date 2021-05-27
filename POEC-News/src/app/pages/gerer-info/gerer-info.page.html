@@ -9,37 +9,36 @@
 
 <ion-content>
   <ion-title class="title">GÉRER LES INFORMATIONS</ion-title>
+
   <ion-list lines="full">
-    <!-- [formGroup]="editForm" (ngSubmit)="saveForm()" -->
-    <form >
+    <form [formGroup]="editForm" (ngSubmit)="saveForm()">
 
       <ion-item>
         <ion-label position="floating">Nom/Pseudo</ion-label>
-        <!-- formControlName="username"  -->
-        <ion-input type="text" required></ion-input>
+        <ion-input formControlName="loginName" type="text" required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <!-- formControlName="email"  -->
-        <ion-input type="email"></ion-input>
+        <ion-input formControlName="email" type="text" required>
+        </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Mot de passe</ion-label>
-        <!-- formControlName="password"  -->
-        <ion-input type="password"></ion-input>
+        <ion-input formControlName="password" type="password" required>
+        </ion-input>
       </ion-item>
 
-      <!-- <ion-row>
+      <ion-row>
         <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">Modifier</ion-button>
+          <button mat-raised-button color="primary">MODIFIER</button>
+          <button class="annuler" mat-raised-button>ANNULER</button>
         </ion-col>
-      </ion-row> -->
-      <button class="editInfo" mat-raised-button color="primary">MODIFIER</button>
-      <button class="annuler" mat-raised-button>ANNULER</button>
-
+      </ion-row>
     </form>
   </ion-list>
+
+
 
 </ion-content>
