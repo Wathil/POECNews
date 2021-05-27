@@ -8,42 +8,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="title">CRÉATION COMPTE</ion-title>
+  <ion-title class="title">{{user.id ? "MODIFIER COMPTE" : "CRÉATION COMPTE"}}</ion-title>
   <ion-list lines="full">
-    <!-- [formGroup]="editForm" (ngSubmit)="saveForm()" -->
-    <form >
-      <ion-item class="statusForm">
+
+    <form #myForm="ngForm" (ngSubmit)="saveUser()">
+      <ion-item class="form-group" *ngIf="user.category==0">
         <ion-label>Status</ion-label>
-        <ion-select value="util">
-          <ion-select-option value="util">Utilisateur</ion-select-option>
-          <ion-select-option value="redac">Rédacteur</ion-select-option>
+        <ion-select value="2" class="form-control" name="category" [(ngModel)]="user.category">
+          <ion-select-option value="2">Utilisateur</ion-select-option>
+          <ion-select-option value="1">Rédacteur</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item class="form-group">
         <ion-label position="floating">Nom/Pseudo</ion-label>
-        <!-- formControlName="username"  -->
-        <ion-input type="text" required></ion-input>
+        <ion-input type="text" required class="form-control" name="loginName" [(ngModel)]="user.loginName"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item class="form-group">
         <ion-label position="floating">Email</ion-label>
-        <!-- formControlName="email"  -->
-        <ion-input type="email"></ion-input>
+        <ion-input type="email" class="form-control" name="email" [(ngModel)]="user.email"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item class="form-group">
         <ion-label position="floating">Mot de passe</ion-label>
-        <!-- formControlName="password"  -->
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" class="form-control" name="password" [(ngModel)]="user.password"></ion-input>
       </ion-item>
-
-      <!-- <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">Modifier</ion-button>
-        </ion-col>
-      </ion-row> -->
-      <button class="editInfo" mat-raised-button color="primary">CRÉER</button>
-      <button class="annuler" mat-raised-button>ANNULER</button>
+      <div class="bouttons">
+        <button mat-raised-button color="primary" type="submit">{{user.id ? "MODIFIER" : "CRÉER"}}</button>
+        <button class="annuler" mat-raised-button>ANNULER</button>
+      </div>
 
     </form>
   </ion-list>

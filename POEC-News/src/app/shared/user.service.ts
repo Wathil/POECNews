@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Login } from '../classes/Login';
 import { User } from '../classes/User';
@@ -12,6 +12,8 @@ export class UserService {
 
   url: string = 'http://localhost:8080/users/';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+  user = new BehaviorSubject<User>(new User({category:2}));
 
   constructor(private httpClient: HttpClient) { }
 
