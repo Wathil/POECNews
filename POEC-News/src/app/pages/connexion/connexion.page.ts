@@ -16,7 +16,7 @@ export class ConnexionPage implements OnInit {
 
   goConnect(){
 
-    this.userService.user.next(user);
+    // this.userService.user.next(user);
     this.router.navigateByUrl("/home");
 
   }

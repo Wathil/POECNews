@@ -69,13 +69,8 @@ export class UserService {
       );
   }
 
-<<<<<<< HEAD
   deleteUser(id: number): Observable<any> {
     let API_URL = `${this.url}${id}`;
-=======
-  deleteUser(id: number) {
-    var API_URL = `${this.url}${id}`;
->>>>>>> 2897d423 (MAJ création)
     return this.httpClient.delete(API_URL, {responseType:"text"})
       .pipe(
         catchError(this.errorMgmt)
