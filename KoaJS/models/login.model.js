@@ -1,7 +1,7 @@
 module.exports = () => {
     const login = {
-        loginName: string,
-        email: string
+        email: string,
+        password: string
     };
     return login;
 };

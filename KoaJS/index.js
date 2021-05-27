@@ -24,7 +24,7 @@ function initial() {
     user.create({ // USER
         //id: 1, // AUTO INCREMENT
         loginName: "r1",
-        email: "truc@machin.com",
+        email: "truc1@machin.com",
         password: "123456",
         penName: "test rédacteur 1",
         accredit: 1,
@@ -33,7 +33,7 @@ function initial() {
     user.create({ // USER
         //id: 1, // AUTO INCREMENT
         loginName: "r2",
-        email: "truc@machin.com",
+        email: "truc2@machin.com",
         password: "123456",
         penName: "test rédacteur 2",
         accredit: 0,
@@ -42,7 +42,7 @@ function initial() {
     user.create({
         //id: 2, // AUTO INCREMENT
         loginName: "admin1", // pseudo
-        email: "truc@machin.com", 
+        email: "truc3@machin.com", 
         password: "123456",
         penName: "test admin 1",
         accredit: 1,
@@ -51,7 +51,7 @@ function initial() {
     user.create({
         //id: 2, // AUTO INCREMENT
         loginName: "admin2", // pseudo
-        email: "truc@machin.com", 
+        email: "truc4@machin.com", 
         password: "123456",
         penName: "test admin 2",
         accredit: 1,
@@ -60,7 +60,7 @@ function initial() {
     user.create({
         //id: 2, // AUTO INCREMENT
         loginName: "user1", // pseudo
-        email: "truc@machin.com", 
+        email: "truc5@machin.com", 
         password: "123456",
         penName: "test user 1",
         accredit: 0,

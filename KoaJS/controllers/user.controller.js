@@ -100,13 +100,13 @@ module.exports = {
         const obj = ctx.request.body;
         console.log(obj);
         try {
-            const loginNamePost = obj.loginName;
             const emailPost = obj.email;
+            const passwordPost = obj.password;
             const userCollection = await user.findAll(({
                 where: {
                     [Op.and]: [
-                      { loginName: loginNamePost },
-                      { email: emailPost }
+                      { email: emailPost },
+                      { password: passwordPost }
                     ]
                   }
             }));

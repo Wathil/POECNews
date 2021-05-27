@@ -16,7 +16,7 @@ module.exports = function (router) {
 
   router.put("/users/:id", controller.updateUser); // ok
 
-  router.post("/users/login", controller.login);
+  router.post("/users/login/", controller.login);
 
   router.get("/users", async ctx => { // http://localhost:8080/users != http://localhost:8080/users/
     ctx.body = "test";
