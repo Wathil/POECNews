@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Login } from '../classes/Login';
 import { User } from '../classes/User';
 
 @Injectable({
@@ -13,6 +14,17 @@ export class UserService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private httpClient: HttpClient) { }
+
+  getUsersLogin(data: Login): Observable<User[]> {
+    let API_URL = `${this.url}/login/`;
+    return this.httpClient.post(API_URL, data)
+      .pipe(
+        map((res: any) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
 
   getUsers(): Observable<User[]> {
     let API_URL = `${this.url}`;
