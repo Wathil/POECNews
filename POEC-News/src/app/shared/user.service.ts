@@ -13,16 +13,16 @@ export class UserService {
   url: string = 'http://localhost:8080/users/';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  user = new BehaviorSubject<User>(new User({category:2}));
+  user = new BehaviorSubject<User>(User.defaultUser());
 
   constructor(private httpClient: HttpClient) { }
 
-  getUsersLogin(data: Login): Observable<User[]> {
-    let API_URL = `${this.url}/login/`;
+  getUsersLogin(data: Login): Observable<User> {
+    let API_URL = `${this.url}login/`;
     return this.httpClient.post(API_URL, data)
       .pipe(
         map((res: any) => {
-          return res || {}
+          return res || null
         }),
         catchError(this.errorMgmt)
       );
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   addUser(data: User): Observable<any> {
-    let API_URL = `${this.url}`;
+    let API_URL = `${this.url}add/`;
     return this.httpClient.post(API_URL, data)
       .pipe(
         catchError(this.errorMgmt)
@@ -63,7 +63,7 @@ export class UserService {
     return this.httpClient.put(API_URL, data)
       .pipe(
         map((res: any) => {
-          return console.log("service :" + res);
+          return res;
         }),
         catchError(this.errorMgmt)
       );

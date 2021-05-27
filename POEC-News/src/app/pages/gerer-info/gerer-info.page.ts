@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class GererInfoPage implements OnInit {
 
   editForm: FormGroup;
   id: any;
+  userCategory: number;
 
   constructor(private userService : UserService,
     private router : Router,
@@ -39,17 +41,20 @@ export class GererInfoPage implements OnInit {
         email: data.email,
         password: data.password,
       })
+      this.userCategory = data.category;
     })
   }
   
   saveForm(){
+    let category = User.getCategoryToString(this.userCategory);
     this.userService.updateUser(this.id, this.editForm.value).subscribe(async data => {
+      console.log(data);
       let toast = await this.toast.create({
         message: 'Informations modifiées',
         duration: 3000
       });
       toast.present();
-      // this.zone.run(() => this.router.navigate(['gerer-utilisateurs']));
+      this.zone.run(() => this.router.navigate([`gerer-${category}s`]));
     })
   }
 }

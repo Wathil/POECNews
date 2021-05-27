@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';

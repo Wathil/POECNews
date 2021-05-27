@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from './classes/User';
 import { UserService } from './shared/user.service';
 @Component({
@@ -9,11 +10,7 @@ import { UserService } from './shared/user.service';
 
 export class AppComponent implements OnInit {
 
-  // userCategory = 3;
-
-  user = new User({
-    category: 2
-  })
+  user : User;
 
   public appPages = [
     // admin
@@ -43,20 +40,17 @@ export class AppComponent implements OnInit {
     ]
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.userService.getUser(4).subscribe(user => {
-      if (user) {
-        this.userService.user.next(user);
-        this.user = user;
-      }
+    this.userService.user.subscribe(user => {
+      this.user = user;
     })
-
-    // this.userService.user.subscribe(user => {
-    //   this.user = user;
-    // })
   }
 
+  deconnect(){
+    this.userService.user.next(User.defaultUser());
+    this.router.navigateByUrl('connexion');
+  }
 
 }

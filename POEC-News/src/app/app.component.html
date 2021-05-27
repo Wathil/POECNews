@@ -15,6 +15,7 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <button mat-button color="primary" *ngIf="user.id" (click)="deconnect()">Se déconnecter</button>
         </ion-list>
 
         <!-- <ion-list id="labels-list">
