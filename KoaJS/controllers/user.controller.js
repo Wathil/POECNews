@@ -1,4 +1,5 @@
 const user = require("../models").user;
+const login = require("../models").login;
 const db = require("../models");
 const Op = db.Sequelize.Op;
 
@@ -21,7 +22,7 @@ module.exports = {
         try {
             const userCollection = await user.findOne({
                 where: { id: id }
-            })
+            });
             ctx.status = 201;
             ctx.body = userCollection;
         }
@@ -53,7 +54,7 @@ module.exports = {
         try {
             const deletedUser = await user.findOne(({
                 where: { id: id }
-            }))
+            }));
             if (deletedUser) {
                 deletedUser.destroy();
                 ctx.status = 201;
@@ -76,7 +77,7 @@ module.exports = {
         try {
             const userCollection = await user.findOne(({
                 where: { id: id }
-            }))
+            }));
             if (userCollection) {
                 const updatedUser = await user.update(ctx.request.body, {
                     where: { id: id }
@@ -88,6 +89,29 @@ module.exports = {
                 ctx.status = 404;
                 ctx.body = "User:" + id +" Not Found";
             }
+        }
+        catch (e) {
+            console.log(e);
+            ctx.status = 400;
+            ctx.body = e;
+        }
+    },
+    async login(ctx) {
+        const obj = ctx.request.body;
+        console.log(obj);
+        try {
+            const loginNamePost = obj.loginName;
+            const emailPost = obj.email;
+            const userCollection = await user.findAll(({
+                where: {
+                    [Op.and]: [
+                      { loginName: loginNamePost },
+                      { email: emailPost }
+                    ]
+                  }
+            }));
+            ctx.status = 201;
+            ctx.body = userCollection;
         }
         catch (e) {
             console.log(e);
