@@ -2,24 +2,21 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Login } from '../classes/Login';
-import { User } from '../classes/User';
+import { Article } from '../classes/Article';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ArticleService {
 
-  url: string = 'http://localhost:8080/users/';
+  url: string = 'http://localhost:8080/articles/';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-  user = new BehaviorSubject<User>(new User({category:2}));
 
   constructor(private httpClient: HttpClient) { }
 
-  getUsersLogin(data: Login): Observable<User[]> {
-    let API_URL = `${this.url}/login/`;
-    return this.httpClient.post(API_URL, data)
+  getArticlesWithLimitAndOffset(limit:number, offset: number): Observable<Article[]> {
+    let API_URL = `${this.url}`;
+    return this.httpClient.post(API_URL, {limit, offset})
       .pipe(
         map((res: any) => {
           return res || {}
@@ -28,7 +25,7 @@ export class UserService {
       );
   }
 
-  getUsers(): Observable<User[]> {
+  getArticles(): Observable<Article[]> {
     let API_URL = `${this.url}`;
     return this.httpClient.get(API_URL)
       .pipe(
@@ -39,15 +36,15 @@ export class UserService {
       );
   }
 
-  addUser(data: User): Observable<any> {
-    let API_URL = `${this.url}/add/`;
+  addArticle(data: Article): Observable<any> {
+    let API_URL = `${this.url}add/`;
     return this.httpClient.post(API_URL, data)
       .pipe(
         catchError(this.errorMgmt)
       );
   }
 
-  getUser(id: number): Observable<User> {
+  getArticle(id: number): Observable<Article> {
     let API_URL = `${this.url}${id}`;
     return this.httpClient.get(API_URL)
       .pipe(
@@ -58,7 +55,7 @@ export class UserService {
       );
   }
 
-  updateUser(id: number, data: User): Observable<any> {
+  updateArticle(id: number, data: Article): Observable<any> {
     let API_URL = `${this.url}${id}`;
     return this.httpClient.put(API_URL, data)
       .pipe(
@@ -69,7 +66,7 @@ export class UserService {
       );
   }
 
-  deleteUser(id: number): Observable<any> {
+  deleteArticle(id: number): Observable<any> {
     let API_URL = `${this.url}${id}`;
     return this.httpClient.delete(API_URL, {responseType:"text"})
       .pipe(
