@@ -3,51 +3,23 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <img class="logo" src="./../../../assets/img/logo-POECNewsBlanc.png">
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-title>ACCUEIL</ion-title>
-  
-  <ion-content>
-    <ion-card>
-      <img src="./assets/img/madison.jpg" />
-      <ion-card-header>
-        <ion-card-subtitle>Destination</ion-card-subtitle>
-        <ion-card-title>Madison, WI</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-      </ion-card-content>
-      <button id="buttonLire" mat-raised-button color="primary">LIRE</button>
-    </ion-card>
-  </ion-content>
+  <ion-list-header>
+    <ion-title>ACCUEIL</ion-title>
+  </ion-list-header>
 
-  <ion-content>
-    <ion-card>
-      <img src="./assets/img/madison.jpg" />
-      <ion-card-header>
-        <ion-card-subtitle>Destination</ion-card-subtitle>
-        <ion-card-title>Madison, WI</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
-
-  <ion-content>
-    <ion-card>
-      <img src="./assets/img/madison.jpg" />
-      <ion-card-header>
-        <ion-card-subtitle>Destination</ion-card-subtitle>
-        <ion-card-title>Madison, WI</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
+  <ion-card *ngFor="let article of articles; let i = index;">
+    <img src="{{ article.urlImage }}" />
+    <ion-card-header>
+      <ion-card-subtitle>Categorie</ion-card-subtitle>
+      <ion-card-title>{{ article.titre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{article.contenu.substr(0, 100)}}</ion-card-content>
+    <button id="buttonLire" mat-raised-button color="primary">LIRE</button>
+  </ion-card>
 
 </ion-content>

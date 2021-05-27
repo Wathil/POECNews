@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Article } from 'src/app/classes/Article';
+import { ArticleService } from 'src/app/shared/article.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  articles: Article[] = [];
+
+  constructor(
+    private articleService: ArticleService,
+  ) { }
 
   ngOnInit() {
+    this.reloadData();
+  }
+
+  reloadData() {    
+    this.articleService.getArticles().subscribe(data => {
+      this.articles = data;
+    });
   }
 
 }

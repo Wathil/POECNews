@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
@@ -10,9 +9,11 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./gerer-redacteurs.page.scss'],
 })
 export class GererRedacteursPage implements OnInit {
+
   users: User[] = []; 
 
-  constructor(private userService: UserService, 
+  constructor(
+    private userService: UserService, 
     private toast: ToastController, 
     private alertController : AlertController
     ) { }
@@ -20,6 +21,7 @@ export class GererRedacteursPage implements OnInit {
   ngOnInit() {
     this.reloadData();
   }
+
   reloadData() {    
     this.userService.getUsers().subscribe(data => {
     this.users = data;
