@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'connexion',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   // {
@@ -46,7 +46,17 @@ const routes: Routes = [
   {
     path: 'creation-admin',
     loadChildren: () => import('./pages/creation-admin/creation-admin.module').then( m => m.CreationAdminPageModule)
+  },
+  {
+    path: 'creation-article',
+    loadChildren: () => import('./pages/creation-article/creation-article.module').then( m => m.CreationArticlePageModule)
+  },
+  {
+    path: 'modif-article/:id',
+    loadChildren: () => import('./pages/modif-article/modif-article.module').then( m => m.ModifArticlePageModule)
   }
+
+
 
 
 ];
