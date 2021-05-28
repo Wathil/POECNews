@@ -10,21 +10,21 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class GererRedacteursPage implements OnInit {
 
-  users: User[] = []; 
+  users: User[] = [];
 
   constructor(
-    private userService: UserService, 
-    private toast: ToastController, 
-    private alertController : AlertController
-    ) { }
+    private userService: UserService,
+    private toast: ToastController,
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {
     this.reloadData();
   }
 
-  reloadData() {    
-    this.userService.getUsers().subscribe(data => {
-    this.users = data;
+  reloadData() {
+    this.userService.getRedacteurs().subscribe(data => {
+      this.users = data;
     });
   }
 
