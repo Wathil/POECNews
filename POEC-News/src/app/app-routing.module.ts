@@ -32,8 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/connexion/connexion.module').then( m => m.ConnexionPageModule)
   },
   {
-    path: 'gerer-info/:id',
-    loadChildren: () => import('./pages/gerer-info/gerer-info.module').then( m => m.GererInfoPageModule)
+    path: 'gerer-utilisateur/:id',
+    loadChildren: () => import('./pages/gerer-utilisateur/gerer-utilisateur.module').then( m => m.GererUtilisateurPageModule)
+  },
+  {
+    path: 'gerer-redacteur/:id',
+    loadChildren: () => import('./pages/gerer-redacteur/gerer-redacteur.module').then( m => m.GererRedacteurPageModule)
   },
   {
     path: 'rec-mdp',

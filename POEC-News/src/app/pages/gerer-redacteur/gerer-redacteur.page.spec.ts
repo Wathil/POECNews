@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GererInfoPage } from './gerer-info.page';
+import { GererRedacteurPage } from './gerer-redacteur.page';
 
-describe('GererInfoPage', () => {
-  let component: GererInfoPage;
-  let fixture: ComponentFixture<GererInfoPage>;
+describe('GererUtilisateurPage', () => {
+  let component: GererRedacteurPage;
+  let fixture: ComponentFixture<GererRedacteurPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GererInfoPage ],
+      declarations: [ GererRedacteurPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GererInfoPage);
+    fixture = TestBed.createComponent(GererRedacteurPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

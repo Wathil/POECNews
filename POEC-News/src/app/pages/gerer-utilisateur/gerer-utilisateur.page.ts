@@ -6,11 +6,11 @@ import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
-  selector: 'app-gerer-info',
-  templateUrl: './gerer-info.page.html',
-  styleUrls: ['./gerer-info.page.scss'],
+  selector: 'app-gerer-utilisateur',
+  templateUrl: './gerer-utilisateur.page.html',
+  styleUrls: ['./gerer-utilisateur.page.scss'],
 })
-export class GererInfoPage implements OnInit {
+export class GererUtilisateurPage implements OnInit {
 
   editForm: FormGroup;
   id: any;

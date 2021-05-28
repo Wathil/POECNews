@@ -23,6 +23,15 @@ app.use(bodyParser()); // JSON integrated
 function initial() {
     user.create({ // USER
         //id: 1, // AUTO INCREMENT
+        loginName: "r",
+        email: "1",
+        password: "1",
+        penName: "test admin 1",
+        accredit: 1,
+        category: 0 // 0: Admin; 1: Rédacteur; 2: Utilisateur
+    });
+    user.create({ // USER
+        //id: 1, // AUTO INCREMENT
         loginName: "r1",
         email: "truc1@machin.com",
         password: "123456",

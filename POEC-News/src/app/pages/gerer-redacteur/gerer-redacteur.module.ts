@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GererInfoPageRoutingModule } from './gerer-info-routing.module';
+import { GererRedacteurPageRoutingModule } from './gerer-redacteur-routing.module';
 
-import { GererInfoPage } from './gerer-info.page';
+import { GererRedacteurPage } from './gerer-redacteur.page';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    GererInfoPageRoutingModule,
+    GererRedacteurPageRoutingModule,
     MaterialModule
   ],
-  declarations: [GererInfoPage]
+  declarations: [GererRedacteurPage]
 })
-export class GererInfoPageModule {}
+export class GererRedacteurPageModule {}

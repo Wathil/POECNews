@@ -39,6 +39,34 @@ module.exports = {
             ctx.body = e;
         }
     },
+    async getUtilisateurs(ctx) { // GET http://localhost:8080/users/utilisateurs/
+        try {
+            const userCollection = await user.findAll({
+                where: { category: 2 }
+            });
+            ctx.status = 201;
+            ctx.body = userCollection;
+        }
+        catch (e) {
+            console.log(e);
+            ctx.status = 500;
+            ctx.body = e;
+        }
+    },
+    async getRedacteurs(ctx) { // GET http://localhost:8080/users/redacteurs/
+        try {
+            const userCollection = await user.findAll({
+                where: { category: 1 }
+            });
+            ctx.status = 201;
+            ctx.body = userCollection;
+        }
+        catch (e) {
+            console.log(e);
+            ctx.status = 500;
+            ctx.body = e;
+        }
+    },
     async getUser(ctx) { // GET http://localhost:8080/users/:id
         const id = ctx.params.id;
         console.log("id=" + id);

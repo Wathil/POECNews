@@ -21,7 +21,7 @@ export class GererUtilisateursPage implements OnInit {
     this.reloadData();
   }
   reloadData() {    
-    this.userService.getUsers().subscribe(data => {
+    this.userService.getUtilisateurs().subscribe(data => {
     this.users = data;
     });
   }

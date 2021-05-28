@@ -8,6 +8,10 @@ module.exports = function (router) {
   //router.get("/users/", ctx => controller.getUsers(ctx)); // ok
   router.get("/users/", controller.getUsers); // ok
 
+  router.get("/users/utilisateurs/", controller.getUtilisateurs); // 
+
+  router.get("/users/redacteurs/", controller.getRedacteurs); // 
+
   router.get("/users/:id", controller.getUser); // ok
 
   router.post("/users/add/", controller.addUser); // ok
