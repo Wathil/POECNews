@@ -13,8 +13,15 @@
 
     <form class="addUser" [class.close]="hide" [formGroup]="articleForm" (ngSubmit)="saveArticle()">
       <ion-item>
-        <ion-label position="floating">Auteur</ion-label>
-        <ion-input formControlName="author" type="text" required></ion-input>
+        <ion-label position="floating">Rédacteur</ion-label>
+        <ion-input formControlName="author" [value]="user.loginName" type="text" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Catégorie</ion-label>
+        <ion-select formControlName="category" value="notifications" interface="action-sheet">
+          <ion-select-option *ngFor="let p of categories" [value]="p.tag">{{p.tag}}</ion-select-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>

@@ -10,19 +10,23 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class GererUtilisateursPage implements OnInit {
 
-  users: User[] = []; 
+  users: User[] = [];
 
-  constructor(private userService: UserService, 
-    private toast: ToastController, 
-    private alertController : AlertController
-    ) { }
+  constructor(private userService: UserService,
+    private toast: ToastController,
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {
-    this.reloadData();
   }
-  reloadData() {    
+
+  ionViewWillEnter() {
+    this.reloadData()
+  }
+  
+  reloadData() {
     this.userService.getUtilisateurs().subscribe(data => {
-    this.users = data;
+      this.users = data;
     });
   }
 

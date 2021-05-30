@@ -20,9 +20,11 @@
         <mat-label>MOT DE PASSE</mat-label>
         <input matInput formControlName="password" type="password">
       </mat-form-field>
-      <button id="buttonConnect" mat-raised-button color="primary" type="submit">CONNEXION</button>
+      <button mat-raised-button color="primary" type="submit">CONNEXION</button>
       <a routerLink="/rec-mdp">Mot de passe oublié</a>
-      <button id="buttonIns" mat-raised-button>S'INSCRIRE</button>
+      <div class="divIns">
+        <button class="buttonIns" mat-raised-button [routerLink]="['/creation-user/']">S'INSCRIRE</button>
+      </div>
     </form>
   </ion-list>
 

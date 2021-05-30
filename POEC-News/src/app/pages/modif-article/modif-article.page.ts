@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ArticleService } from 'src/app/shared/article.service';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-modif-article',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Category } from 'src/app/classes/Category';
 import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -27,6 +28,7 @@ export class CreationAdminPage implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
 
+
     ) { }
 
   ngOnInit() {
@@ -42,7 +44,13 @@ export class CreationAdminPage implements OnInit {
         duration: 3000        
       });
       toast.present();
+      if (this.userForm.get("category").value == 1){
+        this.router.navigateByUrl('gerer-redacteurs');
+      } else if (this.userForm.get("category").value == 2) {
+        this.router.navigateByUrl('gerer-utilisateurs');
+      }
       this.userForm.reset();
+      
     })    
   }
 
