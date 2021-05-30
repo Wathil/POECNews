@@ -3,7 +3,7 @@ const controller = require("../controllers/article.controller");
 module.exports = function (router) {
 
   // BASE URL http://localhost:8080/
-  // BASE_URL_ARTCILE http://localhost:8080/articles/
+  // BASE_URL_ARTICLE http://localhost:8080/articles/
 
   router.post("/articles/", controller.getArticlesWithLimitAndOffset); // {"limit":1, "offset":3} https://sequelize.org/v5/manual/models-usage.html#manipulating-the-dataset-with-limit--offset--order-and-group OK
   

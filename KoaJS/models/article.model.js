@@ -13,9 +13,17 @@ module.exports = (sequelize, Sequelize) => {
         contenu: {
             type: Sequelize.TEXT
         },
-        author: {
-            type: Sequelize.STRING
+        userId :{
+            type: Sequelize.INTEGER,
+            onDelete: 'CASCADE',
+            references: {
+                model: 'user',
+                key: 'id'
+            },
         },
+        // userId :{
+        //     type: Sequelize.INTEGER
+        // },
         urlImage: {
             type: Sequelize.STRING
         }

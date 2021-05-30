@@ -1,5 +1,4 @@
 const dbConfig = require("./../config/db.config");
-
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -22,5 +21,12 @@ db.sequelize = sequelize;
 
 db.user = require('./user.model')(sequelize, Sequelize);
 db.article = require('./article.model')(sequelize, Sequelize);
+db.category = require('./category.model')(sequelize, Sequelize);
+db.article_category = sequelize.define('article_category');
+
+db.article.belongsTo(db.user, { foreignKey: 'userId' });
+
+db.article.belongsToMany(db.category, { through: 'article_category' });
+db.category.belongsToMany(db.article, { through: 'article_category' });
 
 module.exports = db;
