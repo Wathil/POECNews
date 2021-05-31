@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/classes/Article';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
@@ -19,7 +19,9 @@ export class ArticlePage implements OnInit {
     private articleService: ArticleService,
     private categoryService: CategoryService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private zone: NgZone
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,13 @@ export class ArticlePage implements OnInit {
       }
     })
   }
+  
+  afficheParAuteur(userId: number) {
+    this.zone.run(() => this.router.navigateByUrl(`/articles-par-auteur/` + userId));
+  }
 
+  afficheParCategory(categoryId: number) {
+    this.zone.run(() => this.router.navigateByUrl(`/articles-par-categorie/` + categoryId));
+  }
 
 }

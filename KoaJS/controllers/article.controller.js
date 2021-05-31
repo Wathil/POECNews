@@ -30,6 +30,36 @@ module.exports = {
             ctx.body = e;
         }
     },
+    async getArticlesParCategorie(ctx) { // GET http://localhost:8080/articles/par-categorie/:categoryId
+        try {
+            const categoryId = ctx.params.categoryId;
+            const articleCollection = await article.findAll({
+                where : { categoryId: categoryId }
+            });
+            ctx.status = 201;
+            ctx.body = articleCollection;
+        }
+        catch (e) {
+            console.log(e);
+            ctx.status = 500;
+            ctx.body = e;
+        }
+    },
+    async getArticlesParAuteur(ctx) { // GET http://localhost:8080/articles/par-auteur/:userId
+        try {
+            const userId = ctx.params.userId;
+            const articleCollection = await article.findAll({
+                where : { userId: userId }
+            });
+            ctx.status = 201;
+            ctx.body = articleCollection;
+        }
+        catch (e) {
+            console.log(e);
+            ctx.status = 500;
+            ctx.body = e;
+        }
+    },
     async getArticle(ctx) { // GET http://localhost:8080/articles/:id
         const id = ctx.params.id;
         try {

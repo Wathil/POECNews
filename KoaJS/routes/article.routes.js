@@ -6,8 +6,12 @@ module.exports = function (router) {
   // BASE_URL_ARTICLE http://localhost:8080/articles/
 
   router.post("/articles/", controller.getArticlesWithLimitAndOffset); // {"limit":1, "offset":3} https://sequelize.org/v5/manual/models-usage.html#manipulating-the-dataset-with-limit--offset--order-and-group OK
-  
+
   router.get("/articles/", controller.getArticles); // ok
+
+  router.get("/articles/par-categorie/:categoryId", controller.getArticlesParCategorie); // 
+
+  router.get("/articles/par-auteur/:userId", controller.getArticlesParAuteur); // 
 
   router.get("/articles/:id", controller.getArticle); // ok
 

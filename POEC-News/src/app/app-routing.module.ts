@@ -70,9 +70,18 @@ const routes: Routes = [
   {
     path: 'gerer-categorie/:id',
     loadChildren: () => import('./pages/gerer-categorie/gerer-categorie.module').then( m => m.GererCategoriePageModule)
-  },  {
-    path: 'creation-category',
+  },
+  {
+    path: 'creation-category/',
     loadChildren: () => import('./pages/creation-category/creation-category.module').then( m => m.CreationCategoryPageModule)
+  },
+  {
+    path: 'articles-par-categorie/:categoryId',
+    loadChildren: () => import('./pages/articles-par-categorie/articles-par-categorie.module').then( m => m.ArticlesParCategoriePageModule)
+  },
+  {
+    path: 'articles-par-auteur/:userId',
+    loadChildren: () => import('./pages/articles-par-auteur/articles-par-auteur.module').then( m => m.ArticlesParAuteurPageModule)
   }
 
 

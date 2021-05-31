@@ -36,6 +36,28 @@ export class ArticleService {
       );
   }
 
+  getArticlesParCategorie(categoryId: number): Observable<Article[]> {
+    let API_URL = `${this.url}par-categorie/${categoryId}`;
+    return this.httpClient.get(API_URL)
+      .pipe(
+        map((res: any) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
+  getArticlesParAuteur(userId: number): Observable<Article[]> {
+    let API_URL = `${this.url}par-auteur/${userId}`;
+    return this.httpClient.get(API_URL)
+      .pipe(
+        map((res: any) => {
+          return res || {}
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
   addArticle(data: Article): Observable<any> {
     let API_URL = `${this.url}add/`;
     return this.httpClient.post(API_URL, data)

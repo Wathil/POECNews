@@ -1,36 +1,50 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/classes/Article';
+import { Category } from 'src/app/classes/Category';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-articles-par-categorie',
+  templateUrl: './articles-par-categorie.page.html',
+  styleUrls: ['./articles-par-categorie.page.scss'],
 })
-export class HomePage implements OnInit {
+export class ArticlesParCategoriePage implements OnInit {
 
   articles: Article[] = [];
+  categories: Category[] = [];
+  categorie!: Category;
+  tag!: string;
+  categoryId!: number;
 
-  constructor(
-    private articleService: ArticleService,
-    private categoryService: CategoryService,
+  constructor(private articleService: ArticleService,
     private userService: UserService,
+    private categoryService: CategoryService,
     private router: Router,
-    private zone: NgZone
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private zone: NgZone) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
+    this.categoryId = this.activatedRoute.snapshot.params['categoryId'];
     this.reloadData();
   }
 
   reloadData() {
-    this.articleService.getArticles().subscribe(data => {
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+    });
+
+    this.categoryService.getCategory(this.categoryId).subscribe(categorie => {
+      this.categorie = categorie;
+      this.tag = categorie.tag;
+    });
+
+    this.articleService.getArticlesParCategorie(this.categoryId).subscribe(data => {
       this.articles = data;
       for (let article of this.articles) {
         if (article.userId) {
@@ -49,10 +63,13 @@ export class HomePage implements OnInit {
 
   lireArticle(id: number) {
     if (this.userService.user.getValue().id) {
-      this.router.navigateByUrl('/article/'+id);
+      this.zone.run(() => this.router.navigateByUrl(`/article/` + id));
     } else {
-      this.router.navigateByUrl('/connexion');
+      this.zone.run(() => this.router.navigateByUrl(`/connexion`));
     }
+  }
+
+  changeSelection(i: number) {
   }
 
   afficheParAuteur(userId: number) {
@@ -62,5 +79,4 @@ export class HomePage implements OnInit {
   afficheParCategory(categoryId: number) {
     this.zone.run(() => this.router.navigateByUrl(`/articles-par-categorie/` + categoryId));
   }
-
 }

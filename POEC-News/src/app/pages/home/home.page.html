@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list-header>
-    <ion-title>ACCUEIL</ion-title>
+    <ion-title class="title">ACCUEIL</ion-title>
   </ion-list-header>
 
   <!-- <ion-card>
@@ -31,11 +31,10 @@
     <ion-card-title>{{ article.titre }}</ion-card-title>
     <ion-card-header>
       <div>
-        <p style="float: left">{{ article.author }}</p>
-        <p style="float: right">{{ article.category }}</p>
+        <p style="float: left"><ion-button expand="block" size="small" fill="clear" (click)="afficheParAuteur(article.userId)">{{ article.author }}</ion-button></p>
+        <p style="float: right"><ion-button expand="block" size="small" fill="clear" (click)="afficheParCategory(article.categoryId)">{{ article.category }}</ion-button></p>
       </div>
     </ion-card-header>
-    <p></p>
     <ion-card-content>{{article.contenu.substr(0, 100)}}</ion-card-content>
     <div class="divLire">
       <button class="buttonLire" mat-raised-button color="primary" (click)="lireArticle(article.id)">Lire</button>
