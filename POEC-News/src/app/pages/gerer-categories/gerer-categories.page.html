@@ -10,7 +10,7 @@
 <ion-content>
   <ion-list-header>
     <ion-title class="title">GÉRER LES CATÉGORIES</ion-title>
-    <ion-icon name="add-circle" class="iconAdd" [routerLink]="['/creation-category/']"></ion-icon>
+    <ion-icon name="add-circle" class="iconAdd" color="primary" [routerLink]="['/creation-category/']"></ion-icon>
   </ion-list-header>
 
   <ion-list>
@@ -23,8 +23,8 @@
             <p>{{ elt.description }}</p>
           </ion-label>
           <div>
-            <ion-icon name="create" style="zoom:1.6" [routerLink]="['/gerer-categorie/', elt.id]"></ion-icon>
-            <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
+            <ion-icon name="create" style="zoom:1.6" color="primary" [routerLink]="['/gerer-categorie/', elt.id]"></ion-icon>
+            <ion-icon name="trash" style="zoom:1.6" color="primary" (click)="handleButtonClick(elt.id)"></ion-icon>
           </div>
         </ion-item>
       </div>
