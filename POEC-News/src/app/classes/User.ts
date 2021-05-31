@@ -8,7 +8,6 @@ export class User {
     loginName!: string;
     email!: string;
     password!: string;
-    penName!: string; // For Redacteur Writer Author
     accredit!: number;
     category!: number; // 0: Admin; 1: Rédacteur; 2: Utilisateur
 
@@ -18,7 +17,6 @@ export class User {
             this.loginName = user.loginName;
             this.email = user.email;
             this.password = user.password;
-            this.penName = user.penName;
             this.accredit = user.accredit;
             this.category = user.category;
         }

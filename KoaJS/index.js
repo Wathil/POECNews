@@ -22,7 +22,6 @@ function user1() {
         loginName: "r",
         email: "1",
         password: "1",
-        penName: "test admin 1",
         accredit: 1,
         category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
@@ -36,7 +35,6 @@ function user2() {
         loginName: "r1",
         email: "truc1@machin.com",
         password: "123456",
-        penName: "test rédacteur 1",
         accredit: 1,
         category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
@@ -50,7 +48,6 @@ function user3() {
         loginName: "r2",
         email: "truc2@machin.com",
         password: "123456",
-        penName: "test rédacteur 2",
         accredit: 0,
         category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
@@ -64,7 +61,6 @@ function user4() {
         loginName: "admin1",
         email: "truc3@machin.com",
         password: "123456",
-        penName: "test admin 1",
         accredit: 1,
         category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
@@ -78,7 +74,6 @@ function user5() {
         loginName: "admin2",
         email: "truc4@machin.com",
         password: "123456",
-        penName: "test admin 2",
         accredit: 1,
         category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
@@ -92,7 +87,6 @@ function user6() {
         loginName: "user1",
         email: "truc5@machin.com",
         password: "123456",
-        penName: "test user 1",
         accredit: 0,
         category: '2' // Admin; Rédacteur; Utilisateur
     }).then((() => {

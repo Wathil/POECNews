@@ -28,7 +28,7 @@ export class ArticlePage implements OnInit {
       this.article = data;
       if (this.article.userId) {
         this.userService.getRedacteur(this.article.userId).subscribe(user => {
-          this.article.author = user.penName;
+          this.article.author = user.loginName;
         })
       }
       if (this.article.categoryId) {

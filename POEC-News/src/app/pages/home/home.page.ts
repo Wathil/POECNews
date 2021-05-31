@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
       for (let article of this.articles) {
         if (article.userId) {
           this.userService.getRedacteur(article.userId).subscribe(user => {
-            article.author = user.penName;
+            article.author = user.loginName;
           })
         }
         if (article.categoryId) {

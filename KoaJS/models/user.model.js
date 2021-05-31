@@ -16,9 +16,6 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING(8)
         },
-        penName: {
-            type: Sequelize.STRING
-        },
         accredit: {
             type: Sequelize.INTEGER // Sequelize ne fonctionne pas avec les boolean javascript
         },
@@ -27,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
             // values: ['Admin', 'Rédacteur', 'Utilisateur']
         }
     }, {
-        tableName: 'user' // Sinon sequelize prend POECNewsDBMySQL.redacteurs SELECT `id`, `userlogin`, `passwd`, `penname`, `accredit`, `createdAt`, `updatedAt` FROM `redacteurs` AS `redacteur`;
+        tableName: 'user' // Sinon sequelize prend POECNewsDBMySQL.redacteurs SELECT `id`, `userlogin`, `passwd`,  `accredit`, `createdAt`, `updatedAt` FROM `redacteurs` AS `redacteur`;
     });
     return user;
 }
