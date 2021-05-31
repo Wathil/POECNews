@@ -31,10 +31,11 @@
     <ion-card-title>{{ article.titre }}</ion-card-title>
     <ion-card-header>
       <div>
-        <p style="float: left">{{ article.category }}</p>
-        <p style="float: right">{{ article.author }}</p>
+        <p style="float: left">{{ article.author }}</p>
+        <p style="float: right">{{ article.category }}</p>
       </div>
     </ion-card-header>
+    <p></p>
     <ion-card-content>{{article.contenu.substr(0, 100)}}</ion-card-content>
     <div class="divLire">
       <button class="buttonLire" mat-raised-button color="primary" (click)="lireArticle(article.id)">Lire</button>
