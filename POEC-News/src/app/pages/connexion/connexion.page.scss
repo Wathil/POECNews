@@ -10,9 +10,10 @@
 }
 
 a{
-    font-size: x-small;
+    font-size: small;
     display: flex;
     justify-content:flex-end;
+    padding: 5px;
 }
 
 ::ng-deep .mat-form-field-wrapper  {
@@ -25,9 +26,13 @@ mat-form-field{
     justify-content:center;    
 }
 
-#buttonIns{
+.buttonIns{
     background-color: #6e7fe0;
     color: #fff;
+}
+
+.divIns{
+    text-align: end;
 }
 
 

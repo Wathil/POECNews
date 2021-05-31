@@ -19,7 +19,10 @@ export class GererRedacteursPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.reloadData();
+  }
+
+  ionViewWillEnter() {
+    this.reloadData()
   }
 
   reloadData() {
@@ -27,7 +30,7 @@ export class GererRedacteursPage implements OnInit {
       this.users = data;
     });
   }
-
+  
   delUser(id: number) {
     this.userService.deleteUser(id).subscribe(async data => {
       console.log(data);

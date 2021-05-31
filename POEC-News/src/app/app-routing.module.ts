@@ -58,7 +58,13 @@ const routes: Routes = [
   {
     path: 'modif-article/:id',
     loadChildren: () => import('./pages/modif-article/modif-article.module').then( m => m.ModifArticlePageModule)
+  },
+  {
+    path: 'article/:id',
+    loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
   }
+
+
 
 
 

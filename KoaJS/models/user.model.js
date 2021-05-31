@@ -23,8 +23,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER // Sequelize ne fonctionne pas avec les boolean javascript
         },
         category: {
-            type: Sequelize.ENUM,
-            values: ['Admin', 'Rédacteur', 'Utilisateur']
+            type: Sequelize.INTEGER
+            // values: ['Admin', 'Rédacteur', 'Utilisateur']
         }
     }, {
         tableName: 'user' // Sinon sequelize prend POECNewsDBMySQL.redacteurs SELECT `id`, `userlogin`, `passwd`, `penname`, `accredit`, `createdAt`, `updatedAt` FROM `redacteurs` AS `redacteur`;

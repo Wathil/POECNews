@@ -24,7 +24,7 @@ function user1() {
         password: "1",
         penName: "test admin 1",
         accredit: 1,
-        category: 'Admin' // Admin; Rédacteur; Utilisateur
+        category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user1 inserted");
         user2();
@@ -38,7 +38,7 @@ function user2() {
         password: "123456",
         penName: "test rédacteur 1",
         accredit: 1,
-        category: 'Rédacteur' // Admin; Rédacteur; Utilisateur
+        category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user2 inserted");
         user3();
@@ -52,7 +52,7 @@ function user3() {
         password: "123456",
         penName: "test rédacteur 2",
         accredit: 0,
-        category: 'Rédacteur' // Admin; Rédacteur; Utilisateur
+        category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user3 inserted");
         user4();
@@ -66,7 +66,7 @@ function user4() {
         password: "123456",
         penName: "test admin 1",
         accredit: 1,
-        category: 'Admin' // Admin; Rédacteur; Utilisateur
+        category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user4 inserted");
         user5();
@@ -80,7 +80,7 @@ function user5() {
         password: "123456",
         penName: "test admin 2",
         accredit: 1,
-        category: 'Admin' // Admin; Rédacteur; Utilisateur
+        category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user5 inserted");
         user6();
@@ -94,7 +94,7 @@ function user6() {
         password: "123456",
         penName: "test user 1",
         accredit: 0,
-        category: 'Utilisateur' // Admin; Rédacteur; Utilisateur
+        category: '2' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user6 inserted");
         category1();
