@@ -32,7 +32,6 @@ module.exports = {
     },
     async getArticle(ctx) { // GET http://localhost:8080/articles/:id
         const id = ctx.params.id;
-        console.log("id=" + id);
         try {
             const articleCollection = await article.findOne({
                 where: { id: id }
@@ -49,7 +48,6 @@ module.exports = {
     async addArticle(ctx) { // POST http://localhost:8080/articles/add/
         try {
             const obj = ctx.request.body;
-            console.log(obj);
             const newArticle = await article.create(obj);
             ctx.status = 201;
             ctx.body = newArticle;
@@ -62,7 +60,6 @@ module.exports = {
     },
     async deleteArticle(ctx) { // DELETE http://localhost:8080/articles/:id
         const id = ctx.params.id;
-        console.log("id=" + id);
         try {
             const deletedArticle = await article.findOne(({
                 where: { id: id }
@@ -83,9 +80,8 @@ module.exports = {
             ctx.body = e;
         }
     },
-    async updateArticle(ctx) { // PUT http://localhost:8080/users/:id
+    async updateArticle(ctx) { // PUT http://localhost:8080/articles/:id
         const id = ctx.params.id;
-        console.log("id=" + id);
         try {
             const articleCollection = await article.findOne(({
                 where: { id: id }

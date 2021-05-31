@@ -22,11 +22,12 @@ db.sequelize = sequelize;
 db.user = require('./user.model')(sequelize, Sequelize);
 db.article = require('./article.model')(sequelize, Sequelize);
 db.category = require('./category.model')(sequelize, Sequelize);
-db.article_category = sequelize.define('article_category');
+db.commentaire = require('./commentaire.model')(sequelize, Sequelize);
 
 db.article.belongsTo(db.user, { foreignKey: 'userId' });
+db.article.belongsTo(db.category, { foreignKey: 'categoryId' });
 
-db.article.belongsToMany(db.category, { through: 'article_category' });
-db.category.belongsToMany(db.article, { through: 'article_category' });
+db.commentaire.belongsTo(db.user, { foreignKey: 'userId' });
+db.commentaire.belongsTo(db.article, { foreignKey: 'articleId' });
 
 module.exports = db;

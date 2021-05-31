@@ -1,7 +1,7 @@
 // https://sequelize.org/v5/manual/data-types.html
 
 module.exports = (sequelize, Sequelize) => {
-    const article = sequelize.define('article', {
+    const commentaire = sequelize.define('commentaire', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -15,25 +15,19 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id'
             },
         },
-        categoryId: {
+        articleId :{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
             references: {
-                model: 'user',
+                model: 'article',
                 key: 'id'
             },
         },
-        titre: {
-            type: Sequelize.STRING
-        },
         contenu: {
             type: Sequelize.TEXT
-        },
-        urlImage: {
-            type: Sequelize.STRING
         }
     }, {
-        tableName: 'article'
+        tableName: 'commentaire'
     });
-    return article;
+    return commentaire;
 };
