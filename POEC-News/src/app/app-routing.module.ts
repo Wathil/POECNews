@@ -70,7 +70,11 @@ const routes: Routes = [
   {
     path: 'gerer-categorie/:id',
     loadChildren: () => import('./pages/gerer-categorie/gerer-categorie.module').then( m => m.GererCategoriePageModule)
+  },  {
+    path: 'creation-category',
+    loadChildren: () => import('./pages/creation-category/creation-category.module').then( m => m.CreationCategoryPageModule)
   }
+
 
 
 ];

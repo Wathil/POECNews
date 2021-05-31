@@ -25,7 +25,7 @@ export class CategoryService {
       );
   }
 
-  addArticle(data: Category): Observable<any> {
+  addCategory(data: Category): Observable<any> {
     let API_URL = `${this.url}add/`;
     return this.httpClient.post(API_URL, data)
       .pipe(

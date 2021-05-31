@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">CRÉATION CATÉGORIE</ion-title>
+  <ion-list lines="full">
+
+    <form class="addUser" [class.close]="hide" [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+      <ion-item>
+        <ion-label position="floating">Tag</ion-label>
+        <ion-input formControlName="tag" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Déscription</ion-label>
+        <ion-input formControlName="description" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button type="submit" mat-raised-button color="primary">Ajouter</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+</ion-content>
