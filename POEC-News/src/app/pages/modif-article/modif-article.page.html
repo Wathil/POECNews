@@ -28,12 +28,11 @@
         <ion-textarea formControlName="contenu" type="textarea" autoGrow="false" required></ion-textarea>
       </ion-item>
 
-      <ion-row>
-        <ion-col>
-          <button mat-raised-button color="primary" type="submit">MODIFIER</button>
-          <button class="annuler" mat-raised-button [routerLink]="['/gerer-articles/']">ANNULER</button>
-        </ion-col>
-      </ion-row>
+      <div class="bouttons">
+        <button mat-raised-button color="primary" type="submit">MODIFIER</button>
+        <button class="annuler" mat-raised-button [routerLink]="['/gerer-articles/']">ANNULER</button>
+      </div>
+
     </form>
   </ion-list>
 

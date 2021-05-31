@@ -30,12 +30,11 @@
         </ion-input>
       </ion-item>
 
-      <ion-row>
-        <ion-col>
-          <button mat-raised-button color="primary">MODIFIER</button>
-          <button class="annuler" mat-raised-button>ANNULER</button>
-        </ion-col>
-      </ion-row>
+      <div class="bouttons">
+        <button mat-raised-button color="primary">MODIFIER</button>
+        <button class="annuler" mat-raised-button [routerLink]="['/gerer-utilisateurs/']">ANNULER</button>
+      </div>
+
     </form>
   </ion-list>
 
