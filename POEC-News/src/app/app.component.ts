@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     [
       { title: 'Accueil', url: '/home', icon: 'home' },
       { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
+      { title: 'Gérer les catégories', url: 'gerer-categories', icon: 'settings' },
       { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' },
     ],
     // utilisateur

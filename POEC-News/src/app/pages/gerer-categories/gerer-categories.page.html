@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list-header>
+    <ion-title class="title">GÉRER LES CATÉGORIES</ion-title>
+    <ion-icon name="add-circle" class="iconAdd" [routerLink]="['/creation-admin/']"></ion-icon>
+  </ion-list-header>
+
+  <ion-list>
+    <div *ngIf="categories.length; else spinner">
+      <div lines="inset" *ngFor="let elt of categories">
+        <ion-item>
+          <ion-label>
+            <p>{{ elt.id }}</p>
+            <p>{{ elt.tag }}</p>
+            <p>{{ elt.description }}</p>
+          </ion-label>
+          <div>
+            <ion-icon name="create" style="zoom:1.6" [routerLink]="['/gerer-categorie/', elt.id]"></ion-icon>
+            <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
+          </div>
+        </ion-item>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ng-template #spinner>
+  <div id="spinner">
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+</ng-template>

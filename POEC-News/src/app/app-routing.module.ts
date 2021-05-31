@@ -62,7 +62,16 @@ const routes: Routes = [
   {
     path: 'article/:id',
     loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
+  },
+  {
+    path: 'gerer-categories',
+    loadChildren: () => import('./pages/gerer-categories/gerer-categories.module').then( m => m.GererCategoriesPageModule)
+  },
+  {
+    path: 'gerer-categorie/:id',
+    loadChildren: () => import('./pages/gerer-categorie/gerer-categorie.module').then( m => m.GererCategoriePageModule)
   }
+
 
 ];
 
