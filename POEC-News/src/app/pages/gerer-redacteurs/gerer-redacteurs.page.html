@@ -10,7 +10,7 @@
 <ion-content>
   <ion-list-header>
     <ion-title class="title">GÉRER LES RÉDACTEURS</ion-title>
-    <ion-icon name="person-add" class="iconAdd" [routerLink]="['/creation-admin/']"></ion-icon>
+    <ion-icon name="person-add" class="iconAdd" color="primary" [routerLink]="['/creation-admin/']"></ion-icon>
   </ion-list-header>
 
   <ion-list>
@@ -23,8 +23,8 @@
             <p>{{ elt.email }}</p>
           </ion-label>
           <div>
-            <ion-icon name="create" style="zoom:1.6" [routerLink]="['/gerer-redacteur/', elt.id]"></ion-icon>
-            <ion-icon name="trash" style="zoom:1.6" (click)="handleButtonClick(elt.id)"></ion-icon>
+            <ion-icon name="create" style="zoom:1.6" color="primary" [routerLink]="['/gerer-redacteur/', elt.id]"></ion-icon>
+            <ion-icon name="trash" style="zoom:1.6" color="primary" (click)="handleButtonClick(elt.id)"></ion-icon>
           </div>
         </ion-item>
       </div>
