@@ -61,6 +61,17 @@ export class UserService {
       );
   }
 
+  getRedacteur(userId: number): Observable<User> {
+    let API_URL = `${this.url}${userId}`;
+    return this.httpClient.get(API_URL)
+    .pipe(
+      map((res: any) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
+
   addUser(data: User): Observable<any> {
     let API_URL = `${this.url}add/`;
     return this.httpClient.post(API_URL, data)

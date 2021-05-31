@@ -1,8 +1,11 @@
 export class Article {
-    id!: number; // clé Primaire 
+    id!: number; // clé Primaire
+    userId!: number;
+    categoryId!: number;
     titre!: string;
-    category!: string;
     contenu!: string;
-    author!: string;
     urlImage!: string;
+    // Propriétés supplémentaires
+    category!: string;
+    author!: string;
 }

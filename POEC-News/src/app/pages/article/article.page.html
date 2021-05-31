@@ -14,9 +14,12 @@
 
   <ion-card *ngIf="article">
     <img src="{{ article.urlImage }}" />
+    <ion-card-title>{{ article.titre }}</ion-card-title>
     <ion-card-header>
-      <ion-card-subtitle>Categorie</ion-card-subtitle>
-      <ion-card-title>{{ article.titre }}</ion-card-title>
+      <div>
+        <p style="float: left">{{ article.category }}</p>
+        <p style="float: right">{{ article.author }}</p>
+      </div>
     </ion-card-header>
     <ion-card-content>{{article.contenu}}</ion-card-content>
   </ion-card>
