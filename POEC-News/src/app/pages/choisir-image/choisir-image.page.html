@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>choisir-image</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="container">
+          <div class="img-list" *ngFor="let img of tabs; let i = index;">
+            <input type="image" src="{{ img }}" alt="" srcset="" width="100%" (click)="clickImage(i)"/>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

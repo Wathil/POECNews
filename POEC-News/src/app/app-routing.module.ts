@@ -62,12 +62,11 @@ const routes: Routes = [
   {
     path: 'article/:id',
     loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
+  },
+  {
+    path: 'choisir-image',
+    loadChildren: () => import('./pages/choisir-image/choisir-image.module').then( m => m.ChoisirImagePageModule)
   }
-
-
-
-
-
 
 ];
 
