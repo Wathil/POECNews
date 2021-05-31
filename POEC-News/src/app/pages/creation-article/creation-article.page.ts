@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -21,8 +21,11 @@ export class CreationArticlePage implements OnInit {
     author: [''],
     titre: [''],
     category: [''],
-    contenu: ['']
+    contenu: [''],
+    image: ['']
   })
+
+  @ViewChild("file", {static: true}) fileInput:any;
 
   categories: any;
 
@@ -61,5 +64,10 @@ export class CreationArticlePage implements OnInit {
     })    
   }
 
+  openFile(){
+    this.fileInput.getInputElement().then(el => {
+      el.click();
+    });
+  }
 
 }

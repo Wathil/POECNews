@@ -34,6 +34,14 @@
         <ion-textarea formControlName="contenu" type="textarea" required></ion-textarea>
       </ion-item>
 
+      <ion-item >
+        <ion-label position="floating">Image</ion-label>
+        <ion-input #file formControlName="image" type="file" hidden></ion-input>
+        <div class="addImg">
+          <ion-icon name="image" (click)="openFile()"></ion-icon>
+        </div>
+      </ion-item>
+
       <ion-row>
         <ion-col>
           <button type="submit" mat-raised-button color="primary">Créer</button>
