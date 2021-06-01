@@ -24,9 +24,8 @@ export class ModifArticlePage implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      author: [''],
       titre: [''],
-      contenu: [''],
+      contenu: ['']
     })
 
     this.id = this.actRoute.snapshot.params['id'];
@@ -35,7 +34,6 @@ export class ModifArticlePage implements OnInit {
       console.log(data);
       this.editForm.patchValue({
         id: this.id,
-        author: data.author,
         titre: data.titre,
         contenu: data.contenu,
       })
@@ -50,7 +48,7 @@ export class ModifArticlePage implements OnInit {
         duration: 3000
       });
       toast.present();
-      this.zone.run(() => this.router.navigate([`gerer-articles`]));
+      this.zone.run(() => this.router.navigateByUrl(`gerer-articles`));
     })
   }
 
