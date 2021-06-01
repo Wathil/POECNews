@@ -91,6 +91,19 @@ function user6() {
         category: '2' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user6 inserted");
+        user7();
+    }));
+}
+function user7() {
+    const user6 = user.create({
+        //id: 6, // AUTO INCREMENT
+        loginName: "7",
+        email: "7",
+        password: "7",
+        accredit: 0,
+        category: '1' // Admin; Rédacteur; Utilisateur
+    }).then((() => {
+        console.log("user7 inserted");
         category1();
     }));
 }

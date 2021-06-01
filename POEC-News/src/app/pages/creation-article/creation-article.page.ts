@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Article } from 'src/app/classes/Article';
 import { User } from 'src/app/classes/User';
@@ -18,9 +18,9 @@ export class CreationArticlePage implements OnInit {
 
   articleForm = this.formBuilder.group({
     id: [null],
-    author: [''],
     titre: [''],
-    category: [''],
+    userId: [null],
+    categoryId: [null],
     contenu: [''],
     image: ['']
   })
@@ -33,7 +33,6 @@ export class CreationArticlePage implements OnInit {
 
   constructor(private router: Router, 
     private toast: ToastController,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
     private categoryService: CategoryService,
@@ -47,11 +46,10 @@ export class CreationArticlePage implements OnInit {
     });
 
     this.user = this.userService.user.getValue();
-    this.articleForm.patchValue({author: this.user.loginName});
   }
 
-
   saveArticle() {
+    this.articleForm.patchValue({userId: this.user.id});
     this.articleService.addArticle(this.articleForm.value).subscribe(async data => {
       console.log(data);
       let toast = await this.toast.create({        

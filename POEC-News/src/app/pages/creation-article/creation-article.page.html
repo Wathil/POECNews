@@ -8,19 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="title">CRÉATION ARTICLE</ion-title>
+  <ion-title class="title">CRÉATION ARTICLE PAR {{ user.loginName }}</ion-title>
   <ion-list lines="full">
 
     <form class="addUser" [class.close]="hide" [formGroup]="articleForm" (ngSubmit)="saveArticle()">
-      <ion-item>
-        <ion-label position="floating">Rédacteur</ion-label>
-        <ion-input formControlName="author" [value]="user.loginName" type="text" readonly></ion-input>
-      </ion-item>
 
       <ion-item>
         <ion-label>Catégorie</ion-label>
-        <ion-select formControlName="category" value="notifications" interface="action-sheet">
-          <ion-select-option *ngFor="let p of categories" [value]="p.tag">{{p.tag}}</ion-select-option>
+        <ion-select formControlName="categoryId" value="notifications" interface="action-sheet">
+          <ion-select-option *ngFor="let p of categories" [value]="p.id">{{p.tag}}</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -34,7 +30,7 @@
         <ion-textarea formControlName="contenu" type="textarea" required></ion-textarea>
       </ion-item>
 
-      <ion-item >
+      <ion-item>
         <ion-label position="floating">Image</ion-label>
         <ion-input #file formControlName="image" type="file" hidden></ion-input>
         <div class="addImg">
