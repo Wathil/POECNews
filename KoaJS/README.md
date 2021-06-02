@@ -9,6 +9,7 @@
 # npm i @koa/router
 # npm i @koa/cors
 # npm i koa-bodyparse
+# npm i jsonwebtoken
 #
 # npm i mysql2-promise
 #

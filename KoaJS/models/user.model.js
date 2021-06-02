@@ -21,7 +21,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         category: {
             type: Sequelize.INTEGER
-            // values: ['Admin', 'Rédacteur', 'Utilisateur']
+            // values: ['administrateur', 'Rédacteur', 'Utilisateur']
         }
     }, {
         tableName: 'user' // Sinon sequelize prend POECNewsDBMySQL.redacteurs SELECT `id`, `userlogin`, `passwd`,  `accredit`, `createdAt`, `updatedAt` FROM `redacteurs` AS `redacteur`;
