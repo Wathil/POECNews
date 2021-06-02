@@ -1,0 +1,153 @@
+const user = require("../models").user;
+const login = require("../models").login;
+const db = require("../models");
+const Op = db.Sequelize.Op;
+
+module.exports = {
+    async login(request, res) {
+        try {
+            const emailPost = request.body.email;
+            const passwordPost = request.body.password;
+            const userCollection = await user.findOne(({
+                where: {
+                    [Op.and]: [
+                      { email: emailPost },
+                      { password: passwordPost }
+                    ]
+                  }
+            }));
+            res.status(201).send(userCollection);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send({
+                message:
+                    e.message || "Some error occurred"
+            });
+        }
+    },
+    async getUsers(request, res) { // GET http://localhost:8080/users/
+        try {
+            const userCollection = await user.findAll();
+            res.status(201).send(userCollection);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send({
+                message:
+                    e.message || "Some error occurred."
+            });
+        }
+    },
+    async getUtilisateurs(request, res) { // GET http://localhost:8080/users/utilisateurs/
+        try {
+            const userCollection = await user.findAll({
+                where: { category: 2 }
+            });
+            res.status(201).send(userCollection);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send({
+                message:
+                    e.message || "Some error occurred."
+            });
+        }
+    },
+    async getRedacteurs(request, res) { // GET http://localhost:8080/users/redacteurs/
+        try {
+            const userCollection = await user.findAll({
+                where: { category: 1 }
+            });
+            res.status(201).send(userCollection);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(500).send({
+                message:
+                    e.message || "Some error occurred."
+            });
+        }
+    },
+    async getUser(request, res) { // GET http://localhost:8080/users/:id
+        const id = request.params.id;
+        console.log("id=" + id);
+        try {
+            const userCollection = await user.findOne({
+                where: { id: id }
+            });
+            res.status(201).send(userCollection);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send({
+                message:
+                    e.message || "Some error occurred"
+            });
+        }
+    },
+    async addUser(request, res) { // POST http://localhost:8080/users/add/
+        try {
+            const obj = request.request.body;
+            console.log(obj);
+            const newUser = await user.create(obj);
+            res.status(201).send(newUser);
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send({
+                message:
+                    e.message || "Some error occurred"
+            });
+        }
+    },
+    async deleteUser(request, res) { // DELETE http://localhost:8080/users/:id
+        const id = request.params.id;
+        console.log("id=" + id);
+        try {
+            const deletedUser = await user.findOne(({
+                where: { id: id }
+            }));
+            if (deletedUser) {
+                deletedUser.destroy();
+                res.status(201).send({message:"Deleted"});
+            }
+            else {
+                res.status(404).send({message:"User:" + id + " Not Found"});
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send({
+                message:
+                    e.message || "Some error occurred"
+            });
+        }
+    },
+    async updateUser(request, res) { // PUT http://localhost:8080/users/:id
+        const id = request.params.id;
+        console.log("id=" + id);
+        try {
+            const userCollection = await user.findOne(({
+                where: { id: id }
+            }));
+            if (userCollection) {
+                const updatedUser = await user.update(ctx.request.body, {
+                    where: { id: id }
+                })
+                res.status(201).send(updatedUser);
+            }
+            else {
+                res.status(404).send({message:"User:" + id + " Not Found"});
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send({
+                message:
+                    e.message || "Some error occurred"
+            });
+        }
+    }
+    
+}

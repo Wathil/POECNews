@@ -5,6 +5,8 @@
 # npm i express
 # npm i mysql2
 # npm i sequelize
+# npm i jsonwebtoken
+# npm i bcryptjs
 # 
 # HOST: "localhost"
 # USER: "root"
