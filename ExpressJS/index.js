@@ -8,12 +8,22 @@ const user = db.user;
 const article = db.article;
 const category = db.category;
 const commentaire = db.commentaire;
+const user_role = db.user_role;
 
-db.sequelize.sync({ force: true })
-    .then(() => {
-        console.log("Drop and re-sync db.");
-        role1();
-    });
+dropDatabase();
+
+function dropDatabase() {
+    db.sequelize.query("DROP DATABASE poecnewsdbmysql").then(createDatabase);
+}
+function createDatabase() {
+    db.sequelize.query("CREATE DATABASE poecnewsdbmysql").then(useDatabase);
+}
+function useDatabase() {
+    db.sequelize.query("USE poecnewsdbmysql").then(syncDatabase);
+}
+function syncDatabase() {
+    db.sequelize.sync().then(role1);
+}
 
 function role1() {
     const role1 = role.create({
@@ -49,9 +59,19 @@ function user1() {
         email: "1",
         password: "1",
         accredit: 1,
-        category: '0' // Admin; Rédacteur; Utilisateur
+        category: '0' 
     }).then((() => {
         console.log("user1 inserted");
+        user_role1();
+    }));
+}
+function user_role1() {
+    const user_role1 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "1", // redacteur
+        userId: "1"
+    }).then((() => {
+        console.log("user_role1 inserted");
         user2();
     }));
 }
@@ -65,6 +85,16 @@ function user2() {
         category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user2 inserted");
+        user_role2();
+    }));
+}
+function user_role2() {
+    const user_role2 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "1", // redacteur
+        userId: "2"
+    }).then((() => {
+        console.log("user_role2 inserted");
         user3();
     }));
 }
@@ -78,19 +108,39 @@ function user3() {
         category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user3 inserted");
+        user_role3();
+    }));
+}
+function user_role3() {
+    const user_role3 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "1", // redacteur
+        userId: "3"
+    }).then((() => {
+        console.log("user_role3 inserted");
         user4();
     }));
 }
 function user4() {
     const user4 = user.create({
         //id: 4, // AUTO INCREMENT
-        loginName: "admin1",
-        email: "truc3@machin.com",
-        password: "123456",
+        loginName: "a",
+        email: "a",
+        password: "a",
         accredit: 1,
         category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user4 inserted");
+        user_role4();
+    }));
+}
+function user_role4() {
+    const user_role4 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "0", // administrateur
+        userId: "4"
+    }).then((() => {
+        console.log("user_role4 inserted");
         user5();
     }));
 }
@@ -104,6 +154,16 @@ function user5() {
         category: '0' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user5 inserted");
+        user_role5();
+    }));
+}
+function user_role5() {
+    const user_role5 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "0", // administrateur
+        userId: "5"
+    }).then((() => {
+        console.log("user_role5 inserted");
         user6();
     }));
 }
@@ -117,6 +177,16 @@ function user6() {
         category: '2' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user6 inserted");
+        user_role6();
+    }));
+}
+function user_role6() {
+    const user_role6 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "2", // utilisateur
+        userId: "6"
+    }).then((() => {
+        console.log("user_role6 inserted");
         user7();
     }));
 }
@@ -130,6 +200,16 @@ function user7() {
         category: '1' // Admin; Rédacteur; Utilisateur
     }).then((() => {
         console.log("user7 inserted");
+        user_role7();
+    }));
+}
+function user_role7() {
+    const user_role7 = user_role.create({ // USER
+        //id: 1, // AUTO INCREMENT
+        roleId: "1", // redacteur
+        userId: "7"
+    }).then((() => {
+        console.log("user_role7 inserted");
         category1();
     }));
 }
