@@ -63,7 +63,7 @@ isRedacteur = (req, res, next) => {
   userTable.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "rédacteur") {
+        if (roles[i].name === "redacteur") {
           next();
           return;
         }
@@ -80,7 +80,7 @@ isRedacteurOrAdministrateur = (req, res, next) => {
   userTable.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "rédacteur") {
+        if (roles[i].name === "redacteur") {
           next();
           return;
         }

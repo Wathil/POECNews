@@ -8,7 +8,7 @@ const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken"); // !
 var bcrypt = require("bcryptjs"); // !
 
-exports.signup = (req, res) => {
+exports.signup = (req, res) => { // s'inscrire
   // Save User to Database
   user.create({
     loginName: req.body.loginName, // !
@@ -40,10 +40,10 @@ exports.signup = (req, res) => {
     });
 };
 
-exports.signin = (req, res) => {
-  User.findOne({
+exports.signin = (req, res) => { // connexion login
+  user.findOne({
     where: {
-      loginName: req.body.loginName
+      email: req.body.email
     }
   })
     .then(user => {
@@ -67,16 +67,17 @@ exports.signin = (req, res) => {
         expiresIn: 86400 // 24 hours
       });
 
-      var authorities = [];
+      var lesRoles = [];
       user.getRoles().then(roles => {
         for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
+          lesRoles.push("ROLE_" + roles[i].name.toUpperCase()); // !
         }
         res.status(200).send({
           id: user.id,
           loginName: user.loginName,
           email: user.email,
-          roles: authorities,
+          accredit: user.accredit,
+          roles: lesRoles,
           accessToken: token
         });
       });

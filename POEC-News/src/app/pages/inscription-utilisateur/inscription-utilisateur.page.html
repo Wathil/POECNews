@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">{{user.id ? "MODIFIER INFORMATIONS" : "CRÉATION COMPTE"}}</ion-title>
+  <ion-list lines="full">
+
+    <div *ngIf="isSignedUp; else signupForm">
+      Your registration is successful. Please login!
+    </div>
+
+    <ng-template #signupForm>
+
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="loginName">Nom/Pseudo</ion-label>
+          <ion-input type="text" class="form-control" name="loginName" [(ngModel)]="form.loginName" #name="ngModel"
+            required />
+          <div *ngIf="f.submitted && name.invalid">
+            <div *ngIf="loginName.errors.required">Name is required</div>
+          </div>
+        </ion-item>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="email">Email</ion-label>
+          <ion-input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required
+            email />
+          <div *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>
+        </ion-item>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="password">Password</ion-label>
+          <ion-input type="password" class="form-control" name="password" [(ngModel)]="form.password"
+            #password="ngModel" required minlength="6" />
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </ion-item>
+
+        <ion-item class="form-group">
+          <button mat-raised-button color="primary" type="submit">CRÉER</button>
+          <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+            Erreur!<br />{{errorMessage}}
+          </div>
+        </ion-item>
+
+      </form>
+
+    </ng-template>
+  </ion-list>
+
+</ion-content>

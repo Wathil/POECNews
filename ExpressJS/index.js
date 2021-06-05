@@ -9,6 +9,7 @@ const article = db.article;
 const category = db.category;
 const commentaire = db.commentaire;
 const user_role = db.user_role;
+var bcrypt = require("bcryptjs");
 
 dropDatabase();
 
@@ -37,7 +38,7 @@ function role1() {
 function role2() {
     const role2 = role.create({
         id: 1,
-        name: 'rédacteur'
+        name: 'redacteur'
     }).then((() => {
         console.log("role2 inserted");
         role3();
@@ -57,9 +58,8 @@ function user1() {
         //id: 1, // AUTO INCREMENT
         loginName: "r",
         email: "1",
-        password: "1",
-        accredit: 1,
-        category: '0' 
+        password: bcrypt.hashSync("1", 8),
+        accredit: 1
     }).then((() => {
         console.log("user1 inserted");
         user_role1();
@@ -80,9 +80,8 @@ function user2() {
         //id: 2, // AUTO INCREMENT
         loginName: "r1",
         email: "truc1@machin.com",
-        password: "123456",
-        accredit: 1,
-        category: '1' // Admin; Rédacteur; Utilisateur
+        password: bcrypt.hashSync("123456", 8),
+        accredit: 1
     }).then((() => {
         console.log("user2 inserted");
         user_role2();
@@ -103,9 +102,8 @@ function user3() {
         //id: 3, // AUTO INCREMENT
         loginName: "r2",
         email: "truc2@machin.com",
-        password: "123456",
-        accredit: 0,
-        category: '1' // Admin; Rédacteur; Utilisateur
+        password: bcrypt.hashSync("123456", 8),
+        accredit: 0
     }).then((() => {
         console.log("user3 inserted");
         user_role3();
@@ -126,9 +124,8 @@ function user4() {
         //id: 4, // AUTO INCREMENT
         loginName: "a",
         email: "a",
-        password: "a",
-        accredit: 1,
-        category: '0' // Admin; Rédacteur; Utilisateur
+        password: bcrypt.hashSync("a", 8),
+        accredit: 1
     }).then((() => {
         console.log("user4 inserted");
         user_role4();
@@ -149,9 +146,8 @@ function user5() {
         //id: 5, // AUTO INCREMENT
         loginName: "admin2",
         email: "truc4@machin.com",
-        password: "123456",
-        accredit: 1,
-        category: '0' // Admin; Rédacteur; Utilisateur
+        password: bcrypt.hashSync("123456", 8),
+        accredit: 1
     }).then((() => {
         console.log("user5 inserted");
         user_role5();
@@ -170,11 +166,10 @@ function user_role5() {
 function user6() {
     const user6 = user.create({
         //id: 6, // AUTO INCREMENT
-        loginName: "user1",
-        email: "truc5@machin.com",
-        password: "123456",
-        accredit: 0,
-        category: '2' // Admin; Rédacteur; Utilisateur
+        loginName: "3",
+        email: "3",
+        password: bcrypt.hashSync("3", 8),
+        accredit: 0
     }).then((() => {
         console.log("user6 inserted");
         user_role6();
@@ -195,9 +190,8 @@ function user7() {
         //id: 6, // AUTO INCREMENT
         loginName: "7",
         email: "7",
-        password: "7",
-        accredit: 0,
-        category: '1' // Admin; Rédacteur; Utilisateur
+        password: bcrypt.hashSync("7", 8),
+        accredit: 0
     }).then((() => {
         console.log("user7 inserted");
         user_role7();

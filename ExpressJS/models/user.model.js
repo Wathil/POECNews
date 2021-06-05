@@ -14,17 +14,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         password: {
-            type: Sequelize.STRING(8)
+            type: Sequelize.STRING(255)
         },
         accredit: {
             type: Sequelize.INTEGER // Sequelize ne fonctionne pas avec les boolean javascript
-        },
-        category: {
-            type: Sequelize.INTEGER
-            // values: ['administrateur', 'Rédacteur', 'Utilisateur']
         }
     }, {
-        tableName: 'user' // Sinon sequelize prend POECNewsDBMySQL.redacteurs SELECT `id`, `userlogin`, `passwd`,  `accredit`, `createdAt`, `updatedAt` FROM `redacteurs` AS `redacteur`;
+        tableName: 'user'
     });
     return user;
 }
