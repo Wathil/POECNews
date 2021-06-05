@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AuthLoginInfo } from 'src/app/auth/login-info';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
@@ -22,9 +23,10 @@ export class ConnexionPage implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private zone: NgZone,
     private toast: ToastController,
-    private router: Router
+    private zone: NgZone,
+    private router: Router,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class ConnexionPage implements OnInit {
         this.tokenStorage.saveToken(jwtResponse.accessToken);
         this.tokenStorage.saveLoginName(jwtResponse.loginName);
         this.tokenStorage.saveEmail(jwtResponse.email);
+        const newRole = jwtResponse.roles[0]
         this.tokenStorage.saveRoles(jwtResponse.roles);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -58,6 +61,8 @@ export class ConnexionPage implements OnInit {
           duration: 3000
         });
         toast.present();
+        this.appComponent.refreshRole(newRole);
+        //window.location.reload();
         this.zone.run(() => this.router.navigateByUrl(`home`));
       },
       error => {

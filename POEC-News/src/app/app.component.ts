@@ -8,8 +8,7 @@ import { TokenStorageService } from './auth/token-storage.service';
 
 export class AppComponent implements OnInit {
 
-  private roles: string[];
-  private role: string;
+  private role: string = 'invite'
 
   liensAdministrateur = [
     { title: 'Accueil', url: '/home', icon: 'home' },
@@ -38,33 +37,35 @@ export class AppComponent implements OnInit {
   ]
 
   constructor(
-    private token: TokenStorageService) { }
+    private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
+
   }
 
-  ionViewWillEnter() {
-    if (this.token.getToken()) {
-      this.roles = this.token.getRoles();
-      this.roles.every(role => {
-        if (role === 'ROLE_ADMINISTRATEUR') { // ExpressJS auth.controller.js
-          this.role = 'administrateur';
-          return false;
-        } else if (role === 'ROLE_REDACTEUR') { // ExpressJS auth.controller.js
-          this.role = 'redacteur';
-          return false;
-        } else if (role === 'ROLE_UTILISATEUR') { // ExpressJS auth.controller.js
-          this.role = 'utilisateur';
-          return false;
-        }
-        this.role = 'invite';
-        return true;
-      });
+  refreshRole(newRole: string) {
+    console.log("refreshRole newRole=" + newRole);
+    if (newRole === 'ROLE_ADMINISTRATEUR') { // ExpressJS auth.controller.js
+      console.log("administrateur");
+      this.role = 'administrateur';
+      return false;
+    } else if (newRole === 'ROLE_REDACTEUR') { // ExpressJS auth.controller.js
+      console.log("redacteur");
+      this.role = 'redacteur';
+      return false;
+    } else if (newRole === 'ROLE_UTILISATEUR') { // ExpressJS auth.controller.js
+      console.log("utilisateur");
+      this.role = 'utilisateur';
+      return false;
     }
+    console.log("invite");
+    this.role = 'invite';
+    return true;
   }
+
 
   logout() {
-    this.token.signOut();
+    this.tokenStorage.signOut();
     window.location.reload();
   }
 
