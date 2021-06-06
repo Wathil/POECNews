@@ -3,28 +3,30 @@ const ROLES = db.ROLES;
 const userTable = db.user;
 
 checkDuplicateUsernameOrEmail = (req, res, next) => {
-  // Username
+  // loginName
+  const loginName = req.body.loginName;
   userTable.findOne({
     where: {
-      username: req.body.username
+      loginName: loginName
     }
   }).then(user => {
     if (user) {
       res.status(400).send({
-        message: "Failed! Username is already in use!"
+        message: "Failed! loginName " + loginName + " is already in use!"
       });
       return;
     }
 
     // Email
+    const email = req.body.email;
     userTable.findOne({
       where: {
-        email: req.body.email
+        email: email
       }
     }).then(user => {
       if (user) {
         res.status(400).send({
-          message: "Failed! Email is already in use!"
+          message: "Failed! email " + email + " is already in use!"
         });
         return;
       }

@@ -8,6 +8,6 @@ export class SignUpInfo { // Seulement pour qu'un utilisateur s'enregistre
         this.loginName = loginName;
         this.email = email;
         this.password = password;
-        this.role = ['utilisateur'];
+        this.role = ['utilisateur']; // l'inscription n'est que pour les utilisateurs
     }
 }

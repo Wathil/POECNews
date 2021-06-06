@@ -13,7 +13,8 @@ exports.signup = (req, res) => { // s'inscrire
   user.create({
     loginName: req.body.loginName, // !
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+    accredit: 1
   })
     .then(user => {
       if (req.body.roles) {
@@ -29,8 +30,8 @@ exports.signup = (req, res) => { // s'inscrire
           });
         });
       } else {
-        // user role = 1
-        user.setRoles([1]).then(() => {
+        // user role = 0 utilisateur
+        user.setRoles([0]).then(() => {
           res.send({ message: "User was registered successfully!" });
         });
       }
