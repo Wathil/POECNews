@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { UserService } from 'src/app/shared/user.service';
+import { AppComponent } from 'src/app/app.component';
+import { AuthService } from 'src/app/auth/auth.service';
+import { AuthLoginInfo } from 'src/app/auth/login-info';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-connexion',
@@ -11,29 +13,60 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class ConnexionPage implements OnInit {
 
-  loginForm = this.formBuilder.group({
-    email: [''],
-    password: ['']
-  })
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  loginName = '';
+  private loginInfo: AuthLoginInfo;
 
-  constructor(private router : Router, 
-    private userService: UserService, 
-    private formBuilder : FormBuilder,
-    private toast : ToastController
-    ) { }
+  constructor(
+    private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private toast: ToastController,
+    private zone: NgZone,
+    private router: Router,
+    private appComponent: AppComponent
+  ) { }
 
   ngOnInit() {
   }
 
-  goConnect(){
-    this.userService.getUsersLogin(this.loginForm.value).subscribe(user => {
-      console.log(user);
-      if (user){
-        this.userService.user.next(user);
-        this.loginForm.reset();
-        this.router.navigateByUrl("home");
-      }      
-    })
+  ionViewWillEnter() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.loginName = this.tokenStorage.getLoginName();
+    }
   }
-  
+
+  onSubmit() {
+    this.loginInfo = new AuthLoginInfo(
+      this.form.email,
+      this.form.password);
+
+    this.authService.attemptAuth(this.loginInfo).subscribe(
+      async jwtResponse => {
+        this.tokenStorage.saveToken(jwtResponse.accessToken);
+        this.tokenStorage.saveLoginName(jwtResponse.loginName);
+        this.tokenStorage.saveEmail(jwtResponse.email);
+        const newRole = jwtResponse.roles[0]
+        this.tokenStorage.saveRoles(jwtResponse.roles);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        let toast = await this.toast.create({
+          message: 'Connexion réussie.',
+          duration: 3000
+        });
+        toast.present();
+        this.appComponent.refreshRole(newRole);
+        this.zone.run(() => this.router.navigateByUrl(`home`));
+      },
+      error => {
+        console.log("ERROR=" + error);
+        this.errorMessage = error.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
+
 }

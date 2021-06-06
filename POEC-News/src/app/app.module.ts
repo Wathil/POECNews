@@ -10,11 +10,13 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './shared/modules/material.module';
 
+import { httpInterceptorProviders } from './auth/auth-interceptor';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NoopAnimationsModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [httpInterceptorProviders, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

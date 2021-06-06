@@ -1,5 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Article } from 'src/app/classes/Article';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
@@ -14,7 +15,10 @@ export class HomePage implements OnInit {
 
   articles: Article[] = [];
 
+  info: any;
+
   constructor(
+    private tokenStorage: TokenStorageService,
     private articleService: ArticleService,
     private categoryService: CategoryService,
     private userService: UserService,
@@ -26,6 +30,13 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    if (this.tokenStorage.getToken()) {
+      this.info = {
+        token: this.tokenStorage.getToken(),
+        loginName: this.tokenStorage.getLoginName(),
+        roles: this.tokenStorage.getRoles()
+      };
+    }
     this.reloadData();
   }
 
@@ -49,7 +60,7 @@ export class HomePage implements OnInit {
 
   lireArticle(id: number) {
     if (this.userService.user.getValue().id) {
-      this.router.navigateByUrl('/article/'+id);
+      this.router.navigateByUrl('/article/' + id);
     } else {
       this.router.navigateByUrl('/connexion');
     }

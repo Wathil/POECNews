@@ -10,22 +10,42 @@
   <ion-list>
     <img class="logo" src="./assets/img/logo-POECNews.png">
   </ion-list>
-  <ion-list>
-    <form class="connect" [formGroup]="loginForm" (ngSubmit)="goConnect()">
-      <mat-form-field appearance="outline">
-        <mat-label>EMAIL</mat-label>
-        <input matInput formControlName="email">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>MOT DE PASSE</mat-label>
-        <input matInput formControlName="password" type="password">
-      </mat-form-field>
+
+  <div *ngIf="isLoggedIn; else loggedOut">
+    Vous êtes connecté en tant que {{loginName}}.
+  </div>
+
+  <ng-template #loggedOut>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+      <ion-item class="form-group">
+        <ion-label for="email">email</ion-label>
+        <ion-input type="text" class="form-control" name="email" [(ngModel)]="form.email" #username="ngModel" required></ion-input>
+        <div *ngIf="f.submitted && username.invalid">
+          <div *ngIf="username.errors.required">Username is required</div>
+        </div>
+      </ion-item>
+
+      <ion-item class="form-group">
+        <ion-label for="password">Password</ion-label>
+        <ion-input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"></ion-input>
+        <div *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </ion-item>
+
       <button mat-raised-button color="primary" type="submit">CONNEXION</button>
-      <a routerLink="/rec-mdp">Mot de passe oublié</a>
-      <div class="divIns">
-        <button class="buttonIns" mat-raised-button [routerLink]="['/creation-user/']">S'INSCRIRE</button>
+      <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+        Login failed: {{errorMessage}}
       </div>
     </form>
-  </ion-list>
+
+    <a routerLink="/rec-mdp">Mot de passe oublié</a>
+    <div class="divIns">
+      <button class="buttonIns" mat-raised-button [routerLink]="['/inscription-utilisateur/']">S'INSCRIRE</button>
+    </div>
+
+  </ng-template>
 
 </ion-content>

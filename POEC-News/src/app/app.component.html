@@ -2,30 +2,66 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list id="inbox-list">
+
+        <ion-list *ngIf="role === 'administrateur'" id="inbox-list">
           <ion-list-header>Mon compte</ion-list-header> <br>
-          <!-- <ion-note>hi@ionicframework.com</ion-note> -->
-          <!-- <div *ngIf="userStatus == 'utilisateur'">
-            <div>crédit = {{  }}</div>
-            <a routerLink="/acheterCrédit">Acheter crédit</a>
-          </div> -->
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages[user.category]; let i = index">            
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+          <ion-menu-toggle *ngFor="let p of liensAdministrateur" auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <button mat-button color="primary" *ngIf="user.id" (click)="deconnect()">Se déconnecter</button>
+          <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
         </ion-list>
 
-        <!-- <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+        <ion-list *ngIf="role === 'redacteur'" id="inbox-list">
+          <ion-list-header>Mon compte</ion-list-header> <br>
+          <ion-menu-toggle *ngFor="let p of liensRedacteur" auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
+        </ion-list>
 
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
-        </ion-list> -->
+        <ion-list *ngIf="role === 'utilisateur'" id="inbox-list">
+          <ion-list-header>Mon compte</ion-list-header> <br>
+          <ion-menu-toggle *ngFor="let p of liensUtilisateur" auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
+        </ion-list>
+
+        <ion-list *ngIf="role === 'invite'" id="inbox-list">
+          <ion-list-header>Mon compte</ion-list-header> <br>
+          <ion-menu-toggle *ngFor="let p of lienDefault" auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
+        </ion-list>
+
+        <ion-list *ngIf="!role" id="inbox-list">
+          <ion-list-header>Mon compte</ion-list-header> <br>
+          <ion-menu-toggle *ngFor="let p of lienDefault" auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

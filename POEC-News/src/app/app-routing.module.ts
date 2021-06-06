@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'creation-user',
-    loadChildren: () => import('./pages/creation-user/creation-user.module').then( m => m.CreationUserPageModule)
+    loadChildren: () => import('./pages/creation-user/creation-user.module').then( m => m.CreationUserPageModule) // A Modifier vers modifier compte
   },
   {
     path: 'creation-admin',
@@ -82,8 +82,11 @@ const routes: Routes = [
   {
     path: 'articles-par-auteur/:userId',
     loadChildren: () => import('./pages/articles-par-auteur/articles-par-auteur.module').then( m => m.ArticlesParAuteurPageModule)
+  },
+  {
+    path: 'inscription-utilisateur',
+    loadChildren: () => import('./pages/inscription-utilisateur/inscription-utilisateur.module').then( m => m.InscriptionUtilisateurPageModule)
   }
-
 
 
 ];

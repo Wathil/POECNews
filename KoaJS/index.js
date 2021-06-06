@@ -5,6 +5,7 @@ const router = new Router();
 
 const db = require("./models");
 
+const role = db.role;
 const user = db.user;
 const article = db.article;
 const category = db.category;
@@ -13,9 +14,36 @@ const commentaire = db.commentaire;
 db.sequelize.sync({ force: true })
     .then(() => {
         console.log("Drop and re-sync db.");
-        user1();
+        role1();
     });
 
+function role1() {
+    const role1 = role.create({
+        id: 0,
+        name: 'administrateur'
+    }).then((() => {
+        console.log("role1 inserted");
+        role2();
+    }));
+}
+function role2() {
+    const role2 = role.create({
+        id: 1,
+        name: 'rédacteur'
+    }).then((() => {
+        console.log("role2 inserted");
+        role3();
+    }));
+}
+function role3() {
+    const role3 = role.create({
+        id: 2,
+        name: 'utilisateur'
+    }).then((() => {
+        console.log("role3 inserted");
+        user1();
+    }));
+}
 function user1() {
     const user1 = user.create({ // USER
         //id: 1, // AUTO INCREMENT
@@ -290,6 +318,8 @@ require('./routes/user.routes')(router);
 require('./routes/article.routes')(router);
 require('./routes/category.routes')(router);
 require('./routes/commentaire.routes')(router);
+require('./routes/access.routes')(router);
+require('./routes/auth.routes')(router);
 
 app
     .use(router.routes())
