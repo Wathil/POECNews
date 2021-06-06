@@ -197,73 +197,85 @@ function f_commentaire() {
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 1,
-        contenu: "commentaire 1"
+        contenu: "commentaire  article 1",
+        resId: null
     });
     const commentaire2 = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
-        articleId : 2,
-        contenu: "commentaire 2"
+        articleId : 1,
+        contenu: "commentaire article 1",
+        resId: null
     });
     const commentaire3 = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
-        articleId : 3,
-        contenu: "commentaire 3"
+        articleId : 2,
+        contenu: "commentaire article 2",
+        resId: null
     });
     const commentaire4 = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
-        articleId : 4,
-        contenu: "commentaire 4"
+        articleId : 2,
+        contenu: "commentaire article 2",
+        resId: null
     });
     const commentaire5 = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
-        articleId : 5,
-        contenu: "commentaire 5"
+        articleId : 2,
+        contenu: "commentaire article 2",
+        resId: null
     });
     const commentaire6 = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 6,
-        contenu: "commentaire 6"
+        contenu: "commentaire 6",
+        resId: null
     });
     const commentaire1a = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 1,
-        contenu: "commentaire 1 A"
+        contenu: "réponse commentaire 1 article 1",
+        resId: 1
     });
     const commentaire2a = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 2,
-        contenu: "commentaire 2 A"
+        contenu: "réponse commentaire 2 article 2",
+        resId: 3
     });
     const commentaire3a = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 3,
-        contenu: "commentaire 3 A"
+        contenu: "reponse commentaire 2 article 3 ",
+        resId: 2
     });
     const commentaire4a = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 4,
-        contenu: "commentaire 4 A"
+        contenu: "reponse commentaire 4 article 4",
+        resId: 4
     });
     const commentaire5a = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 5,
-        contenu: "commentaire 5 A"
+        contenu: "réponse commentaire 5 artcile 5",
+        resId: 5
     });
     const commentaire6a = commentaire.create({
         //id: 1 // AUTO INCREMENT
         userId : 6,
         articleId : 6,
-        contenu: "commentaire 6 A"
+        contenu: "réponse commentaire 6 article 6",
+        resId: 6
     });
 }
 

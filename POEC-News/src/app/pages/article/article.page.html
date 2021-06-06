@@ -24,5 +24,12 @@
     <p></p>
     <ion-card-content>{{article.contenu}}</ion-card-content>
   </ion-card>
+  <p>Commentaires: </p>
+  <div *ngIf="coms.length">
+    <ion-card *ngFor="let com of coms">
+      <p>{{com.contenu}}</p>
+      <p *ngIf="com.response" style="background-color: aquamarine;">{{com.response.contenu}}</p>
+    </ion-card>
+  </div>
 
 </ion-content>

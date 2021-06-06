@@ -23,6 +23,9 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id'
             },
         },
+        resId: {
+            type: Sequelize.INTEGER
+        },
         contenu: {
             type: Sequelize.TEXT
         }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/classes/Article';
+import { Commentaire } from 'src/app/classes/Commentaire';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
+import { CommentaireService } from 'src/app/shared/commentaire.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -14,28 +16,44 @@ export class ArticlePage implements OnInit {
 
   id: any;
   article: Article;
+  coms: Commentaire[] = [];
 
   constructor(
     private articleService: ArticleService,
     private categoryService: CategoryService,
     private userService: UserService,
+    private commentaireService: CommentaireService,
     private route: ActivatedRoute
+
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.articleService.getArticle(this.id).subscribe(data => {
-      this.article = data;
-      if (this.article.userId) {
+      if (data) {
+        this.article = data;
         this.userService.getRedacteur(this.article.userId).subscribe(user => {
           this.article.author = user.loginName;
         })
-      }
-      if (this.article.categoryId) {
+
         this.categoryService.getCategory(this.article.categoryId).subscribe(category => {
           this.article.category = category.tag;
         })
       }
+      this.commentaireService.getCommentairesByArticleId(this.id).subscribe(com => {
+        if(com){
+          console.log(com);
+          com.forEach(c => {
+            if(c.resId == null){
+              this.coms.push(c);
+            } else {
+              let comRes = this.coms.find(t => t.id == c.resId );
+              comRes.response = c;
+            }
+          })
+          console.log(this.coms);
+        }
+      })
     })
   }
 
