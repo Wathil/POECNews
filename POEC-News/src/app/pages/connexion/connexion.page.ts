@@ -36,13 +36,10 @@ export class ConnexionPage implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.loginName = this.tokenStorage.getLoginName();
-      console.log("this.tokenStorage.getLoginName()=" + this.tokenStorage.getLoginName());
     }
   }
 
   onSubmit() {
-    console.log(this.form);
-
     this.loginInfo = new AuthLoginInfo(
       this.form.email,
       this.form.password);
@@ -62,7 +59,6 @@ export class ConnexionPage implements OnInit {
         });
         toast.present();
         this.appComponent.refreshRole(newRole);
-        //window.location.reload();
         this.zone.run(() => this.router.navigateByUrl(`home`));
       },
       error => {
@@ -73,7 +69,4 @@ export class ConnexionPage implements OnInit {
     );
   }
 
-  reloadPage() {
-    window.location.reload();
-  }
 }

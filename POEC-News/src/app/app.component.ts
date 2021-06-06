@@ -8,7 +8,7 @@ import { TokenStorageService } from './auth/token-storage.service';
 
 export class AppComponent implements OnInit {
 
-  private role: string = 'invite'
+  private role: string = 'invite' // Valeur par défaut
 
   liensAdministrateur = [
     { title: 'Accueil', url: '/home', icon: 'home' },
@@ -44,25 +44,15 @@ export class AppComponent implements OnInit {
   }
 
   refreshRole(newRole: string) {
-    console.log("refreshRole newRole=" + newRole);
-    if (newRole === 'ROLE_ADMINISTRATEUR') { // ExpressJS auth.controller.js
-      console.log("administrateur");
+    if (newRole === 'ROLE_ADMINISTRATEUR') // ExpressJS auth.controller.js
       this.role = 'administrateur';
-      return false;
-    } else if (newRole === 'ROLE_REDACTEUR') { // ExpressJS auth.controller.js
-      console.log("redacteur");
+    else if (newRole === 'ROLE_REDACTEUR') // ExpressJS auth.controller.js
       this.role = 'redacteur';
-      return false;
-    } else if (newRole === 'ROLE_UTILISATEUR') { // ExpressJS auth.controller.js
-      console.log("utilisateur");
+    else if (newRole === 'ROLE_UTILISATEUR') // ExpressJS auth.controller.js
       this.role = 'utilisateur';
-      return false;
-    }
-    console.log("invite");
-    this.role = 'invite';
-    return true;
+    else
+      this.role = 'invite';
   }
-
 
   logout() {
     this.tokenStorage.signOut();
