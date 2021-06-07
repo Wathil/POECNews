@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Category } from 'src/app/classes/Category';
+import { AuthService } from 'src/app/auth/auth.service';
+import { SignUpInfo } from 'src/app/auth/signup-info';
 import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -11,47 +11,58 @@ import { UserService } from 'src/app/shared/user.service';
   templateUrl: './creation-admin.page.html',
   styleUrls: ['./creation-admin.page.scss'],
 })
+
 export class CreationAdminPage implements OnInit {
+
   user: User;
+  signupInfo: SignUpInfo;
+  form: any = {};
+  errorMessage = '';
 
-  userForm = this.formBuilder.group({
-    id: [null],
-    loginName: [''],
-    email: [''],
-    password: [''],
-    category: [null]
-  })
-
-  constructor(private router: Router, 
-    private userService: UserService, 
+  constructor(
+    private router: Router,
+    private userService: UserService,
     private toast: ToastController,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-
-
-    ) { }
+    private authService: AuthService,
+    private zone: NgZone
+  ) { }
 
   ngOnInit() {
     this.user = this.userService.user.getValue() || new User(null);
   }
 
+  onSubmit() {
+    var roles;
+    if (this.form.category == '0')
+      roles = ['administrateur'];
+    else if (this.form.category == '1')
+      roles = ['redacteur'];
+    else
+      roles = ['utilisateur'];
 
-  saveUser() {
-    this.userService.addUser(this.userForm.value).subscribe(async data => {
-      console.log(data);
-      let toast = await this.toast.create({        
-        message: 'Un user ajouté',
-        duration: 3000        
-      });
-      toast.present();
-      if (this.userForm.get("category").value == 1){
-        this.router.navigateByUrl('gerer-redacteurs');
-      } else if (this.userForm.get("category").value == 2) {
-        this.router.navigateByUrl('gerer-utilisateurs');
+    this.signupInfo = new SignUpInfo(
+      this.form.loginName,
+      this.form.email,
+      this.form.password,
+      roles);
+
+    this.authService.signUp(this.signupInfo).subscribe(
+      async data => {
+        let toast = await this.toast.create({
+          message: `${roles[0]} inscrit!`,
+          duration: 3000
+        });
+        toast.present();
+        if (roles[0] == 'redacteur')
+          this.zone.run(() => this.router.navigateByUrl(`gerer-redacteurs`));
+        if (roles[0] == 'utilisateur')
+          this.zone.run(() => this.router.navigateByUrl(`gerer-utilisateurs`));
+      },
+      error => {
+        console.log("CreationAdminPage onSubmit()=" + error);
+        this.errorMessage = error.error.message;
       }
-      this.userForm.reset();
-      
-    })    
+    );
   }
 
 }

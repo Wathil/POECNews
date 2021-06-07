@@ -1,4 +1,5 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+ 
+ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -51,10 +52,15 @@ export class UserService {
   }
 
   getRedacteurs(): Observable<User[]> {
+    console.log("UserService getRedacteurs");
     let API_URL = `${this.url}redacteurs/`;
+    console.log("API_URL="+ API_URL);
+    var redacteur: User;
     return this.httpClient.get(API_URL)
       .pipe(
         map((res: any) => {
+          //redacteur.id = res.id;
+          console.log("res=" + res);
           return res || {}
         }),
         catchError(this.errorMgmt)

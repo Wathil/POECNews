@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './auth/token-storage.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -40,7 +41,10 @@ export class AppComponent implements OnInit {
     private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
-
+    const role = JSON.parse(sessionStorage.getItem("AuthRoles"));
+    if (role) {
+      this.refreshRole(role[0]);
+    }
   }
 
   refreshRole(newRole: string) {

@@ -29,16 +29,11 @@ export class InscriptionUtilisateurPage implements OnInit {
     this.signupInfo = new SignUpInfo(
       this.form.loginName,
       this.form.email,
-      this.form.password);
-
-      console.log("this.signupInfo.loginName=" + this.signupInfo.loginName);
-      console.log("this.signupInfo.email=" + this.signupInfo.email);
-      console.log("this.signupInfo.password=" + this.signupInfo.password);
-      console.log("this.signupInfo.role[0]=" + this.signupInfo.role[0]);
+      this.form.password,
+      ['utilisateur']);
  
     this.authService.signUp(this.signupInfo).subscribe(
       async data => {
-        console.log(data);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
         let toast = await this.toast.create({

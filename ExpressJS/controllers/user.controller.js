@@ -2,6 +2,9 @@ const user = require("../models").user;
 const login = require("../models").login;
 const db = require("../models");
 const Op = db.Sequelize.Op;
+const user_role = db.user_role;
+const role = db.role;
+const col = db.sequelize.col;
 
 module.exports = {
     async login(request, res) {
@@ -42,7 +45,15 @@ module.exports = {
     async getUtilisateurs(request, res) { // GET http://localhost:8080/users/utilisateurs/
         try {
             const userCollection = await user.findAll({
-                where: { category: 2 }
+                include: [{
+                    model: role,
+                    through: {
+                        where: {roleId: 2},
+                        attributes: []
+                    },
+                    required: true
+                  }],
+                  attributes: ['id', 'loginName', 'email', 'password', 'accredit', [col('roles.id'), 'category']]
             });
             res.status(201).send(userCollection);
         }
@@ -57,8 +68,17 @@ module.exports = {
     async getRedacteurs(request, res) { // GET http://localhost:8080/users/redacteurs/
         try {
             const userCollection = await user.findAll({
-                where: { category: 1 }
+                include: [{
+                    model: role,
+                    through: {
+                        where: {roleId: 1},
+                        attributes: []
+                    },
+                    required: true
+                  }],
+                  attributes: ['id', 'loginName', 'email', 'password', 'accredit', [col('roles.id'), 'category']]
             });
+            console.log();
             res.status(201).send(userCollection);
         }
         catch (e) {

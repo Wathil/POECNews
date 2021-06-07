@@ -1,13 +1,13 @@
-export class SignUpInfo { // Seulement pour qu'un utilisateur s'enregistre
+export class SignUpInfo {
     loginName: string;
     email: string;
     password: string;
-    role: string[];
+    roles: string[];
  
-    constructor(loginName: string, email: string, password: string) {
+    constructor(loginName: string, email: string, password: string, roles: string[]) {
         this.loginName = loginName;
         this.email = email;
         this.password = password;
-        this.role = ['utilisateur']; // l'inscription n'est que pour les utilisateurs
+        this.roles = roles;
     }
 }

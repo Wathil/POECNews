@@ -27,7 +27,9 @@ export class GererRedacteursPage implements OnInit {
 
   reloadData() {
     this.userService.getRedacteurs().subscribe(data => {
+      console.log("GererRedacteursPage");
       this.users = data;
+      console.log("Fin GererRedacteursPage=");
     });
   }
   
