@@ -1,5 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Article } from 'src/app/classes/Article';
 import { Category } from 'src/app/classes/Category';
 import { ArticleService } from 'src/app/shared/article.service';
@@ -19,7 +20,9 @@ export class ArticlesParCategoriePage implements OnInit {
   tag!: string;
   categoryId!: number;
 
-  constructor(private articleService: ArticleService,
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private articleService: ArticleService,
     private userService: UserService,
     private categoryService: CategoryService,
     private router: Router,
@@ -62,7 +65,7 @@ export class ArticlesParCategoriePage implements OnInit {
   }
 
   lireArticle(id: number) {
-    if (this.userService.user.getValue().id) {
+    if (this.tokenStorage.getToken()) {
       this.zone.run(() => this.router.navigateByUrl(`/article/` + id));
     } else {
       this.zone.run(() => this.router.navigateByUrl(`/connexion`));

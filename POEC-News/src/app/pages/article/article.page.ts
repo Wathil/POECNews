@@ -26,6 +26,7 @@ export class ArticlePage implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    console.log("ID=" + this.id)
     this.articleService.getArticle(this.id).subscribe(data => {
       this.article = data;
       if (this.article.userId) {

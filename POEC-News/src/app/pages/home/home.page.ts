@@ -14,7 +14,6 @@ import { UserService } from 'src/app/shared/user.service';
 export class HomePage implements OnInit {
 
   articles: Article[] = [];
-
   info: any;
 
   constructor(
@@ -59,7 +58,7 @@ export class HomePage implements OnInit {
   }
 
   lireArticle(id: number) {
-    if (this.userService.user.getValue().id) {
+    if (this.tokenStorage.getToken()) {
       this.router.navigateByUrl('/article/' + id);
     } else {
       this.router.navigateByUrl('/connexion');
