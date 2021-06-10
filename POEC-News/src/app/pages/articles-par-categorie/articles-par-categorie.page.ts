@@ -1,6 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Article } from 'src/app/classes/Article';
 import { Category } from 'src/app/classes/Category';
 import { ArticleService } from 'src/app/shared/article.service';
@@ -21,7 +20,6 @@ export class ArticlesParCategoriePage implements OnInit {
   categoryId!: number;
 
   constructor(
-    private tokenStorage: TokenStorageService,
     private articleService: ArticleService,
     private userService: UserService,
     private categoryService: CategoryService,

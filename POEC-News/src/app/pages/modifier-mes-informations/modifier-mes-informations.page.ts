@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
-import { User } from 'src/app/classes/User';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({

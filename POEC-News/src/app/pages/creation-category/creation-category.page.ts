@@ -23,13 +23,10 @@ export class CreationCategoryPage implements OnInit {
     private categoryService: CategoryService,
     private toast: ToastController,
     private formBuilder: FormBuilder,
-
-
   ) { }
 
   ngOnInit() {
   }
-
 
   saveCategory() {
     this.categoryService.addCategory(this.categoryForm.value).subscribe(async data => {

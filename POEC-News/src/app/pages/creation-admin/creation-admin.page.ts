@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SignUpInfo } from 'src/app/auth/signup-info';
-import { User } from 'src/app/classes/User';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-creation-admin',
@@ -20,7 +18,6 @@ export class CreationAdminPage implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
     private toast: ToastController,
     private authService: AuthService,
     private zone: NgZone
