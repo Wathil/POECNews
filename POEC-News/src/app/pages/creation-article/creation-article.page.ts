@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Article } from 'src/app/classes/Article';
 import { User } from 'src/app/classes/User';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-creation-article',
@@ -36,20 +36,18 @@ export class CreationArticlePage implements OnInit {
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
     private categoryService: CategoryService,
-    private userService: UserService
-
+    private tokenStorage: TokenStorageService
     ) { }
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe(cat => {
       this.categories = cat;
     });
-
-    this.user = this.userService.user.getValue();
   }
 
   saveArticle() {
-    this.articleForm.patchValue({userId: this.user.id});
+    var id: number = +this.tokenStorage.getId();
+    this.articleForm.patchValue({userId: id});
     this.articleService.addArticle(this.articleForm.value).subscribe(async data => {
       console.log(data);
       let toast = await this.toast.create({        

@@ -17,19 +17,19 @@ export class AppComponent implements OnInit {
     { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
     { title: 'Gérer les rédacteurs', url: 'gerer-redacteurs', icon: 'people-circle' },
     { title: 'Gérer les utilisateurs', url: 'gerer-utilisateurs', icon: 'people' },
-    { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' } // A Modifier vers modifier compte
+    { title: 'Gérer mes informations', url: 'modifier-mes-informations', icon: 'settings' } // A Modifier vers modifier compte
   ]
 
   liensRedacteur = [
     { title: 'Accueil', url: '/home', icon: 'home' },
     { title: 'Gérer les articles', url: 'gerer-articles', icon: 'create' },
     { title: 'Gérer les catégories', url: 'gerer-categories', icon: 'settings' },
-    { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' } // A Modifier vers modifier compte
+    { title: 'Gérer mes informations', url: 'modifier-mes-informations', icon: 'settings' } // A Modifier vers modifier compte
   ]
 
   liensUtilisateur = [
     { title: 'Accueil', url: '/home', icon: 'home' },
-    { title: 'Gérer mes informations', url: 'creation-user', icon: 'settings' }, // A Modifier vers modifier compte
+    { title: 'Gérer mes informations', url: 'modifier-mes-informations', icon: 'settings' }, // A Modifier vers modifier compte
   ]
 
   lienDefault = [

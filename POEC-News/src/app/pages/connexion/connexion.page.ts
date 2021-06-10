@@ -80,6 +80,7 @@ export class ConnexionPage implements OnInit {
         this.tokenStorage.saveId(jwtResponse.id);
         this.tokenStorage.saveLoginName(jwtResponse.loginName);
         this.tokenStorage.saveEmail(jwtResponse.email);
+        this.tokenStorage.saveCategoryId(jwtResponse.categoryId);
         const newRole = jwtResponse.roles[0]
         this.tokenStorage.saveRoles(jwtResponse.roles);
         this.isLoginFailed = false;

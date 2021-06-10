@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 module.exports = {
     async getCommentairesByUserId(request, res) { // GET http://localhost:8080/commentaires/byuserid/ https://sequelize.org/v5/manual/models-usage.html#manipulating-the-dataset-with-limit--offset--order-and-group
         try {
-            const userIdParam = ctx.params.id;
+            const userIdParam = request.params.id;
             const commentaireCollection = await commentaire.findAll(({
                 where: { userId: userIdParam }
             }));
@@ -20,7 +20,7 @@ module.exports = {
         }
     },
     async getCommentairesByArticleId(request, res) { // GET http://localhost:8080/commentaires/byarticleid/:id
-        const articleIdParam = ctx.params.id;
+        const articleIdParam = request.params.id;
         try {
             const commentaireCollection = await commentaire.findAll({
                 where: { articleId: articleIdParam }
@@ -35,7 +35,7 @@ module.exports = {
         }
     },
     async getCommentaire(request, res) { // GET http://localhost:8080/commentaires/:id
-        const id = ctx.params.id;
+        const id = request.params.id;
         try {
             const commentaireCollection = await commentaire.findOne({
                 where: { id: id }
@@ -92,7 +92,7 @@ module.exports = {
                 where: { id: id }
             }));
             if (commentaireCollection) {
-                const updatedCommentaire = await commentaire.update(ctx.request.body, {
+                const updatedCommentaire = await commentaire.update(request.body, {
                     where: { id: id }
                 })
                 res.status(201).send(updatedCommentaire);

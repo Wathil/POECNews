@@ -1,6 +1,6 @@
 export class JwtResponse {
     accessToken: string;
-    type: string;
+    categoryId: string;
     id: string;
     loginName: string;
     email: string; // former userName

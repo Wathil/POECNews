@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Article } from 'src/app/classes/Article';
-import { User } from 'src/app/classes/User';
 import { ArticleService } from 'src/app/shared/article.service';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-gerer-articles',
@@ -11,26 +9,24 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./gerer-articles.page.scss'],
 })
 export class GererArticlesPage implements OnInit {
-  user : User;
-  articles: Article[] = []; 
 
-  constructor(private articleService: ArticleService, 
-    private toast: ToastController, 
-    private alertController : AlertController,
-    private userService: UserService
-    ) { }
+  articles: Article[] = [];
+
+  constructor(private articleService: ArticleService,
+    private toast: ToastController,
+    private alertController: AlertController,
+  ) { }
 
   ngOnInit() {
-    this.user = this.userService.user.getValue();
   }
 
   ionViewWillEnter() {
     this.reloadData()
   }
 
-  reloadData() {    
+  reloadData() {
     this.articleService.getArticles().subscribe(data => {
-    this.articles = data;
+      this.articles = data;
     });
   }
 

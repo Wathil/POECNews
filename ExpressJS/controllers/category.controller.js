@@ -77,7 +77,7 @@ module.exports = {
                 where: { id: id }
             }));
             if (categoryCollection) {
-                const updatedCategory = await category.update(ctx.request.body, {
+                const updatedCategory = await category.update(request.body, {
                     where: { id: id }
                 })
                 res.status(201).send(updatedCategory);

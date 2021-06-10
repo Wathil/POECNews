@@ -5,6 +5,7 @@ const ID_KEY = 'AuthId'; // user.id
 const LOGINNAME_KEY = 'AuthLoginName'; // user.loginName
 const EMAIL_KEY = 'AuthUserEmailname'; // user.email 
 const ROLES_KEY = 'AuthRoles'; // {ROLE_ADMINISTRATEUR, ROLE_REDACTEUR, ROLE_UTILISATEUR}
+const CATEGORY_ID = 'AuthCategoryId';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,15 @@ export class TokenStorageService {
 
   public getEmail(): string {
     return sessionStorage.getItem(EMAIL_KEY);
+  }
+
+  public saveCategoryId(email: string) {
+    window.sessionStorage.removeItem(CATEGORY_ID);
+    window.sessionStorage.setItem(CATEGORY_ID, email);
+  }
+
+  public getCategoryId(): string {
+    return sessionStorage.getItem(CATEGORY_ID);
   }
 
   public saveRoles(roles: string[]) {

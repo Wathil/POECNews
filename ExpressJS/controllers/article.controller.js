@@ -122,7 +122,7 @@ module.exports = {
                 where: { id: id }
             }));
             if (articleCollection) {
-                const updatedArticle = await article.update(ctx.request.body, {
+                const updatedArticle = await article.update(request.body, {
                     where: { id: id }
                 })
                 res.status(201).send(updatedArticle);

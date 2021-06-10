@@ -14,8 +14,6 @@ export class UserService {
   url: string = 'http://localhost:8080/users/';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  user = new BehaviorSubject<User>(User.defaultUser());
-
   constructor(private httpClient: HttpClient) { }
 
   getUsersLogin(data: Login): Observable<User> {

@@ -11,15 +11,11 @@ export class User {
     accredit!: number;
     category!: number; // 0: Admin; 1: Rédacteur; 2: Utilisateur
 
-    constructor(user: any) {
-        if (user) {
-            this.id = user.id;
-            this.loginName = user.loginName;
-            this.email = user.email;
-            this.password = user.password;
-            this.accredit = user.accredit;
-            this.category = user.category;
-        }
+    constructor(id: number, loginName: string, email: string, category: number) {
+      this.id = id;
+      this.loginName = loginName;
+      this.email = email;
+      this.category = category;
     }
 
     static getCategoryToString(category: number): string {
@@ -31,9 +27,5 @@ export class User {
             case 2:
               return User.USER_CATEGORY_2;
         }
-    }
-
-    static defaultUser() {
-      return new User({category: 3});
     }
 }

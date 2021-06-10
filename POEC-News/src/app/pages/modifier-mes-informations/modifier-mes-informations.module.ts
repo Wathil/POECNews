@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreationUserPageRoutingModule } from './creation-user-routing.module';
+import { ModifierMesInformationsPageRoutingModule } from './modifier-mes-informations-routing.module';
 
-import { CreationUserPage } from './creation-user.page';
+import { ModifierMesInformationsPage } from './modifier-mes-informations.page';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    CreationUserPageRoutingModule,
+    ModifierMesInformationsPageRoutingModule,
     MaterialModule
   ],
-  declarations: [CreationUserPage]
+  declarations: [ModifierMesInformationsPage]
 })
-export class CreationUserPageModule {}
+export class ModifierMesInformationsPageModule {}

@@ -14,7 +14,6 @@ import { UserService } from 'src/app/shared/user.service';
 
 export class CreationAdminPage implements OnInit {
 
-  user: User;
   signupInfo: SignUpInfo;
   form: any = {};
   errorMessage = '';
@@ -28,7 +27,6 @@ export class CreationAdminPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.userService.user.getValue() || new User(null);
   }
 
   onSubmit() {

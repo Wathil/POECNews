@@ -11,14 +11,15 @@ module.exports = {
         try {
             const emailPost = request.body.email;
             const passwordPost = request.body.password;
-            const userCollection = await user.findOne(({
+            const userCollection = await user.findOne({
                 where: {
                     [Op.and]: [
                       { email: emailPost },
                       { password: passwordPost }
                     ]
-                  }
-            }));
+                  },
+                  attributes: {exclude: ['password']}
+            });
             res.status(201).send(userCollection);
         }
         catch (e) {
@@ -30,8 +31,10 @@ module.exports = {
         }
     },
     async getUsers(request, res) { // GET http://localhost:8080/users/
-        try {
-            const userCollection = await user.findAll();
+        try { // OK sans password
+            const userCollection = await user.findAll({
+                  attributes: {exclude: ['password']}
+            });
             res.status(201).send(userCollection);
         }
         catch (e) {
@@ -43,7 +46,7 @@ module.exports = {
         }
     },
     async getUtilisateurs(request, res) { // GET http://localhost:8080/users/utilisateurs/
-        try {
+        try { // OK sans password
             const userCollection = await user.findAll({
                 include: [{
                     model: role,
@@ -53,7 +56,7 @@ module.exports = {
                     },
                     required: true
                   }],
-                  attributes: ['id', 'loginName', 'email', 'password', 'accredit', [col('roles.id'), 'category']]
+                  attributes: ['id', 'loginName', 'email', 'accredit', [col('roles.id'), 'category']]
             });
             res.status(201).send(userCollection);
         }
@@ -66,7 +69,7 @@ module.exports = {
         }
     },
     async getRedacteurs(request, res) { // GET http://localhost:8080/users/redacteurs/
-        try {
+        try { // OK sans password
             const userCollection = await user.findAll({
                 include: [{
                     model: role,
@@ -76,7 +79,7 @@ module.exports = {
                     },
                     required: true
                   }],
-                  attributes: ['id', 'loginName', 'email', 'password', 'accredit', [col('roles.id'), 'category']]
+                  attributes: ['id', 'loginName', 'email', 'accredit', [col('roles.id'), 'category']]
             });
             console.log();
             res.status(201).send(userCollection);
@@ -92,9 +95,10 @@ module.exports = {
     async getUser(request, res) { // GET http://localhost:8080/users/:id
         const id = request.params.id;
         console.log("id=" + id);
-        try {
+        try {// OK sans password
             const userCollection = await user.findOne({
-                where: { id: id }
+                where: { id: id },
+                attributes: {exclude: ['password']}
             });
             res.status(201).send(userCollection);
         }
@@ -151,8 +155,12 @@ module.exports = {
             const userCollection = await user.findOne(({
                 where: { id: id }
             }));
+            const toUpdate = request.body;
+            if (toUpdate) {
+                delete toUpdate.password;
+            }
             if (userCollection) {
-                const updatedUser = await user.update(ctx.request.body, {
+                const updatedUser = await user.update(toUpdate, {
                     where: { id: id }
                 })
                 res.status(201).send(updatedUser);
