@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   {
@@ -13,79 +14,80 @@ const routes: Routes = [
   // },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'gerer-articles',
-    loadChildren: () => import('./pages/gerer-articles/gerer-articles.module').then( m => m.GererArticlesPageModule)
+    loadChildren: () => import('./pages/gerer-articles/gerer-articles.module').then(m => m.GererArticlesPageModule)
   },
   {
     path: 'gerer-redacteurs',
-    loadChildren: () => import('./pages/gerer-redacteurs/gerer-redacteurs.module').then( m => m.GererRedacteursPageModule)
+    loadChildren: () => import('./pages/gerer-redacteurs/gerer-redacteurs.module').then(m => m.GererRedacteursPageModule)
   },
   {
     path: 'gerer-utilisateurs',
-    loadChildren: () => import('./pages/gerer-utilisateurs/gerer-utilisateurs.module').then( m => m.GererUtilisateursPageModule)
+    loadChildren: () => import('./pages/gerer-utilisateurs/gerer-utilisateurs.module').then(m => m.GererUtilisateursPageModule)
   },
   {
     path: 'connexion',
-    loadChildren: () => import('./pages/connexion/connexion.module').then( m => m.ConnexionPageModule)
+    loadChildren: () => import('./pages/connexion/connexion.module').then(m => m.ConnexionPageModule)
   },
   {
     path: 'gerer-utilisateur/:id',
-    loadChildren: () => import('./pages/gerer-utilisateur/gerer-utilisateur.module').then( m => m.GererUtilisateurPageModule)
+    loadChildren: () => import('./pages/gerer-utilisateur/gerer-utilisateur.module').then(m => m.GererUtilisateurPageModule)
   },
   {
     path: 'gerer-redacteur/:id',
-    loadChildren: () => import('./pages/gerer-redacteur/gerer-redacteur.module').then( m => m.GererRedacteurPageModule)
+    loadChildren: () => import('./pages/gerer-redacteur/gerer-redacteur.module').then(m => m.GererRedacteurPageModule)
   },
   {
     path: 'rec-mdp',
-    loadChildren: () => import('./pages/rec-mdp/rec-mdp.module').then( m => m.RecMdpPageModule)
+    loadChildren: () => import('./pages/rec-mdp/rec-mdp.module').then(m => m.RecMdpPageModule)
   },
   {
     path: 'creation-user',
-    loadChildren: () => import('./pages/creation-user/creation-user.module').then( m => m.CreationUserPageModule) // A Modifier vers modifier compte
+    loadChildren: () => import('./pages/creation-user/creation-user.module').then(m => m.CreationUserPageModule) // A Modifier vers modifier compte
   },
   {
     path: 'creation-admin',
-    loadChildren: () => import('./pages/creation-admin/creation-admin.module').then( m => m.CreationAdminPageModule)
+    loadChildren: () => import('./pages/creation-admin/creation-admin.module').then(m => m.CreationAdminPageModule)
   },
   {
     path: 'creation-article',
-    loadChildren: () => import('./pages/creation-article/creation-article.module').then( m => m.CreationArticlePageModule)
+    loadChildren: () => import('./pages/creation-article/creation-article.module').then(m => m.CreationArticlePageModule)
   },
   {
     path: 'modif-article/:id',
-    loadChildren: () => import('./pages/modif-article/modif-article.module').then( m => m.ModifArticlePageModule)
+    loadChildren: () => import('./pages/modif-article/modif-article.module').then(m => m.ModifArticlePageModule)
   },
   {
     path: 'article/:id',
-    loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
+    loadChildren: () => import('./pages/article/article.module').then(m => m.ArticlePageModule),
+    canActivate: [LoginGuard]
   },
   {
     path: 'gerer-categories',
-    loadChildren: () => import('./pages/gerer-categories/gerer-categories.module').then( m => m.GererCategoriesPageModule)
+    loadChildren: () => import('./pages/gerer-categories/gerer-categories.module').then(m => m.GererCategoriesPageModule)
   },
   {
     path: 'gerer-categorie/:id',
-    loadChildren: () => import('./pages/gerer-categorie/gerer-categorie.module').then( m => m.GererCategoriePageModule)
+    loadChildren: () => import('./pages/gerer-categorie/gerer-categorie.module').then(m => m.GererCategoriePageModule)
   },
   {
     path: 'creation-category/',
-    loadChildren: () => import('./pages/creation-category/creation-category.module').then( m => m.CreationCategoryPageModule)
+    loadChildren: () => import('./pages/creation-category/creation-category.module').then(m => m.CreationCategoryPageModule)
   },
   {
     path: 'articles-par-categorie/:categoryId',
-    loadChildren: () => import('./pages/articles-par-categorie/articles-par-categorie.module').then( m => m.ArticlesParCategoriePageModule)
+    loadChildren: () => import('./pages/articles-par-categorie/articles-par-categorie.module').then(m => m.ArticlesParCategoriePageModule)
   },
   {
     path: 'articles-par-auteur/:userId',
-    loadChildren: () => import('./pages/articles-par-auteur/articles-par-auteur.module').then( m => m.ArticlesParAuteurPageModule)
+    loadChildren: () => import('./pages/articles-par-auteur/articles-par-auteur.module').then(m => m.ArticlesParAuteurPageModule)
   },
   {
     path: 'inscription-utilisateur',
-    loadChildren: () => import('./pages/inscription-utilisateur/inscription-utilisateur.module').then( m => m.InscriptionUtilisateurPageModule)
+    loadChildren: () => import('./pages/inscription-utilisateur/inscription-utilisateur.module').then(m => m.InscriptionUtilisateurPageModule)
   }
 
 
@@ -97,4 +99,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -39,6 +39,36 @@ export class ConnexionPage implements OnInit {
     }
   }
 
+  // onSubmit() {
+  //   this.loginInfo = new AuthLoginInfo(
+  //     this.form.email,
+  //     this.form.password);
+
+  //   this.authService.attemptAuth(this.loginInfo).subscribe(
+  //     async jwtResponse => {
+  //       this.tokenStorage.saveToken(jwtResponse.accessToken);
+  //       this.tokenStorage.saveLoginName(jwtResponse.loginName);
+  //       this.tokenStorage.saveEmail(jwtResponse.email);
+  //       const newRole = jwtResponse.roles[0]
+  //       this.tokenStorage.saveRoles(jwtResponse.roles);
+  //       this.isLoginFailed = false;
+  //       this.isLoggedIn = true;
+  //       let toast = await this.toast.create({
+  //         message: 'Connexion réussie.',
+  //         duration: 3000
+  //       });
+  //       toast.present();
+  //       this.appComponent.refreshRole(newRole);
+  //       this.zone.run(() => this.router.navigateByUrl(`home`));
+  //     },
+  //     error => {
+  //       console.log("ERROR=" + error);
+  //       this.errorMessage = error.error.message;
+  //       this.isLoginFailed = true;
+  //     }
+  //   );
+  // }
+
   onSubmit() {
     this.loginInfo = new AuthLoginInfo(
       this.form.email,
@@ -59,7 +89,13 @@ export class ConnexionPage implements OnInit {
         });
         toast.present();
         this.appComponent.refreshRole(newRole);
-        this.zone.run(() => this.router.navigateByUrl(`home`));
+        if (this.authService.redirectUrl) {
+          console.log("this.authService.redirectUrl=" + this.authService.redirectUrl);
+          this.zone.run(() => this.router.navigateByUrl(this.authService.redirectUrl));
+        }
+        else {
+          this.zone.run(() => this.router.navigateByUrl(`home`));
+        }
       },
       error => {
         console.log("ERROR=" + error);
@@ -68,5 +104,4 @@ export class ConnexionPage implements OnInit {
       }
     );
   }
-
 }

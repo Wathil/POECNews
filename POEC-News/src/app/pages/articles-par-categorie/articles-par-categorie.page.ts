@@ -65,11 +65,7 @@ export class ArticlesParCategoriePage implements OnInit {
   }
 
   lireArticle(id: number) {
-    if (this.tokenStorage.getToken()) {
-      this.zone.run(() => this.router.navigateByUrl(`/article/` + id));
-    } else {
-      this.zone.run(() => this.router.navigateByUrl(`/connexion`));
-    }
+    this.router.navigateByUrl('/article/' + id);
   }
 
   changeSelection(i: number) {

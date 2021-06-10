@@ -58,11 +58,7 @@ export class HomePage implements OnInit {
   }
 
   lireArticle(id: number) {
-    if (this.tokenStorage.getToken()) {
-      this.router.navigateByUrl('/article/' + id);
-    } else {
-      this.router.navigateByUrl('/connexion');
-    }
+    this.router.navigateByUrl('/article/' + id);
   }
 
   afficheParAuteur(userId: number) {
