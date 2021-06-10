@@ -63,17 +63,17 @@ export class ArticlesParCategoriePage implements OnInit {
   }
 
   lireArticle(id: number) {
-    this.router.navigateByUrl('/article/' + id);
+    this.router.navigateByUrl('article/' + id);
   }
 
   changeSelection(i: number) {
   }
 
   afficheParAuteur(userId: number) {
-    this.zone.run(() => this.router.navigateByUrl(`/articles-par-auteur/` + userId));
+    this.zone.run(() => this.router.navigateByUrl(`articles-par-auteur/` + userId));
   }
 
   afficheParCategory(categoryId: number) {
-    this.zone.run(() => this.router.navigateByUrl(`/articles-par-categorie/` + categoryId));
+    this.zone.run(() => this.router.navigateByUrl(`articles-par-categorie/` + categoryId));
   }
 }

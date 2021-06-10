@@ -26,6 +26,7 @@ export class CreationCategoryPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("CreationCategoryPage");
   }
 
   saveCategory() {

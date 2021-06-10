@@ -4,7 +4,6 @@ import { ToastController } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AuthLoginInfo } from 'src/app/auth/login-info';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-connexion',
@@ -22,7 +21,6 @@ export class ConnexionPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private tokenStorage: TokenStorageService,
     private toast: ToastController,
     private zone: NgZone,
     private router: Router,
@@ -33,9 +31,9 @@ export class ConnexionPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    if (this.tokenStorage.getToken()) {
+    if (this.authService.isLogged()) {
       this.isLoggedIn = true;
-      this.loginName = this.tokenStorage.getLoginName();
+      this.loginName = this.authService.getLoginName();
     }
   }
 
@@ -76,13 +74,7 @@ export class ConnexionPage implements OnInit {
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       async jwtResponse => {
-        this.tokenStorage.saveToken(jwtResponse.accessToken);
-        this.tokenStorage.saveId(jwtResponse.id);
-        this.tokenStorage.saveLoginName(jwtResponse.loginName);
-        this.tokenStorage.saveEmail(jwtResponse.email);
-        this.tokenStorage.saveCategoryId(jwtResponse.categoryId);
-        const newRole = jwtResponse.roles[0]
-        this.tokenStorage.saveRoles(jwtResponse.roles);
+        this.authService.setJwtResponse(jwtResponse);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         let toast = await this.toast.create({
@@ -90,7 +82,7 @@ export class ConnexionPage implements OnInit {
           duration: 3000
         });
         toast.present();
-        this.appComponent.refreshRole(newRole);
+        this.appComponent.refreshRole();
         if (this.authService.redirectUrl) {
           console.log("this.authService.redirectUrl=" + this.authService.redirectUrl);
           this.zone.run(() => this.router.navigateByUrl(this.authService.redirectUrl));

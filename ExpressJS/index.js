@@ -78,9 +78,9 @@ function user_role1() {
 function user2() {
     const user2 = user.create({ // USER
         //id: 2, // AUTO INCREMENT
-        loginName: "r1",
-        email: "truc1@machin.com",
-        password: bcrypt.hashSync("123456", 8),
+        loginName: "r",
+        email: "r",
+        password: bcrypt.hashSync("r", 8),
         accredit: 1
     }).then((() => {
         console.log("user2 inserted");
@@ -166,9 +166,9 @@ function user_role5() {
 function user6() {
     const user6 = user.create({
         //id: 6, // AUTO INCREMENT
-        loginName: "3",
-        email: "3",
-        password: bcrypt.hashSync("3", 8),
+        loginName: "u",
+        email: "u",
+        password: bcrypt.hashSync("u", 8),
         accredit: 0
     }).then((() => {
         console.log("user6 inserted");

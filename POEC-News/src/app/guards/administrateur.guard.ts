@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from './auth/token-storage.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class AdministrateurGuard implements CanActivate {
 
   constructor(
-    private tokenStorage: TokenStorageService,
     private authService: AuthService,
     private router: Router) {
   }
@@ -18,7 +16,7 @@ export class LoginGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.tokenStorage.getToken()) {
+    if (this.authService.isAdministrateur()) {
       return true;
     }
     // Store the attempted URL for redirecting

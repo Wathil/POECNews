@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -15,17 +15,16 @@ export class ModifierMesInformationsPage implements OnInit {
   constructor(
     private userService: UserService,
     private toast: ToastController,
-    private tokenStorage: TokenStorageService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
-    this.form.loginName = this.tokenStorage.getLoginName();
-    this.form.email = this.tokenStorage.getEmail();
-    console.log("this.tokenStorage.getRoles()=" + this.tokenStorage.getRoles());
+    this.form.loginName = this.authService.getLoginName();
+    this.form.email = this.authService.getEmail();
   }
 
   saveUser() {
-    var id: number = +this.tokenStorage.getId();
-    var categoryId = +this.tokenStorage.getCategoryId();
+    var id: number = +this.authService.getId();
+    var categoryId = +this.authService.getCategoryId();
     var user = {
       id : id,
       loginName: this.form.loginName,
