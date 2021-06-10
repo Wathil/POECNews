@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/classes/Article';
 import { Commentaire } from 'src/app/classes/Commentaire';
@@ -13,6 +13,8 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./article.page.scss'],
 })
 export class ArticlePage implements OnInit {
+
+  @ViewChild('commentaire', {static: false}) textarea: any;
 
   id: any;
   article: Article;
@@ -41,20 +43,38 @@ export class ArticlePage implements OnInit {
         })
       }
       this.commentaireService.getCommentairesByArticleId(this.id).subscribe(com => {
-        if(com){
+        if (com) {
           console.log(com);
           com.forEach(c => {
-            if(c.resId == null){
+            if (c.resId == null) {
               this.coms.push(c);
             } else {
-              let comRes = this.coms.find(t => t.id == c.resId );
+              let comRes = this.coms.find(t => t.id == c.resId);
               comRes.response = c;
             }
           })
-          console.log(this.coms);
+          this.coms.sort((a, b) => {
+            return b.id - a.id;
+          });
         }
       })
     })
+  }
+
+  comment(textComment) {
+    if (textComment !== "") {
+      const sendComment = new Commentaire({
+        userId: this.userService.user.getValue().id,
+        articleId: this.id,
+        contenu: textComment        
+      })
+      console.log(this.userService.user.getValue().id);
+
+      this.commentaireService.addCommentaire(sendComment).subscribe(newComment => {
+        this.textarea.value = "";
+        this.coms.unshift(newComment);
+      });
+    }
   }
 
 

@@ -12,7 +12,7 @@
     <ion-title>ACCUEIL</ion-title>
   </ion-list-header>
 
-  <ion-card *ngIf="article">
+  <ion-card class="margCard" *ngIf="article">
     <img src="{{ article.urlImage }}" />
     <ion-card-title>{{ article.titre }}</ion-card-title>
     <ion-card-header>
@@ -24,11 +24,27 @@
     <p></p>
     <ion-card-content>{{article.contenu}}</ion-card-content>
   </ion-card>
-  <p>Commentaires: </p>
+  <ion-item>
+    <ion-label position="stacked">Commentaire:</ion-label>
+    <ion-textarea #commentaire ></ion-textarea>
+    <ion-icon class="iconSend" name="send" color="primary" (click)="comment(commentaire.value)"></ion-icon>
+  </ion-item>
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Commentaire</mat-label>
+    <textarea #commentaire matInput></textarea>
+    <ion-icon class="iconSend" name="send" color="primary" (click)="comment(commentaire.value)"></ion-icon>
+  </mat-form-field> -->
   <div *ngIf="coms.length">
     <ion-card *ngFor="let com of coms">
-      <p>{{com.contenu}}</p>
-      <p *ngIf="com.response" style="background-color: aquamarine;">{{com.response.contenu}}</p>
+      <ion-card-content class="comCard">
+        <p>{{com.contenu}}</p>
+        <span size="small">{{com.createdAt}}</span>
+        <ion-card *ngIf="com.response" class="margCard responseCard">
+          <ion-card-content class="responseCardR">
+            {{com.response.contenu}}
+          </ion-card-content>
+        </ion-card>
+      </ion-card-content>
     </ion-card>
   </div>
 
