@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'AuthToken'; // save token
-const LOGINNAME_KEY = 'AuthLoginName'; // save login name
-const EMAIL_KEY = 'AuthUserEmailname'; // save email 
+const ID_KEY = 'AuthId'; // user.id 
+const LOGINNAME_KEY = 'AuthLoginName'; // user.loginName
+const EMAIL_KEY = 'AuthUserEmailname'; // user.email 
 const ROLES_KEY = 'AuthRoles'; // {ROLE_ADMINISTRATEUR, ROLE_REDACTEUR, ROLE_UTILISATEUR}
 
 @Injectable({
@@ -24,6 +25,15 @@ export class TokenStorageService {
 
   public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
+  }
+
+  public saveId(id: string) {
+    window.sessionStorage.removeItem(ID_KEY);
+    window.sessionStorage.setItem(ID_KEY, id);
+  }
+
+  public getId(): string {
+    return sessionStorage.getItem(ID_KEY);
   }
 
   public saveLoginName(loginName: string) {

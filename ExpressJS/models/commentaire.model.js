@@ -23,6 +23,14 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id'
             },
         },
+        resId: {
+            type: Sequelize.INTEGER,
+            onDelete: 'CASCADE',
+            references: {
+                model: 'commentaire',
+                key: 'id'
+            },
+        },
         contenu: {
             type: Sequelize.TEXT
         }

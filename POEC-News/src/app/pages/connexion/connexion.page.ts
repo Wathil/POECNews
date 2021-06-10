@@ -77,6 +77,7 @@ export class ConnexionPage implements OnInit {
     this.authService.attemptAuth(this.loginInfo).subscribe(
       async jwtResponse => {
         this.tokenStorage.saveToken(jwtResponse.accessToken);
+        this.tokenStorage.saveId(jwtResponse.id);
         this.tokenStorage.saveLoginName(jwtResponse.loginName);
         this.tokenStorage.saveEmail(jwtResponse.email);
         const newRole = jwtResponse.roles[0]

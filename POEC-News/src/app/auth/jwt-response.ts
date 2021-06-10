@@ -1,8 +1,9 @@
 export class JwtResponse {
     accessToken: string;
     type: string;
+    id: string;
     loginName: string;
     email: string; // former userName
-    accredit: number;
+    accredit: string;
     roles: string[];
 }
