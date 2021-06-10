@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoginGuard } from './login.guard';
+import { AdministrateurGuard } from './guards/administrateur.guard';
+import { RedacteurGuard } from './guards/redacteur.guard';
+import { UtilisateurGuard } from './guards/utilisateur.guard';
 
 const routes: Routes = [
   {
@@ -19,17 +21,17 @@ const routes: Routes = [
   {
     path: 'gerer-articles',
     loadChildren: () => import('./pages/gerer-articles/gerer-articles.module').then(m => m.GererArticlesPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [RedacteurGuard]
   },
   {
     path: 'gerer-redacteurs',
     loadChildren: () => import('./pages/gerer-redacteurs/gerer-redacteurs.module').then(m => m.GererRedacteursPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [AdministrateurGuard]
   },
   {
     path: 'gerer-utilisateurs',
     loadChildren: () => import('./pages/gerer-utilisateurs/gerer-utilisateurs.module').then(m => m.GererUtilisateursPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [AdministrateurGuard]
   },
   {
     path: 'connexion',
@@ -38,12 +40,12 @@ const routes: Routes = [
   {
     path: 'gerer-utilisateur/:id',
     loadChildren: () => import('./pages/gerer-utilisateur/gerer-utilisateur.module').then(m => m.GererUtilisateurPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [AdministrateurGuard]
   },
   {
     path: 'gerer-redacteur/:id',
     loadChildren: () => import('./pages/gerer-redacteur/gerer-redacteur.module').then(m => m.GererRedacteurPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [AdministrateurGuard]
   },
   {
     path: 'rec-mdp',
@@ -52,42 +54,43 @@ const routes: Routes = [
   {
     path: 'modifier-mes-informations',
     loadChildren: () => import('./pages/modifier-mes-informations/modifier-mes-informations.module').then(m => m.ModifierMesInformationsPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [UtilisateurGuard]
   },
   {
     path: 'creation-admin',
     loadChildren: () => import('./pages/creation-admin/creation-admin.module').then(m => m.CreationAdminPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [AdministrateurGuard]
   },
   {
     path: 'creation-article',
     loadChildren: () => import('./pages/creation-article/creation-article.module').then(m => m.CreationArticlePageModule),
-    canActivate: [LoginGuard]
+    canActivate: [RedacteurGuard]
   },
   {
     path: 'modif-article/:id',
     loadChildren: () => import('./pages/modif-article/modif-article.module').then(m => m.ModifArticlePageModule),
-    canActivate: [LoginGuard]
+    canActivate: [RedacteurGuard]
   },
   {
     path: 'article/:id',
     loadChildren: () => import('./pages/article/article.module').then(m => m.ArticlePageModule),
-    canActivate: [LoginGuard]
+    //canActivate: [UtilisateurGuard, RedacteurGuard, AdministrateurGuard]
+    canActivate: [UtilisateurGuard]
   },
   {
     path: 'gerer-categories',
     loadChildren: () => import('./pages/gerer-categories/gerer-categories.module').then(m => m.GererCategoriesPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [RedacteurGuard]
   },
   {
     path: 'gerer-categorie/:id',
     loadChildren: () => import('./pages/gerer-categorie/gerer-categorie.module').then(m => m.GererCategoriePageModule),
-    canActivate: [LoginGuard]
+    canActivate: [RedacteurGuard]
   },
   {
-    path: 'creation-category/',
+    path: 'creation-category',
     loadChildren: () => import('./pages/creation-category/creation-category.module').then(m => m.CreationCategoryPageModule),
-    canActivate: [LoginGuard]
+    canActivate: [RedacteurGuard]
   },
   {
     path: 'articles-par-categorie/:categoryId',

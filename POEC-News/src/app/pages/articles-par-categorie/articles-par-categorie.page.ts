@@ -1,6 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Article } from 'src/app/classes/Article';
 import { Category } from 'src/app/classes/Category';
 import { ArticleService } from 'src/app/shared/article.service';
@@ -21,7 +20,6 @@ export class ArticlesParCategoriePage implements OnInit {
   categoryId!: number;
 
   constructor(
-    private tokenStorage: TokenStorageService,
     private articleService: ArticleService,
     private userService: UserService,
     private categoryService: CategoryService,
@@ -65,17 +63,17 @@ export class ArticlesParCategoriePage implements OnInit {
   }
 
   lireArticle(id: number) {
-    this.router.navigateByUrl('/article/' + id);
+    this.router.navigateByUrl('article/' + id);
   }
 
   changeSelection(i: number) {
   }
 
   afficheParAuteur(userId: number) {
-    this.zone.run(() => this.router.navigateByUrl(`/articles-par-auteur/` + userId));
+    this.zone.run(() => this.router.navigateByUrl(`articles-par-auteur/` + userId));
   }
 
   afficheParCategory(categoryId: number) {
-    this.zone.run(() => this.router.navigateByUrl(`/articles-par-categorie/` + categoryId));
+    this.zone.run(() => this.router.navigateByUrl(`articles-par-categorie/` + categoryId));
   }
 }
