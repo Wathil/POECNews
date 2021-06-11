@@ -1,4 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
@@ -19,12 +20,18 @@ export class ConnexionPage implements OnInit {
   loginName = '';
   private loginInfo: AuthLoginInfo;
 
+  loginForm = this.formBuilder.group({
+    email: [''],
+    password: ['']
+  })
+
   constructor(
     private authService: AuthService,
     private toast: ToastController,
     private zone: NgZone,
     private router: Router,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -37,40 +44,12 @@ export class ConnexionPage implements OnInit {
     }
   }
 
-  // onSubmit() {
-  //   this.loginInfo = new AuthLoginInfo(
-  //     this.form.email,
-  //     this.form.password);
-
-  //   this.authService.attemptAuth(this.loginInfo).subscribe(
-  //     async jwtResponse => {
-  //       this.tokenStorage.saveToken(jwtResponse.accessToken);
-  //       this.tokenStorage.saveLoginName(jwtResponse.loginName);
-  //       this.tokenStorage.saveEmail(jwtResponse.email);
-  //       const newRole = jwtResponse.roles[0]
-  //       this.tokenStorage.saveRoles(jwtResponse.roles);
-  //       this.isLoginFailed = false;
-  //       this.isLoggedIn = true;
-  //       let toast = await this.toast.create({
-  //         message: 'Connexion réussie.',
-  //         duration: 3000
-  //       });
-  //       toast.present();
-  //       this.appComponent.refreshRole(newRole);
-  //       this.zone.run(() => this.router.navigateByUrl(`home`));
-  //     },
-  //     error => {
-  //       console.log("ERROR=" + error);
-  //       this.errorMessage = error.error.message;
-  //       this.isLoginFailed = true;
-  //     }
-  //   );
-  // }
-
   onSubmit() {
-    this.loginInfo = new AuthLoginInfo(
-      this.form.email,
-      this.form.password);
+    const formValue = this.loginForm.value;
+
+    this.loginInfo = new AuthLoginInfo(      
+      formValue['email'],
+      formValue['password']);
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       async jwtResponse => {
