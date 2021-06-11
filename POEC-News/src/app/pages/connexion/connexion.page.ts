@@ -84,7 +84,6 @@ export class ConnexionPage implements OnInit {
         toast.present();
         this.appComponent.refreshRole();
         if (this.authService.redirectUrl) {
-          console.log("this.authService.redirectUrl=" + this.authService.redirectUrl);
           this.zone.run(() => this.router.navigateByUrl(this.authService.redirectUrl));
         }
         else {

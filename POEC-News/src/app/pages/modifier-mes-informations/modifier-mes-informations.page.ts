@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -13,6 +14,8 @@ export class ModifierMesInformationsPage implements OnInit {
   form: any = {};
 
   constructor(
+    private router: Router,
+    private zone: NgZone,
     private userService: UserService,
     private toast: ToastController,
     private authService: AuthService) { }
@@ -34,12 +37,21 @@ export class ModifierMesInformationsPage implements OnInit {
       accredit: null // todo
     };
     
-    this.userService.updateUser(id, user).subscribe(async data => {
+    this.userService.updateUser(id, user).subscribe(
+      async data => {
       let toast = await this.toast.create({
         message: 'Informations modifiées',
-        duration: 3000
+        duration: 2000
       });
       toast.present();
+      this.zone.run(() => this.router.navigateByUrl('home'));
+    },
+    error => {
+      let toast = this.toast.create({
+        message: 'Erreur:' + error,
+        duration: 2000
+      });
+      console.log("ERROR=" + error);
     });
   }
 
