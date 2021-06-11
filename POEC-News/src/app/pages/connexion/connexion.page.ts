@@ -13,17 +13,17 @@ import { AuthLoginInfo } from 'src/app/auth/login-info';
 })
 export class ConnexionPage implements OnInit {
 
+  loginForm = this.formBuilder.group({
+    email: [''],
+    password: ['']
+  });
+
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   loginName = '';
   private loginInfo: AuthLoginInfo;
-
-  loginForm = this.formBuilder.group({
-    email: [''],
-    password: ['']
-  })
 
   constructor(
     private authService: AuthService,
