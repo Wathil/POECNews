@@ -33,13 +33,13 @@ export class GererArticlesPage implements OnInit {
   delUser(id: number) {
     this.articleService.deleteArticle(id).subscribe(async data => {
       console.log(data);
-      let toast = await this.toast.create({
+      const toast = await this.toast.create({
         message: 'Article supprimé',
         duration: 3000
       });
       toast.present();
       this.reloadData();
-    })
+    });
   }
 
   async handleButtonClick(id: number) {
@@ -55,7 +55,7 @@ export class GererArticlesPage implements OnInit {
           text: 'Oui',
           cssClass: 'secondary',
           handler: () => {
-            this.delUser(id)
+            this.delUser(id);
           }
         }
       ]

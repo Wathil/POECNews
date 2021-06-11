@@ -53,7 +53,8 @@ const routes: Routes = [
   },
   {
     path: 'modifier-mes-informations',
-    loadChildren: () => import('./pages/modifier-mes-informations/modifier-mes-informations.module').then(m => m.ModifierMesInformationsPageModule),
+    loadChildren: () => import('./pages/modifier-mes-informations/modifier-mes-informations.module')
+      .then(m => m.ModifierMesInformationsPageModule),
     canActivate: [UtilisateurGuard]
   },
   {
@@ -102,7 +103,8 @@ const routes: Routes = [
   },
   {
     path: 'inscription-utilisateur',
-    loadChildren: () => import('./pages/inscription-utilisateur/inscription-utilisateur.module').then(m => m.InscriptionUtilisateurPageModule)
+    loadChildren: () => import('./pages/inscription-utilisateur/inscription-utilisateur.module')
+      .then(m => m.InscriptionUtilisateurPageModule)
   },
 
 

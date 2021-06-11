@@ -47,16 +47,16 @@ export class ConnexionPage implements OnInit {
   onSubmit() {
     const formValue = this.loginForm.value;
 
-    this.loginInfo = new AuthLoginInfo(      
-      formValue['email'],
-      formValue['password']);
+    this.loginInfo = new AuthLoginInfo(
+      formValue.email,
+      formValue.password);
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       async jwtResponse => {
         this.authService.setJwtResponse(jwtResponse);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        let toast = await this.toast.create({
+        const toast = await this.toast.create({
           message: 'Connexion réussie.',
           duration: 3000
         });
@@ -70,7 +70,7 @@ export class ConnexionPage implements OnInit {
         }
       },
       error => {
-        console.log("ERROR=" + error);
+        console.log('ERROR=' + error);
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
       }

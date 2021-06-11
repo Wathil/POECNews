@@ -14,21 +14,32 @@ export class ModifArticlePage implements OnInit {
   editForm: FormGroup;
   id: any;
 
-  constructor(private router : Router,
+  images: string[] = [
+    './assets/img/1.jpg',
+    './assets/img/2.jpg',
+    './assets/img/3.jpg',
+    './assets/img/4.jpg',
+    './assets/img/5.jpg'
+  ];
+
+  imageSelected: string = null;
+
+  constructor(private router: Router,
     private actRoute: ActivatedRoute,
-    private formBuilder : FormBuilder,
+    private formBuilder: FormBuilder,
     private zone: NgZone,
-    private toast : ToastController,
-    private articleService : ArticleService
+    private toast: ToastController,
+    private articleService: ArticleService
     ) { }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
       titre: [''],
-      contenu: ['']
-    })
+      contenu: [''],
+      urlImage: [null]
+    });
 
-    this.id = this.actRoute.snapshot.params['id'];
+    this.id = this.actRoute.snapshot.params.id;
 
     this.articleService.getArticle(this.id).subscribe(data =>{
       console.log(data);
@@ -36,20 +47,27 @@ export class ModifArticlePage implements OnInit {
         id: this.id,
         titre: data.titre,
         contenu: data.contenu,
-      })
-    })
+        urlImage: data.urlImage
+      });
+      this.imageSelected = this.editForm.controls.urlImage.value;
+    });
   }
-  
+
   saveForm(){
     this.articleService.updateArticle(this.id, this.editForm.value).subscribe(async data => {
       console.log(data);
-      let toast = await this.toast.create({
+      const toast = await this.toast.create({
         message: 'Article modifié.',
         duration: 3000
       });
       toast.present();
       this.zone.run(() => this.router.navigateByUrl(`gerer-articles`));
-    })
+    });
+  }
+
+  clickImage(i: number) {
+    this.imageSelected = this.images[i];
+    this.editForm.controls.urlImage.setValue(this.images[i]);
   }
 
 }

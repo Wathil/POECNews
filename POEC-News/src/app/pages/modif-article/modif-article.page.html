@@ -11,6 +11,12 @@
   <ion-title class="title">MODIFIER ARTICLE</ion-title>
 
   <ion-list lines="full">
+
+    <ion-item *ngIf="imageSelected">
+      <ion-label>Image d'illustration</ion-label>
+      <img src="{{imageSelected}}"/>
+    </ion-item>
+
     <form [formGroup]="editForm" (ngSubmit)="saveForm()">
 
       <ion-item>
@@ -31,6 +37,11 @@
     </form>
   </ion-list>
 
-
+  <ion-list lines="full">
+    <ion-label >Changer l'image</ion-label>
+    <ion-item button *ngFor="let image of images; let i = index;" (click)='clickImage(i)'>
+      <img src="{{image}}"/>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

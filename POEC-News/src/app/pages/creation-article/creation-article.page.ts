@@ -16,14 +16,24 @@ import { CategoryService } from 'src/app/shared/category.service';
 export class CreationArticlePage implements OnInit {
   article: Article;
 
+  images: string[] = [
+    './assets/img/1.jpg',
+    './assets/img/2.jpg',
+    './assets/img/3.jpg',
+    './assets/img/4.jpg',
+    './assets/img/5.jpg'
+  ];
+
+  imageSelected: string = null;
+
   articleForm = this.formBuilder.group({
     id: [null],
     titre: [''],
     userId: [null],
     categoryId: [null],
     contenu: [''],
-    image: ['']
-  })
+    urlImage: [null]
+  });
 
   @ViewChild("file", {static: true}) fileInput:any;
 
@@ -31,7 +41,7 @@ export class CreationArticlePage implements OnInit {
 
   user: User;
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private toast: ToastController,
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
@@ -46,24 +56,28 @@ export class CreationArticlePage implements OnInit {
   }
 
   saveArticle() {
-    var id: number = +this.authService.getId();
+    const id: number = +this.authService.getId();
     this.articleForm.patchValue({userId: id});
     this.articleService.addArticle(this.articleForm.value).subscribe(async data => {
       console.log(data);
-      let toast = await this.toast.create({        
+      const toast = await this.toast.create({
         message: 'Un article crée',
-        duration: 3000        
+        duration: 3000
       });
       toast.present();
-      this.articleForm.reset();      
-      this.router.navigateByUrl("gerer-articles");
-    })    
-  }
-
-  openFile(){
-    this.fileInput.getInputElement().then(el => {
-      el.click();
+      this.articleForm.reset();
+      this.router.navigateByUrl('gerer-articles');
     });
   }
 
+  // openFile() {
+  //   this.fileInput.getInputElement().then(el => {
+  //     el.click();
+  //   });
+  // }
+
+  clickImage(i: number) {
+    this.imageSelected = this.images[i];
+    this.articleForm.controls.urlImage.setValue(this.images[i]);
+  }
 }

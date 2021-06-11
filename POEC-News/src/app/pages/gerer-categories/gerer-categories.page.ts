@@ -22,7 +22,7 @@ export class GererCategoriesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.reloadData()
+    this.reloadData();
   }
 
   reloadData() {
@@ -30,17 +30,17 @@ export class GererCategoriesPage implements OnInit {
       this.categories = data;
     });
   }
-  
-  delCategory(id: number) {
+
+  delCategory(id: number): void {
     this.categoryService.deleteCategory(id).subscribe(async data => {
       console.log(data);
-      let toast = await this.toast.create({
+      const toast = await this.toast.create({
         message: 'Catégorie supprimée',
         duration: 3000
       });
       toast.present();
       this.reloadData();
-    })
+    });
   }
 
   async handleButtonClick(id: number) {
@@ -56,7 +56,7 @@ export class GererCategoriesPage implements OnInit {
           text: 'Oui',
           cssClass: 'secondary',
           handler: () => {
-            this.delCategory(id)
+            this.delCategory(id);
           }
         }
       ]
