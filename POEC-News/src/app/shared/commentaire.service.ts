@@ -9,46 +9,40 @@ import { Commentaire } from '../classes/Commentaire';
 })
 export class CommentaireService {
 
-  url: string = 'http://localhost:8080/commentaires/';
+  url = 'http://localhost:8080/commentaires/';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private httpClient: HttpClient) { }
 
   getCommentairesByUserId(userId: number): Observable<Commentaire[]> {
-    let API_URL = `${this.url}byuserid/${userId}`;
+    const API_URL = `${this.url}byuserid/${userId}`;
     return this.httpClient.get(API_URL)
       .pipe(
-        map((res: any) => {
-          return res || {}
-        }),
+        map((res: any) => res || {}),
         catchError(this.errorMgmt)
       );
   }
 
   getCommentairesByArticleId(articleId: number): Observable<Commentaire[]> {
-    let API_URL = `${this.url}byarticleid/${articleId}`;
+    const API_URL = `${this.url}byarticleid/${articleId}`;
     return this.httpClient.get(API_URL)
       .pipe(
-        map((res: any) => {
-          return res || {}
-        }),
+        map((res: any) => res || {}),
         catchError(this.errorMgmt)
       );
   }
 
   getCommentaire(id: number): Observable<Commentaire> {
-    let API_URL = `${this.url}${id}`;
+    const API_URL = `${this.url}${id}`;
     return this.httpClient.get(API_URL)
       .pipe(
-        map((res: any) => {
-          return res || {}
-        }),
+        map((res: any) => res || {}),
         catchError(this.errorMgmt)
       );
   }
 
   addCommentaire(data: Commentaire): Observable<any> {
-    let API_URL = `${this.url}add/`;
+    const API_URL = `${this.url}add/`;
     return this.httpClient.post(API_URL, data)
       .pipe(
         catchError(this.errorMgmt)
@@ -56,19 +50,17 @@ export class CommentaireService {
   }
 
   updateCommentaire(id: number, data: Commentaire): Observable<any> {
-    let API_URL = `${this.url}${id}`;
+    const API_URL = `${this.url}${id}`;
     return this.httpClient.put(API_URL, data)
       .pipe(
-        map((res: any) => {
-          return console.log("service :" + res);
-        }),
+        map((res: any) => console.log('service :' + res)),
         catchError(this.errorMgmt)
       );
   }
 
   deleteCommentaire(id: number): Observable<any> {
-    let API_URL = `${this.url}${id}`;
-    return this.httpClient.delete(API_URL, {responseType:"text"})
+    const API_URL = `${this.url}${id}`;
+    return this.httpClient.delete(API_URL, {responseType:'text'})
       .pipe(
         catchError(this.errorMgmt)
       );

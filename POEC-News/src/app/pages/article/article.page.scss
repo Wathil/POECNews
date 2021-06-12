@@ -10,3 +10,84 @@
 .divLire{
     text-align: end;
 }
+
+.margCard{
+    margin: 0 !important;
+}
+
+.comCard{
+    background-color: rgb(255, 255, 255); 
+    padding: 5px 10px;
+}
+
+.responseCard {
+    @extend .comCard;
+    margin-top: 1em !important;
+    background-color:#ede7f6;    
+}
+
+.responseCardR {
+    padding: 5px 8px !important;
+}
+
+.commentWrapper {
+    height: 0;
+    overflow: hidden;
+
+    &.commentOpen {
+        height: auto;
+    }
+}
+
+.commentButton {
+
+    &.buttonHide {
+        display: none;
+    }
+}
+
+.sendContainer {
+    position: relative;
+    height: 1.8em;
+}
+
+.iconSend{
+    position: absolute;
+    font-size: 1.4em;
+    right: 10px;
+    bottom: 0;
+}
+
+.comField {
+    width: 100%;
+}
+
+.articleHeader {
+    display: flex;    
+    justify-content: space-between;
+    padding: 0 0;
+}
+
+.commentBut{
+    display: flex;
+    justify-content: space-around;
+}
+
+.comUser {
+    color: #0202c1;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.comFooter {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.resIcon {
+    font-size: 1.8em;
+}
+
+::ng-deep .mat-form-field-underline {
+    bottom: 0;
+}

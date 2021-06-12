@@ -1,4 +1,5 @@
 const commentaire = require("../models").commentaire;
+const user = require("../models").user;
 const db = require("../models");
 const Op = db.Sequelize.Op;
 
@@ -21,11 +22,33 @@ module.exports = {
     },
     async getCommentairesByArticleId(request, res) { // GET http://localhost:8080/commentaires/byarticleid/:id
         const articleIdParam = request.params.id;
+        // try {
+        //     const commentaireCollection = await commentaire.findAll({
+        //         where: { articleId: articleIdParam }
+        //     });
+        //     res.status(201).send(commentaireCollection);
+        // }
         try {
-            const commentaireCollection = await commentaire.findAll({
+            db.commentaire.findAll({
+                include:[
+                    {model: db.user
+                    }
+                ],
                 where: { articleId: articleIdParam }
-            });
-            res.status(201).send(commentaireCollection);
+            }).then(commentaire =>{
+                const resObjt = commentaire.map(c => {
+                    return Object.assign({}, {
+                        id: c.id,
+                        userId: c.userId,
+                        articleId: c.articleId,
+                        resId: c.resId,
+                        contenu: c.contenu,
+                        user: c.user
+                    })
+                })
+                console.log(resObjt);
+                res.status(201).send(resObjt);
+            })
         }
         catch (e) {
             console.log(e);
@@ -51,10 +74,30 @@ module.exports = {
     },
     async addCommentaire(request, res) { // POST http://localhost:8080/commentaires/add/
         try {
-            const obj = request.request.body;
+            const obj = request.body;
             console.log(obj);
-            const newCommentaire = await commentaire.create(obj);
-            res.status(201).send(newCommentaire);
+            commentaire.create(obj).then(newCommentaire => {
+                commentaire.findOne({
+                    include: [
+                        { model: db.user }
+                    ],
+                    where: { id: newCommentaire.id }
+                }).then(c => {
+                    const resObjt =  Object.assign({}, {
+                            id: c.id,
+                            userId: c.userId,
+                            articleId: c.articleId,
+                            resId: c.resId,
+                            contenu: c.contenu,
+                            user: c.user
+                        })
+                    
+                    console.log(resObjt);
+                    res.status(201).send(resObjt);
+                })
+            });
+            
+            // res.status(201).send(newCommentaire);
         }
         catch (e) {
             console.log(e);

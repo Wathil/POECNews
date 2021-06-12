@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [],
@@ -15,8 +16,9 @@ import { IonicModule } from '@ionic/angular';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    IonicModule
-    
+    IonicModule,
+    MatChipsModule
+
   ],
   exports: [
     MatButtonModule,
@@ -24,8 +26,9 @@ import { IonicModule } from '@ionic/angular';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    IonicModule
-    
+    IonicModule,
+    MatChipsModule
+
   ]
 })
 export class MaterialModule { }

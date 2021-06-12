@@ -1,8 +1,11 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Article } from 'src/app/classes/Article';
+import { Commentaire } from 'src/app/classes/Commentaire';
 import { ArticleService } from 'src/app/shared/article.service';
 import { CategoryService } from 'src/app/shared/category.service';
+import { CommentaireService } from 'src/app/shared/commentaire.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -12,42 +15,113 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class ArticlePage implements OnInit {
 
+  @ViewChild('commentaire', { static: false }) commentaire: ElementRef;
+  @ViewChild('response', { static: false }) response: ElementRef;
+  @ViewChild('commentWrapper', { static: false }) commentWrapper: ElementRef;
+  @ViewChild('commentButton', { static: false }) commentButton: ElementRef;
+
   id: any;
   article: Article;
+  coms: Commentaire[] = [];
+  hideComment = true;
+  hideResponse = true;
+  currentCommentId: number;
+  isRedacteur: boolean;
 
   constructor(
     private articleService: ArticleService,
     private categoryService: CategoryService,
     private userService: UserService,
+    private commentaireService: CommentaireService,
     private route: ActivatedRoute,
+    private authService: AuthService,
+    private zone: NgZone,
     private router: Router,
-    private zone: NgZone
+    private auth: AuthService,
   ) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    console.log("ID=" + this.id)
+    this.id = this.route.snapshot.params.id;
     this.articleService.getArticle(this.id).subscribe(data => {
-      this.article = data;
-      if (this.article.userId) {
+      if (data) {
+        this.article = data;
         this.userService.getRedacteur(this.article.userId).subscribe(user => {
           this.article.author = user.loginName;
-        })
-      }
-      if (this.article.categoryId) {
+        });
+
         this.categoryService.getCategory(this.article.categoryId).subscribe(category => {
           this.article.category = category.tag;
-        })
+        });
       }
-    })
+      this.commentaireService.getCommentairesByArticleId(this.id).subscribe(com => {
+        if (com) {
+          console.log(com);
+          com.forEach(c => {
+            if (c.resId == null) {
+              this.coms.push(c);
+            } else {
+              const comRes = this.coms.find(t => t.id === c.resId);
+              comRes.response = c;
+            }
+          });
+          this.coms.sort((a, b) => b.id - a.id);
+        }
+      });
+    });
+    this.isRedacteur = this.auth.isRedacteur();
   }
-  
+
+  comment(textComment: string) {
+    if (textComment !== '') {
+      const sendComment = new Commentaire({
+        userId: this.authService.getId(),
+        articleId: this.id,
+        contenu: textComment
+      });
+      console.log(this.commentaire);
+
+      this.commentaireService.addCommentaire(sendComment).subscribe(newComment => {
+        this.commentaire.nativeElement.value = '';
+        this.coms.unshift(newComment);
+        this.openComment();
+      });
+    }
+  }
+
   afficheParAuteur(userId: number) {
     this.zone.run(() => this.router.navigateByUrl(`/articles-par-auteur/` + userId));
   }
 
   afficheParCategory(categoryId: number) {
     this.zone.run(() => this.router.navigateByUrl(`/articles-par-categorie/` + categoryId));
+  }
+
+  openComment() {
+    this.hideComment = !this.hideComment;
+  }
+
+  openResponse(id: number) {
+    this.hideResponse = !this.hideResponse;
+    this.currentCommentId = id;
+  }
+
+  sendResponse(textResponse: string, comId: number) {
+    if (textResponse !== '') {
+      const sendResponse = new Commentaire({
+        userId: this.authService.getId(),
+        articleId: this.id,
+        contenu: textResponse,
+        resId: comId
+      });
+      console.log(this.commentaire);
+
+      this.commentaireService.addCommentaire(sendResponse).subscribe(newComment => {
+        this.response.nativeElement.value = '';
+        const com = this.coms.find(c => c.id === newComment.resId);
+        com.response = newComment;
+        this.openResponse(comId);
+      });
+    }
   }
 
 }

@@ -18,6 +18,7 @@ export class ArticlesParAuteurPage implements OnInit {
   auteur!: User;
   loginName!: string;
   userId!: number;
+  toolbar = '#f50023';
 
   constructor(
     private articleService: ArticleService,
@@ -31,7 +32,7 @@ export class ArticlesParAuteurPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.userId = this.activatedRoute.snapshot.params['userId'];
+    this.userId = this.activatedRoute.snapshot.params.userId;
     this.reloadData();
   }
 
@@ -47,16 +48,16 @@ export class ArticlesParAuteurPage implements OnInit {
 
     this.articleService.getArticlesParAuteur(this.userId).subscribe(data => {
       this.articles = data;
-      for (let article of this.articles) {
+      for (const article of this.articles) {
         if (article.userId) {
           this.userService.getRedacteur(article.userId).subscribe(user => {
             article.author = user.loginName;
-          })
+          });
         }
         if (article.categoryId) {
           this.categoryService.getCategory(article.categoryId).subscribe(category => {
             article.category = category.tag;
-          })
+          });
         }
       }
     });

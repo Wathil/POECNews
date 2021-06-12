@@ -5,31 +5,22 @@
     </ion-buttons>
     <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
   </ion-toolbar>
+  <div class="filtre">
+    <ion-icon name="filter" class="iconFilter"></ion-icon>
+    <span class="title">{{ tag }}</span>
+  </div>
 </ion-header>
-
 <ion-content>
-  <ion-label class="title">Articles par catégorie: {{ tag }}</ion-label>
-
-  <!-- <ion-item>
-    <ion-label position="floating">Auteur</ion-label>
-    <ion-select [(ngModel)]="auteurSelect" placeholder="Choisir un auteur" (ionChange)="changeSelection()">
-      <ion-select-option *ngFor="let a of auteurs;" value="{{ a.id }}">{{ a.loginName }}</ion-select-option>
-    </ion-select>
-  </ion-item> -->
-
-  <ion-card *ngFor="let article of articles; let i = index;">
+ <ion-card *ngFor="let article of articles; let i = index;">
     <img src="{{ article.urlImage }}" />
     <ion-card-title>{{ article.titre }}</ion-card-title>
-    <ion-card-header>
-      <div>
-        <p style="float: left">
-          <ion-button expand="block" size="small" fill="clear" (click)="afficheParAuteur(article.userId)">{{
-            article.author }}</ion-button>
-        </p>
-        <p style="float: right">
-          <ion-button expand="block" size="small" fill="clear" disabled="true">{{ article.category }}</ion-button>
-        </p>
-      </div>
+    <ion-card-header class="articleHeader">
+      <ion-chip class="clearFix" outline color="secondary">
+        <ion-label (click)="afficheParAuteur(article.userId)">{{ article.author }}</ion-label>
+      </ion-chip>
+      <ion-chip class="clearFix" outline color="primary">
+        <ion-label (click)="afficheParCategory(article.categoryId)">{{ article.category }}</ion-label>
+      </ion-chip>
     </ion-card-header>
     <ion-card-content>{{ article.contenu.substr(0, 200) }}</ion-card-content>
     <div class="divLire">
