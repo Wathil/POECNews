@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="title">CRÉATION COMPTE UTILISATEUR</ion-title>
+  <ion-title class="title">CRÉATION COMPTE</ion-title>
   <ion-list lines="full">
 
     <div *ngIf="isSignedUp; else signupForm">
-      Your registration is successful. Please login!
+      Vous êtes bien enregistré. Veuillez vous identifier!
     </div>
 
     <ng-template #signupForm>
@@ -24,7 +24,7 @@
           <ion-input type="text" class="form-control" name="loginName" [(ngModel)]="form.loginName" #name="ngModel"
             required></ion-input>
           <div *ngIf="f.submitted && name.invalid">
-            <div *ngIf="loginName.errors.required">Name is required</div>
+            <div *ngIf="loginName.errors.required">Nom/Pseudo obligatoire</div>
           </div>
         </ion-item>
 
@@ -33,27 +33,25 @@
           <ion-input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required
             email></ion-input>
           <div *ngIf="f.submitted && email.invalid">
-            <div *ngIf="email.errors.required">Email is required</div>
-            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="email.errors.required">Email obligatoire</div>
+            <div *ngIf="email.errors.email">Email non valide</div>
           </div>
         </ion-item>
 
         <ion-item class="form-group">
-          <ion-label position="floating" for="password">Password</ion-label>
+          <ion-label position="floating" for="password">Mot de passe</ion-label>
           <ion-input type="password" class="form-control" name="password" [(ngModel)]="form.password"
             #password="ngModel" required minlength="6" ></ion-input>
           <div *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="password.errors.required">Mot de passe obligatoire</div>
+            <div *ngIf="password.errors.minlength">Mot de passe doit contenir au minimum 6 caractères</div>
           </div>
         </ion-item>
-
-        <ion-item class="form-group">
+        
+        <div class="bouttons">
           <button mat-raised-button color="primary" type="submit">CRÉER</button>
-          <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
-            Erreur!<br />{{errorMessage}}
-          </div>
-        </ion-item>
+          <button class="annuler" mat-raised-button [routerLink]="['/connexion/']">ANNULER</button>
+        </div>
 
       </form>
 

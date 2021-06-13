@@ -12,7 +12,7 @@
   </ion-list>
 
   <div *ngIf="isLoggedIn; else loggedOut">
-    Vous êtes connecté en tant que {{loginName}}.
+    Vous êtes connecté en tant que {{this.authService.getLoginName()}}.
   </div>
 
   <ng-template #loggedOut>
