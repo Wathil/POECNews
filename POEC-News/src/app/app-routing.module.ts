@@ -107,7 +107,6 @@ const routes: Routes = [
       .then(m => m.InscriptionUtilisateurPageModule)
   },
 
-
   { path: '**', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule) }
 ];
 

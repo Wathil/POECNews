@@ -88,3 +88,54 @@ exports.signin = (req, res) => { // connexion login
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.changePassword = (req, res) => {
+
+  console.log("req.body.email=" + req.body.email);
+  console.log("req.body.oldPassword=" + req.body.oldPassword);
+  console.log("req.body.newPassword=" + req.body.newPassword);
+
+  user.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.oldPassword,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+        console.log("Invalid OldPassword!");
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid OldPassword!"
+        });
+      }
+
+      var newEncryptedPassword = bcrypt.hashSync(req.body.newPassword, 8);
+
+      var token = jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: 86400 // 24 hours
+      });
+
+      user.update(
+        { password: newEncryptedPassword },
+        { where: { id: user.id } }
+      ).then(user => {
+        console.log("user=" + user);
+        res.status(200).send({accessToken: token});
+      }).err(err => {
+        res.status(500).send({ message: err.message });
+      });
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};

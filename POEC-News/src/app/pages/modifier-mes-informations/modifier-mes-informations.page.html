@@ -22,7 +22,8 @@
       </ion-item> -->
       <ion-item class="form-group">
         <ion-label position="floating">Nom/Pseudo</ion-label>
-        <ion-input type="text" required class="form-control" name="loginName" [(ngModel)]="form.loginName" #loginName="ngModel"></ion-input>
+        <ion-input type="text" required class="form-control" name="loginName" [(ngModel)]="form.loginName"
+          #loginName="ngModel"></ion-input>
       </ion-item>
 
       <ion-item class="form-group">
@@ -40,6 +41,37 @@
       </div>
 
     </form>
+  </ion-list>
+
+  <br>
+  <ion-list lines="full">
+    <ion-title class="title">CHANGER LE MOT DE PASSE</ion-title>
+    <form name="form2" (ngSubmit)="changePassword()">
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Ancien mot de passe</ion-label>
+        <ion-input type="password" required class="form-control" name="oldPassword" [(ngModel)]="form2.oldPassword"
+          #oldPassword="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Nouveau mot de passe</ion-label>
+        <ion-input type="password" required class="form-control" name="newPassword" [(ngModel)]="form2.newPassword"
+          #oldPassword2="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Nouveau mot de passe (2)</ion-label>
+        <ion-input type="password" required class="form-control" name="newPassword2" [(ngModel)]="form2.newPassword2"
+          #oldPassword2="ngModel"></ion-input>
+      </ion-item>
+      <br>
+      <div class="bouttons">
+        <button mat-raised-button color="primary" type="submit">CHANGER LE MOT DE PASSE</button>
+      </div>
+
+    </form>
+
   </ion-list>
 
 </ion-content>

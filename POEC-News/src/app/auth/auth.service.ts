@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { JwtResponse } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
 import { SignUpInfo } from './signup-info';
+import { ChangePassword } from './ChangePassword';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' })
@@ -21,6 +22,7 @@ export class AuthService {
 
   private loginUrl = 'http://localhost:8080/auth/signin/';
   private signupUrl = 'http://localhost:8080/auth/signup/';
+  private changePasswordUrl = 'http://localhost:8080/auth/cp/';
   private userLogged: JwtResponse = null;
 
   constructor(private http: HttpClient) {
@@ -48,6 +50,10 @@ export class AuthService {
 
   signUp(info: SignUpInfo): Observable<string> {
     return this.http.post<string>(this.signupUrl, info, httpOptions);
+  }
+
+  changePassword(info: ChangePassword): Observable<string> {
+    return this.http.post<string>(this.changePasswordUrl, info, httpOptions);
   }
 
   setJwtResponse(jwtResponse: JwtResponse) {

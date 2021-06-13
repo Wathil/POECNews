@@ -152,9 +152,9 @@ module.exports = {
         const id = request.params.id;
         console.log("id=" + id);
         try {
-            const userCollection = await user.findOne(({
+            const userCollection = await user.findOne({
                 where: { id: id }
-            }));
+            });
             const toUpdate = request.body;
             if (toUpdate) {
                 delete toUpdate.password;
