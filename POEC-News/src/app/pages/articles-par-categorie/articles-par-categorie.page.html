@@ -22,9 +22,14 @@
         <ion-label (click)="afficheParCategory(article.categoryId)">{{ article.category }}</ion-label>
       </ion-chip>
     </ion-card-header>
-    <ion-card-content>{{ article.contenu.substr(0, 200) }}</ion-card-content>
-    <div class="divLire">
+    <ion-card-content class="ionContenu">{{ article.contenu.substr(0, 200) }}</ion-card-content>
+    <!-- <div class="divLire">
       <button class="buttonLire" mat-raised-button color="primary" (click)="lireArticle(article.id)">Lire</button>
+    </div> -->
+    <div class="divLire" >
+      <ion-chip color="primary">
+        <ion-label (click)="lireArticle(article.id)">Lire</ion-label>
+      </ion-chip>
     </div>
   </ion-card>
 
