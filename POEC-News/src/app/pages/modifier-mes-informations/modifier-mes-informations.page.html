@@ -45,7 +45,7 @@
 
   <br>
   <ion-list lines="full">
-    <ion-title class="title">CHANGER LE MOT DE PASSE</ion-title>
+    <ion-title class="title">MODIFIER LE MOT DE PASSE</ion-title>
     <form name="form2" (ngSubmit)="changePassword()">
 
       <ion-item class="form-group">
@@ -61,13 +61,13 @@
       </ion-item>
 
       <ion-item class="form-group">
-        <ion-label position="floating">Nouveau mot de passe (2)</ion-label>
+        <ion-label position="floating">Confirmation mot de passe</ion-label>
         <ion-input type="password" required class="form-control" name="newPassword2" [(ngModel)]="form2.newPassword2"
           #oldPassword2="ngModel"></ion-input>
       </ion-item>
       <br>
       <div class="bouttons">
-        <button mat-raised-button color="primary" type="submit">CHANGER LE MOT DE PASSE</button>
+        <button mat-raised-button color="primary" type="submit">MODIFIER</button>
       </div>
 
     </form>

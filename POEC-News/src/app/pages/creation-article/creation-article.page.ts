@@ -14,6 +14,8 @@ import { CategoryService } from 'src/app/shared/category.service';
   styleUrls: ['./creation-article.page.scss'],
 })
 export class CreationArticlePage implements OnInit {
+  @ViewChild('file', {static: true}) fileInput: any;
+
   article: Article;
 
   images: string[] = [
@@ -21,7 +23,16 @@ export class CreationArticlePage implements OnInit {
     './assets/img/2.jpg',
     './assets/img/3.jpg',
     './assets/img/4.jpg',
-    './assets/img/5.jpg'
+    './assets/img/5.jpg',
+    './assets/img/6.jpg',
+    './assets/img/7.jpg',
+    './assets/img/8.jpg',
+    './assets/img/9.jpg',
+    './assets/img/10.jpg',
+    './assets/img/11.jpg',
+    './assets/img/12.jpg',
+    './assets/img/13.jpg',
+    './assets/img/14.jpg'
   ];
 
   imageSelected: string = null;
@@ -35,7 +46,6 @@ export class CreationArticlePage implements OnInit {
     urlImage: [null]
   });
 
-  @ViewChild("file", {static: true}) fileInput:any;
 
   categories: any;
 
