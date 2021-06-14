@@ -8,7 +8,7 @@ module.exports = {
         let limit = request.body.limit; console.log("limit=" + limit);
         let offset = request.body.offset; console.log("offset=" + offset);
         try {
-            const articleCollection = await article.findAll({ limit, offset });
+            const articleCollection = await article.findAll({ limit, offset, order: [['id', 'DESC']]});
             res.status(201).send(articleCollection);
         }
         catch (e) {
@@ -21,7 +21,8 @@ module.exports = {
     },
     async getArticles(request, res) { // GET http://localhost:8080/articles/
         try {
-            const articleCollection = await article.findAll();
+            const articleCollection = await article.findAll({
+                order: [['id', 'DESC']]});
             res.status(201).send(articleCollection);
         }
         catch (e) {
@@ -36,7 +37,8 @@ module.exports = {
         try {
             const categoryId = request.params.categoryId;
             const articleCollection = await article.findAll({
-                where : { categoryId: categoryId }
+                where : { categoryId: categoryId },
+                order: [['id', 'DESC']]
             });
             res.status(201).send(articleCollection);
         }
@@ -52,7 +54,8 @@ module.exports = {
         try {
             const userId = request.params.userId;
             const articleCollection = await article.findAll({
-                where : { userId: userId }
+                where : { userId: userId },
+                order: [['id', 'DESC']]
             });
             res.status(201).send(articleCollection);
         }

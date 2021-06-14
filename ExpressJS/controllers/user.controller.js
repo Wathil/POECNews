@@ -19,7 +19,8 @@ module.exports = {
                       { password: passwordPost }
                     ]
                   },
-                  attributes: {exclude: ['password']}
+                  attributes: {exclude: ['password']},
+                  order: [['id', 'DESC']]
             });
             res.status(201).send(userCollection);
         }
@@ -34,7 +35,8 @@ module.exports = {
     async getUsers(request, res) { // GET http://localhost:8080/users/
         try { // OK sans password
             const userCollection = await user.findAll({
-                  attributes: {exclude: ['password']}
+                  attributes: {exclude: ['password']},
+                  order: [['id', 'DESC']]
             });
             res.status(201).send(userCollection);
         }
@@ -57,7 +59,8 @@ module.exports = {
                     },
                     required: true
                   }],
-                  attributes: ['id', 'loginName', 'email', 'accredit', [col('roles.id'), 'category']]
+                  attributes: ['id', 'loginName', 'email', 'accredit', [col('roles.id'), 'category']],
+                  order: [['id', 'DESC']]
             });
             res.status(201).send(userCollection);
         }
@@ -80,7 +83,8 @@ module.exports = {
                     },
                     required: true
                   }],
-                  attributes: ['id', 'loginName', 'email', 'accredit', [col('roles.id'), 'category']]
+                  attributes: ['id', 'loginName', 'email', 'accredit', [col('roles.id'), 'category']],
+                  order: [['id', 'DESC']]
             });
             console.log();
             res.status(201).send(userCollection);

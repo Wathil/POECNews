@@ -8,7 +8,8 @@ module.exports = {
         try {
             const userIdParam = request.params.id;
             const commentaireCollection = await commentaire.findAll(({
-                where: { userId: userIdParam }
+                where: { userId: userIdParam },
+                order: [['id', 'DESC']]
             }));
             res.status(201).send(commentaireCollection);
         }
@@ -34,7 +35,8 @@ module.exports = {
                     {model: db.user
                     }
                 ],
-                where: { articleId: articleIdParam }
+                where: { articleId: articleIdParam },
+                order: [['id', 'DESC']]
             }).then(commentaire =>{
                 const resObjt = commentaire.map(c => {
                     return Object.assign({}, {

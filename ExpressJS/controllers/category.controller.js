@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 module.exports = {
     async getCategories(request, res) { // GET http://localhost:8080/categories/
         try {
-            const categoryCollection = await category.findAll();
+            const categoryCollection = await category.findAll({order: [['id', 'DESC']]});
             res.status(201).send(categoryCollection);
         }
         catch (e) {
