@@ -15,7 +15,7 @@ import { CategoryService } from 'src/app/shared/category.service';
 })
 export class CreationArticlePage implements OnInit {
   @ViewChild('file', {static: true}) fileInput: any;
-
+  hideListImg = false;
   article: Article;
 
   images: string[] = [
@@ -89,5 +89,9 @@ export class CreationArticlePage implements OnInit {
   clickImage(i: number) {
     this.imageSelected = this.images[i];
     this.articleForm.controls.urlImage.setValue(this.images[i]);
+  }
+
+  openListImg() {
+    this.hideListImg = !this.hideListImg;
   }
 }

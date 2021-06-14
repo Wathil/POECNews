@@ -10,7 +10,7 @@ import { ArticleService } from 'src/app/shared/article.service';
   styleUrls: ['./modif-article.page.scss'],
 })
 export class ModifArticlePage implements OnInit {
-
+  hideListImg = false;
   editForm: FormGroup;
   id: any;
 
@@ -77,6 +77,9 @@ export class ModifArticlePage implements OnInit {
   clickImage(i: number) {
     this.imageSelected = this.images[i];
     this.editForm.controls.urlImage.setValue(this.images[i]);
+  }
+  openListImg() {
+    this.hideListImg = !this.hideListImg;
   }
 
 }

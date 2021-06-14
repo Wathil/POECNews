@@ -7,13 +7,13 @@
   </ion-toolbar>
   <div class="filtre">
     <ion-icon name="filter" class="iconFilter"></ion-icon>
-    <span class="title">{{ tag }}</span>
+    <span class="tag">{{ tag }}</span>
   </div>
 </ion-header>
 <ion-content>
  <ion-card *ngFor="let article of articles; let i = index;">
     <img src="{{ article.urlImage }}" />
-    <ion-card-title>{{ article.titre }}</ion-card-title>
+    <ion-card-title class="title">{{ article.titre }}</ion-card-title>
     <ion-card-header class="articleHeader">
       <ion-chip class="clearFix" outline color="secondary">
         <ion-label (click)="afficheParAuteur(article.userId)">{{ article.author }}</ion-label>

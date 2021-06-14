@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card class="margCard" *ngIf="article">
     <img src="{{ article.urlImage }}" />
-    <ion-card-title>{{ article.titre }}</ion-card-title>
+    <ion-card-title class="title">{{ article.titre }}</ion-card-title>
     <ion-card-header class="articleHeader">
       <ion-chip class="clearFix" outline color="secondary">
         <ion-label (click)="afficheParAuteur(article.userId)">{{ article.author }}</ion-label>
@@ -19,7 +19,6 @@
         <ion-label (click)="afficheParCategory(article.categoryId)">{{ article.category }}</ion-label>
       </ion-chip>
     </ion-card-header>
-    <p></p>
     <ion-card-content>{{article.contenu}}</ion-card-content>
     <div class="commentBut">
       <ion-chip outline color="dark" (click)="openComment()">

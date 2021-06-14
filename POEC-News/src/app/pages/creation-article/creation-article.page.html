@@ -15,7 +15,9 @@
       <ion-label>Image d'illustration</ion-label>
       <img src="{{imageSelected}}"/>
     </ion-item>
-
+    <ion-item>
+      <button mat-raised-button (click)="openListImg()">Select image</button>      
+    </ion-item>
     <form class="addUser" [class.close]="hide" [formGroup]="articleForm" (ngSubmit)="saveArticle()">
 
       <ion-item>
@@ -42,7 +44,7 @@
           <ion-icon name="image" (click)="choisirImage()"></ion-icon>
         </div>
       </ion-item> -->
-
+            
       <ion-row>
         <ion-col>
           <button type="submit" mat-raised-button color="primary">CRÉER</button>
@@ -51,11 +53,15 @@
     </form>
   </ion-list>
 
-  <ion-list lines="full">
-    <ion-label >Choisir l'image</ion-label>
-    <ion-item button *ngFor="let image of images; let i = index;" (click)='clickImage(i)'>
-      <img src="{{image}}"/>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="hideListImg">
+    <ion-list lines="full">
+      <ion-label >Choisir l'image</ion-label>
+      <ion-item button *ngFor="let image of images; let i = index;" (click)='clickImage(i)'>
+        <img src="{{image}}"/>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  
 
 </ion-content>
