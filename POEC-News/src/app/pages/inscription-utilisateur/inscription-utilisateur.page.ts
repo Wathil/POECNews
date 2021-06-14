@@ -24,30 +24,38 @@ export class InscriptionUtilisateurPage implements OnInit {
   }
 
   onSubmit() {
-    console.log("InscriptionUtilisateurPage onSubmit()");
+    if (this.form.password !== this.form.password2) {
+      this.form.password = '';
+      this.form.password2 = '';
+      this.toast.create({
+        message: 'Les 2 mots de passe sont différents',
+        duration: 3000
+      }).then(res => res.present());
+    }
+    else {
+      this.signupInfo = new SignUpInfo(
+        this.form.loginName,
+        this.form.email,
+        this.form.password,
+        ['utilisateur']);
 
-    this.signupInfo = new SignUpInfo(
-      this.form.loginName,
-      this.form.email,
-      this.form.password,
-      ['utilisateur']);
- 
-    this.authService.signUp(this.signupInfo).subscribe(
-      async data => {
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        let toast = await this.toast.create({
-          message: 'Utilisateur inscrit!',
-          duration: 3000
-        });
-        toast.present();
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+      this.authService.signUp(this.signupInfo).subscribe(
+        async data => {
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          let toast = await this.toast.create({
+            message: 'Utilisateur inscrit!',
+            duration: 3000
+          });
+          toast.present();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }
   }
 
 }

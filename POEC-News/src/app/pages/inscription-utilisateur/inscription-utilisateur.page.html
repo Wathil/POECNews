@@ -47,6 +47,16 @@
             <div *ngIf="password.errors.minlength">Mot de passe doit contenir au minimum 6 caractères</div>
           </div>
         </ion-item>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="password2">Confirmation du mot de passe</ion-label>
+          <ion-input type="password" class="form-control" name="password2" [(ngModel)]="form.password2"
+            #password="ngModel" required minlength="6" ></ion-input>
+          <div *ngIf="f.submitted && password2.invalid">
+            <div *ngIf="password.errors.required">Confirmation du mot de passe obligatoire</div>
+            <div *ngIf="password.errors.minlength">Confirmation du mot de passe doit contenir au minimum 6 caractères</div>
+          </div>
+        </ion-item>
         
         <div class="bouttons">
           <button mat-raised-button color="primary" type="submit">CRÉER</button>

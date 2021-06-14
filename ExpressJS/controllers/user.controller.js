@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 const user_role = db.user_role;
 const role = db.role;
 const col = db.sequelize.col;
+var bcrypt = require("bcryptjs"); // !
 
 module.exports = {
     async login(request, res) {
@@ -150,15 +151,42 @@ module.exports = {
     },
     async updateUser(request, res) { // PUT http://localhost:8080/users/:id
         const id = request.params.id;
-        console.log("id=" + id);
         try {
             const userCollection = await user.findOne({
                 where: { id: id }
             });
             const toUpdate = request.body;
             if (toUpdate) {
-                delete toUpdate.password;
+                delete toUpdate.password; // remove update password
             }
+            if (userCollection) {
+                const updatedUser = await user.update(toUpdate, {
+                    where: { id: id }
+                })
+                res.status(201).send(updatedUser);
+            }
+            else {
+                res.status(404).send({message:"User:" + id + " Not Found"});
+            }
+        }
+        catch (e) {
+            console.log(e);
+            res.status(400).send({
+                message:
+                    e.message || "Some error occurred"
+            });
+        }
+    },
+    async updateUserWithPassword(request, res) { // PUT http://localhost:8080/userswithpassword/:id
+        const id = request.params.id;
+        try {
+            const userCollection = await user.findOne({
+                where: { id: id }
+            });
+            const toUpdate = request.body;
+            const password = toUpdate.password;
+            var newEncryptedPassword = bcrypt.hashSync(password, 8);
+            toUpdate.password = newEncryptedPassword;
             if (userCollection) {
                 const updatedUser = await user.update(toUpdate, {
                     where: { id: id }

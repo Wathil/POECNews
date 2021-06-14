@@ -106,6 +106,18 @@ export class UserService {
       );
   }
 
+  updateUserWithPassword(id: number, data: User): Observable<any> {
+    let urlUpdateUSerWithPAssword = 'http://localhost:8080/userswithpassword/'; // http://localhost:8080/userswithpassword/:id
+    let API_URL = `${urlUpdateUSerWithPAssword}${id}`;
+    return this.httpClient.put(API_URL, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
   deleteUser(id: number): Observable<any> {
     let API_URL = `${this.url}${id}`;
     return this.httpClient.delete(API_URL, {responseType:"text"})

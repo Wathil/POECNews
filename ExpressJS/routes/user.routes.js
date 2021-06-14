@@ -19,6 +19,8 @@ module.exports = function (router) {
 
   router.put("/users/:id", controller.updateUser); // ok
 
+  router.put("/userswithpassword/:id", controller.updateUserWithPassword); // ok // http://localhost:8080/userswithpassword/:id
+
   router.post("/users/login/", controller.login);
 
 };

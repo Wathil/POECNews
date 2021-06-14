@@ -12,49 +12,87 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class GererRedacteurPage implements OnInit {
 
-  editForm: FormGroup;
+  form: FormGroup;
   id: any;
   userCategory: number;
+  toggle: boolean = false;
 
-  constructor(private userService : UserService,
-    private router : Router,
+  constructor(private userService: UserService,
+    private router: Router,
     private actRoute: ActivatedRoute,
-    private formBuilder : FormBuilder,
+    private formBuilder: FormBuilder,
     private zone: NgZone,
-    private toast : ToastController
-    ) { }
+    private toast: ToastController
+  ) { }
 
   ngOnInit() {
-    this.editForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       loginName: [''],
       email: [''],
       password: [''],
+      password2: ['']
     })
 
     this.id = this.actRoute.snapshot.params['id'];
 
-    this.userService.getUser(this.id).subscribe(data =>{
+    this.userService.getUser(this.id).subscribe(data => {
       console.log(data);
-      this.editForm.patchValue({
+      this.form.patchValue({
         id: this.id,
         loginName: data.loginName,
         email: data.email,
         password: data.password,
+        password2: data.password
       })
       this.userCategory = data.category;
     })
   }
-  
-  saveForm(){
-    let category = User.getCategoryToString(this.userCategory);
-    this.userService.updateUser(this.id, this.editForm.value).subscribe(async data => {
-      console.log(data);
-      let toast = await this.toast.create({
-        message: 'Informations modifiées',
-        duration: 3000
-      });
-      toast.present();
-      this.zone.run(() => this.router.navigate([`gerer-${category}s`]));
-    })
+
+  toggleChange() {
+    if (this.toggle) {
+      this.toggle = false;
+      this.form.controls.password.setValue('');
+      this.form.controls.password2.setValue('');
+    }
+    else {
+      this.toggle = true;
+    }
   }
+
+  saveForm() {
+    if (this.toggle) {
+
+      if (this.form.controls.password.value !== this.form.controls.password2.value) {
+        this.form.controls.password.setValue('');
+        this.form.controls.password2.setValue('');
+        this.toast.create({
+          message: 'Les 2 mots de passe sont différents',
+          duration: 3000
+        }).then(res => res.present());
+      }
+      else {
+        let user: User = new User(this.id, this.form.controls.loginName.value, this.form.controls.email.value, this.form.controls.password.value, this.userCategory);
+        this.userService.updateUserWithPassword(this.id, user).subscribe(async data => {
+          let toast = await this.toast.create({
+            message: 'Informations modifiées',
+            duration: 3000
+          });
+          toast.present();
+          this.zone.run(() => this.router.navigate([`gerer-redacteurs`]));
+        });
+      }
+    }
+    else {
+      let user: User = new User(this.id, this.form.controls.loginName.value, this.form.controls.email.value, null, this.userCategory);
+      this.userService.updateUser(this.id, user).subscribe(async data => {
+        let toast = await this.toast.create({
+          message: 'Informations modifiées',
+          duration: 3000
+        });
+        toast.present();
+        this.zone.run(() => this.router.navigate([`gerer-redacteurs`]));
+      });
+    }
+  }
+
 }

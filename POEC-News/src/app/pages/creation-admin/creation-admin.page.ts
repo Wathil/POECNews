@@ -27,37 +27,46 @@ export class CreationAdminPage implements OnInit {
   }
 
   onSubmit() {
-    var roles;
-    if (this.form.category == '0')
-      roles = ['administrateur'];
-    else if (this.form.category == '1')
-      roles = ['redacteur'];
-    else
-      roles = ['utilisateur'];
+    if (this.form.password !== this.form.password2) {
+      this.form.password = '';
+      this.form.password2 = '';
+      this.toast.create({
+        message: 'Les 2 mots de passe sont différents',
+        duration: 3000
+      }).then(res => res.present());
+    }
+    else {
+      var roles;
+      if (this.form.category == '0')
+        roles = ['administrateur'];
+      else if (this.form.category == '1')
+        roles = ['redacteur'];
+      else
+        roles = ['utilisateur'];
 
-    this.signupInfo = new SignUpInfo(
-      this.form.loginName,
-      this.form.email,
-      this.form.password,
-      roles);
+      this.signupInfo = new SignUpInfo(
+        this.form.loginName,
+        this.form.email,
+        this.form.password,
+        roles);
 
-    this.authService.signUp(this.signupInfo).subscribe(
-      async data => {
-        let toast = await this.toast.create({
-          message: `${roles[0]} inscrit!`,
-          duration: 3000
-        });
-        toast.present();
-        if (roles[0] == 'redacteur')
-          this.zone.run(() => this.router.navigateByUrl(`gerer-redacteurs`));
-        if (roles[0] == 'utilisateur')
-          this.zone.run(() => this.router.navigateByUrl(`gerer-utilisateurs`));
-      },
-      error => {
-        console.log("CreationAdminPage onSubmit()=" + error);
-        this.errorMessage = error.error.message;
-      }
-    );
+      this.authService.signUp(this.signupInfo).subscribe(
+        async data => {
+          let toast = await this.toast.create({
+            message: `${roles[0]} inscrit!`,
+            duration: 3000
+          });
+          toast.present();
+          if (roles[0] == 'redacteur')
+            this.zone.run(() => this.router.navigateByUrl(`gerer-redacteurs`));
+          if (roles[0] == 'utilisateur')
+            this.zone.run(() => this.router.navigateByUrl(`gerer-utilisateurs`));
+        },
+        error => {
+          this.errorMessage = error.message;
+        }
+      );
+    }
   }
 
 }

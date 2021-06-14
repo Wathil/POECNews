@@ -11,10 +11,11 @@ export class User {
     accredit!: number;
     category!: number; // 0: Admin; 1: Rédacteur; 2: Utilisateur
 
-    constructor(id: number, loginName: string, email: string, category: number) {
+    constructor(id: number, loginName: string, email: string, password: string, category: number) {
       this.id = id;
       this.loginName = loginName;
       this.email = email;
+      this.password = password;
       this.category = category;
     }
 

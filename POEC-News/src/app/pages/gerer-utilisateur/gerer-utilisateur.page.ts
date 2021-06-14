@@ -15,6 +15,7 @@ export class GererUtilisateurPage implements OnInit {
   editForm: FormGroup;
   id: any;
   userCategory: number;
+  toggle: boolean = false;
 
   constructor(private userService : UserService,
     private router : Router,
@@ -29,6 +30,7 @@ export class GererUtilisateurPage implements OnInit {
       loginName: [''],
       email: [''],
       password: [''],
+      password2: ['']
     })
 
     this.id = this.actRoute.snapshot.params['id'];
@@ -44,17 +46,51 @@ export class GererUtilisateurPage implements OnInit {
       this.userCategory = data.category;
     })
   }
+
+  toggleChange() {
+    if (this.toggle) {
+      this.toggle = false;
+      this.editForm.controls.password.setValue('');
+      this.editForm.controls.password2.setValue('');
+    }
+    else {
+      this.toggle = true;
+    }
+  }
   
-  saveForm(){
-    let category = User.getCategoryToString(this.userCategory);
-    this.userService.updateUser(this.id, this.editForm.value).subscribe(async data => {
-      console.log(data);
-      let toast = await this.toast.create({
-        message: 'Informations modifiées',
-        duration: 3000
+  saveForm() {
+    if (this.toggle) {
+
+      if (this.editForm.controls.password.value !== this.editForm.controls.password2.value) {
+        this.editForm.controls.password.setValue('');
+        this.editForm.controls.password2.setValue('');
+        this.toast.create({
+          message: 'Les 2 mots de passe sont différents',
+          duration: 3000
+        }).then(res => res.present());
+      }
+      else {
+        let user: User = new User(this.id, this.editForm.controls.loginName.value, this.editForm.controls.email.value, this.editForm.controls.password.value, this.userCategory);
+        this.userService.updateUserWithPassword(this.id, user).subscribe(async data => {
+          let toast = await this.toast.create({
+            message: 'Informations modifiées',
+            duration: 3000
+          });
+          toast.present();
+          this.zone.run(() => this.router.navigate([`gerer-utilisateurs`]));
+        });
+      }
+    }
+    else {
+      let user: User = new User(this.id, this.editForm.controls.loginName.value, this.editForm.controls.email.value, null, this.userCategory);
+      this.userService.updateUser(this.id, user).subscribe(async data => {
+        let toast = await this.toast.create({
+          message: 'Informations modifiées',
+          duration: 3000
+        });
+        toast.present();
+        this.zone.run(() => this.router.navigate([`gerer-utilisateurs`]));
       });
-      toast.present();
-      this.zone.run(() => this.router.navigate([`gerer-${category}s`]));
-    })
+    }
   }
 }
