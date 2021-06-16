@@ -21,7 +21,7 @@ export class GererArticlesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.reloadData()
+    this.reloadData();
   }
 
   reloadData() {
