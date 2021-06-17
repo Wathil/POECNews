@@ -21,9 +21,9 @@ export class GererUtilisateursPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.reloadData()
+    this.reloadData();
   }
-  
+
   reloadData() {
     this.userService.getUtilisateurs().subscribe(data => {
       this.users = data;
@@ -33,19 +33,19 @@ export class GererUtilisateursPage implements OnInit {
   delUser(id: number) {
     this.userService.deleteUser(id).subscribe(async data => {
       console.log(data);
-      let toast = await this.toast.create({
+      const toast = await this.toast.create({
         message: 'Utilisateur supprimé',
         duration: 3000
       });
       toast.present();
       this.reloadData();
-    })
+    });
   }
 
   async handleButtonClick(id: number) {
     const alert = await this.alertController.create({
       header: 'Suppression',
-      message: 'Etes-vous sûr de supprimer cet ulitisateur ?',
+      message: 'Etes-vous sûr de vouloir supprimer cet ulitisateur ?',
       buttons: [
         {
           text: 'Non',
@@ -55,7 +55,7 @@ export class GererUtilisateursPage implements OnInit {
           text: 'Oui',
           cssClass: 'secondary',
           handler: () => {
-            this.delUser(id)
+            this.delUser(id);
           }
         }
       ]
