@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">CRÉATION ARTICLE</ion-title>
+  <ion-list lines="full">
+
+    <ion-item *ngIf="imageSelected">
+      <ion-label>Image d'illustration</ion-label>
+      <img src="{{imageSelected}}"/>
+    </ion-item>
+    <ion-item>
+      <button mat-raised-button (click)="openListImg()">Select image</button>      
+    </ion-item>
+    <form class="addUser" [class.close]="hide" [formGroup]="articleForm" (ngSubmit)="saveArticle()">
+
+      <ion-item>
+        <ion-label>Catégorie</ion-label>
+        <ion-select formControlName="categoryId" value="notifications" interface="action-sheet">
+          <ion-select-option *ngFor="let p of categories" [value]="p.id">{{p.tag}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Titre</ion-label>
+        <ion-input formControlName="titre" type="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contenu</ion-label>
+        <ion-textarea formControlName="contenu" type="textarea" required></ion-textarea>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-label position="floating">Image</ion-label>
+        <ion-input #file formControlName="image" type="file" hidden></ion-input>
+        <div class="addImg">
+          <ion-icon name="image" (click)="choisirImage()"></ion-icon>
+        </div>
+      </ion-item> -->
+            
+      <ion-row>
+        <ion-col>
+          <button type="submit" mat-raised-button color="primary">CRÉER</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+  <div *ngIf="hideListImg">
+    <ion-list lines="full">
+      <ion-label >Choisir l'image</ion-label>
+      <ion-item button *ngFor="let image of images; let i = index;" (click)='clickImage(i)'>
+        <img src="{{image}}"/>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  
+
+</ion-content>

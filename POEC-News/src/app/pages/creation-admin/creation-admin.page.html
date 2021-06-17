@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">CRÉATION COMPTE</ion-title>
+  <ion-list lines="full">
+
+    <form class="addUser" (ngSubmit)="onSubmit()" [class.close]="hide" name="form">
+
+      <ion-item>
+        <ion-label>Catégorie</ion-label>
+        <ion-select class="form-control" name="category" [(ngModel)]="form.category">
+          <ion-select-option value="0">Admin</ion-select-option>
+          <ion-select-option value="1">Rédacteur</ion-select-option>
+          <ion-select-option value="2">Utilisateur</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nom/Pseudo</ion-label>
+        <ion-input name="loginName" type="text" [(ngModel)]="form.loginName" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input name="email" type="email" [(ngModel)]="form.email" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input name="password" type="password" [(ngModel)]="form.password" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Confirmation du mot de passe</ion-label>
+        <ion-input name="password2" type="password" [(ngModel)]="form.password2" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button type="submit" mat-raised-button color="primary">CRÉER</button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+
+  </ion-list>
+
+</ion-content>

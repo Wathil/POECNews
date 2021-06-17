@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">MODIFIER ARTICLE</ion-title>
+
+  <ion-list lines="full">
+
+    <ion-item *ngIf="imageSelected">
+      <ion-label>Image d'illustration</ion-label>
+      <img src="{{imageSelected}}"/>
+    </ion-item>
+
+    <ion-item>
+      <button class="buttonSelect" mat-raised-button (click)="openListImg()">Select image</button>      
+    </ion-item>
+
+    <form [formGroup]="editForm" (ngSubmit)="saveForm()">
+
+      <ion-item>
+        <ion-label position="floating">Titre</ion-label>
+        <ion-input formControlName="titre" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item class="itemTextarea">
+        <ion-label position="floating">Contenu</ion-label>
+        <ion-textarea formControlName="contenu" type="textarea" autoGrow="false" required></ion-textarea>
+      </ion-item>
+
+      <div class="bouttons">
+        <button mat-raised-button color="primary" type="submit">MODIFIER</button>
+        <button class="annuler" mat-raised-button [routerLink]="['/gerer-articles/']">ANNULER</button>
+      </div>
+
+    </form>
+  </ion-list>
+
+  <div *ngIf="hideListImg">
+    <ion-list lines="full">
+      <ion-label >Choisir l'image</ion-label>
+      <ion-item button *ngFor="let image of images; let i = index;" (click)='clickImage(i)'>
+        <img src="{{image}}"/>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

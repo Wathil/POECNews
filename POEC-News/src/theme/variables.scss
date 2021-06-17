@@ -291,7 +291,19 @@ ion-title.title-large {
 }
 
 
+@font-face {
+  font-family: "RobotoSlab-Regular";
+  src: url("../assets/fonts/RobotoSlab-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
+:root,
+:root[mode="ios"],
+:root[mode="md"] {
+  --ion-font-family: "RobotoSlab-Regular", sans-serif !important;
+  font-family: "RobotoSlab-Regular", sans-serif !important;
+}
 
 
 

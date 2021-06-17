@@ -1,0 +1,50 @@
+.logo{
+    height: 40px;
+    margin-left: 27%;
+}
+
+.title{
+    margin-left: 6px !important;
+}
+
+.buttonLire{
+    margin: 5px;
+}
+
+.divLire{
+    text-align: end;
+}
+
+.loginName{
+    font-size: 17px;
+    color: white;
+    font-weight: 400;
+
+}
+
+.iconFilter{
+    position: absolute;     
+    left: 0.9em;     
+    font-size: 1.4em;
+    color: white;
+}
+
+.filtre{
+    text-align: center;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    background: #9e79df;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.articleHeader {
+    display: flex;    
+    justify-content: space-between;
+    padding: 0 0;
+}
+
+.ionContenu{
+    padding-bottom: 0;
+}

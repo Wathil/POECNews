@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">MODIFIER MES INFORMATIONS</ion-title>
+  <ion-list lines="full">
+
+    <form form name="form" #myForm="ngForm" (ngSubmit)="saveUser()">
+      <!-- <ion-item class="form-group" *ngIf="category==0">
+        <ion-label>Status</ion-label>
+        <ion-select value="2" class="form-control" name="category" [(ngModel)]="form.category">
+          <ion-select-option value="0">Admin</ion-select-option>
+          <ion-select-option value="1">Rédacteur</ion-select-option>
+          <ion-select-option value="2">Utilisateur</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+      <ion-item class="form-group">
+        <ion-label position="floating">Nom/Pseudo</ion-label>
+        <ion-input type="text" required class="form-control" name="loginName" [(ngModel)]="form.loginName"
+          #loginName="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel"></ion-input>
+      </ion-item>
+
+      <!-- <ion-item class="form-group">
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input type="password" class="form-control" name="password" [(ngModel)]="password"></ion-input>
+      </ion-item> -->
+      <div class="bouttons">
+        <button mat-raised-button color="primary" type="submit">MODIFIER</button>
+        <button class="annuler" mat-raised-button [routerLink]="['/home/']">ANNULER</button>
+      </div>
+
+    </form>
+  </ion-list>
+
+  <br>
+  <ion-list lines="full">
+    <ion-title class="title">MODIFIER LE MOT DE PASSE</ion-title>
+    <form name="form2" (ngSubmit)="changePassword()">
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Ancien mot de passe</ion-label>
+        <ion-input type="password" required class="form-control" name="oldPassword" [(ngModel)]="form2.oldPassword"
+          #oldPassword="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Nouveau mot de passe</ion-label>
+        <ion-input type="password" required class="form-control" name="newPassword" [(ngModel)]="form2.newPassword"
+          #oldPassword2="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item class="form-group">
+        <ion-label position="floating">Confirmation mot de passe</ion-label>
+        <ion-input type="password" required class="form-control" name="newPassword2" [(ngModel)]="form2.newPassword2"
+          #oldPassword2="ngModel"></ion-input>
+      </ion-item>
+      <br>
+      <div class="bouttons">
+        <button mat-raised-button color="primary" type="submit">MODIFIER</button>
+      </div>
+
+    </form>
+
+  </ion-list>
+
+</ion-content>

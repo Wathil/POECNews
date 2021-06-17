@@ -6,6 +6,8 @@
       "files": ["*.ts"],
       "parserOptions": {
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "tsconfigRootDir": "D:/POEC/projects/POECNews/POEC-News",
+        "sourceType": "module",
         "createDefaultProgram": true
       },
       "extends": [

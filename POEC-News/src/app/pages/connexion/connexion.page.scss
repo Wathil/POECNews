@@ -3,3 +3,38 @@
     margin: 10% 20%;
 }
 
+.connect {
+    padding: 0 13.5%;
+    display: flex;
+    flex-direction: column;
+}
+
+a{
+    color: #7e57c2;
+    font-size: small;
+    display: flex;
+    justify-content:flex-end;
+    padding: 5px;
+}
+
+::ng-deep .mat-form-field-wrapper  {
+        padding-bottom: 0;
+}    
+
+
+mat-form-field{
+    display: flex;
+    justify-content:center;    
+}
+
+.buttonIns{
+    background-color: #b39ddb;
+    color: #fff;
+}
+
+.divIns{
+    text-align: end;
+}
+
+
+

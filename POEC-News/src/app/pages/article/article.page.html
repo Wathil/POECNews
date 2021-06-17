@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="margCard" *ngIf="article">
+    <img src="{{ article.urlImage }}" />
+    <ion-card-title class="title">{{ article.titre }}</ion-card-title>
+    <ion-card-header class="articleHeader">
+      <ion-chip class="clearFix" outline color="secondary">
+        <ion-label (click)="afficheParAuteur(article.userId)">{{ article.author }}</ion-label>
+      </ion-chip>
+      <ion-chip class="clearFix" outline color="primary">
+        <ion-label (click)="afficheParCategory(article.categoryId)">{{ article.category }}</ion-label>
+      </ion-chip>
+    </ion-card-header>
+    <ion-card-content>{{article.contenu}}</ion-card-content>
+    <div class="commentBut">
+      <ion-chip outline color="dark" (click)="openComment()">
+        <ion-label>Commenter</ion-label>
+      </ion-chip>
+    </div>
+  </ion-card>
+  <div class="commentWrapper" [class.commentOpen]="!hideComment">
+    <mat-form-field appearance="fill" class="comField">
+      <mat-label>Commentaire</mat-label>
+      <textarea #commentaire matInput></textarea>
+    </mat-form-field>
+    <div class="sendContainer">
+      <ion-icon class="iconSend" name="send" color="primary" (click)="comment(commentaire.value)"></ion-icon>
+    </div>
+  </div>
+  <div *ngIf="coms.length">
+    <ion-card *ngFor="let com of coms">
+      <ion-card-content class="comCard">
+        <span class="comUser">{{com.user.loginName}}</span>
+        <div>{{com.contenu}}</div>
+        <span size="small">{{com.createdAt}}</span>
+        <ion-card *ngIf="com.response" class="margCard responseCard">
+          <span class="comUser">{{com.response.user.loginName}}</span>
+          <ion-card-content class="responseCardR">
+            {{com.response.contenu}}
+          </ion-card-content>
+        </ion-card>
+      </ion-card-content>
+      <div class="comFooter" *ngIf="!com.response">
+        <ion-icon class="resIcon" name="arrow-undo-circle" color="primary" (click)="openResponse(com.id)" *ngIf="isRedacteur"></ion-icon>
+      </div>
+      <div class="commentWrapper" [class.commentOpen]="!hideResponse && currentCommentId === com.id">
+        <mat-form-field appearance="fill" class="comField">
+          <mat-label>Réponse</mat-label>
+          <textarea #response matInput></textarea>
+        </mat-form-field>
+        <div class="sendContainer">
+          <ion-icon class="iconSend" name="send" color="primary" (click)="sendResponse(response.value, com.id)"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+
+</ion-content>

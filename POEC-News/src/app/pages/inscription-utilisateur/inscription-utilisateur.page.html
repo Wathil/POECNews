@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="title">CRÉATION COMPTE</ion-title>
+  <ion-list lines="full">
+
+    <div *ngIf="isSignedUp; else signupForm">
+      Vous êtes bien enregistré. Veuillez vous identifier!
+    </div>
+
+    <ng-template #signupForm>
+
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="loginName">Nom/Pseudo</ion-label>
+          <ion-input type="text" class="form-control" name="loginName" [(ngModel)]="form.loginName" #name="ngModel"
+            required></ion-input>
+          <div *ngIf="f.submitted && name.invalid">
+            <div *ngIf="loginName.errors.required">Nom/Pseudo obligatoire</div>
+          </div>
+        </ion-item>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="email">Email</ion-label>
+          <ion-input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required
+            email></ion-input>
+          <div *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required">Email obligatoire</div>
+            <div *ngIf="email.errors.email">Email non valide</div>
+          </div>
+        </ion-item>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="password">Mot de passe</ion-label>
+          <ion-input type="password" class="form-control" name="password" [(ngModel)]="form.password"
+            #password="ngModel" required minlength="6" ></ion-input>
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Mot de passe obligatoire</div>
+            <div *ngIf="password.errors.minlength">Mot de passe doit contenir au minimum 6 caractères</div>
+          </div>
+        </ion-item>
+
+        <ion-item class="form-group">
+          <ion-label position="floating" for="password2">Confirmation du mot de passe</ion-label>
+          <ion-input type="password" class="form-control" name="password2" [(ngModel)]="form.password2"
+            #password="ngModel" required minlength="6" ></ion-input>
+          <div *ngIf="f.submitted && password2.invalid">
+            <div *ngIf="password.errors.required">Confirmation du mot de passe obligatoire</div>
+            <div *ngIf="password.errors.minlength">Confirmation du mot de passe doit contenir au minimum 6 caractères</div>
+          </div>
+        </ion-item>
+        
+        <div class="bouttons">
+          <button mat-raised-button color="primary" type="submit">CRÉER</button>
+          <button class="annuler" mat-raised-button [routerLink]="['/connexion/']">ANNULER</button>
+        </div>
+
+      </form>
+
+    </ng-template>
+  </ion-list>
+
+</ion-content>

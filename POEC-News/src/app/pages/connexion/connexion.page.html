@@ -3,13 +3,36 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>  
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <img class="logo" src="./../../../assets/img/logo-POECNews.png">
+    <img class="logo" src="./assets/img/logo-POECNews.png">
   </ion-list>
 
+  <div *ngIf="isLoggedIn; else loggedOut">
+    Vous êtes connecté en tant que {{this.authService.getLoginName()}}.
+  </div>
+
+  <ng-template #loggedOut>
+
+    <form class="connect" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>EMAIL</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>MOT DE PASSE</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">CONNEXION</button>
+      <a routerLink="/rec-mdp">Mot de passe oublié</a>
+      <div class="divIns">
+        <button class="buttonIns" mat-raised-button [routerLink]="['/inscription-utilisateur/']">S'INSCRIRE</button>
+      </div>
+    </form> 
+
+  </ng-template>
 
 </ion-content>

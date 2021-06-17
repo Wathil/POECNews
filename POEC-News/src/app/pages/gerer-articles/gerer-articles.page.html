@@ -3,11 +3,37 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <img class="logo" src="./../../../assets/img/logo-POECNewsBlanc.png">
-  </ion-toolbar>  
+    <img class="logo" src="./assets/img/logo-POECNewsBlanc.png">
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-title>Gérer les articles</ion-title>
-  
+  <ion-list-header>
+    <ion-title class="title">GÉRER LES ARTICLES</ion-title>
+    <ion-icon name="add-circle" class="iconAdd" color="primary" [routerLink]="['/creation-article/']"></ion-icon>
+  </ion-list-header>
+
+  <ion-list>
+    <div *ngIf="articles.length; else spinner">
+      <div lines="inset" *ngFor="let elt of articles">
+        <ion-item>
+          <ion-label>
+            <p>{{ elt.author }}</p>
+            <p>{{ elt.titre }}</p>
+            <p>{{ elt.contenu.substr(0, 40)}}</p>
+          </ion-label>
+          <div>
+            <ion-icon name="create" style="zoom:1.6" color="primary" [routerLink]="['/modif-article/', elt.id]"></ion-icon>
+            <ion-icon name="trash" style="zoom:1.6" color="primary" (click)="handleButtonClick(elt.id)"></ion-icon>
+          </div>
+        </ion-item>
+      </div>
+    </div>
+  </ion-list>
 </ion-content>
+
+<ng-template #spinner>
+  <div id="spinner">
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+</ng-template>
