@@ -69,8 +69,12 @@ export class ConnexionPage implements OnInit {
           this.zone.run(() => this.router.navigateByUrl(`home`));
         }
       },
-      error => {
-        console.log('ERROR=' + error);
+      async error => {
+        const toast = await this.toast.create({
+          message: 'Email/Mot de passe incorrect',
+          duration: 3000
+        });
+        toast.present();
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
       }
