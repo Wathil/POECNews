@@ -80,12 +80,6 @@ export class CreationArticlePage implements OnInit {
     });
   }
 
-  // openFile() {
-  //   this.fileInput.getInputElement().then(el => {
-  //     el.click();
-  //   });
-  // }
-
   clickImage(i: number) {
     this.imageSelected = this.images[i];
     this.articleForm.controls.urlImage.setValue(this.images[i]);

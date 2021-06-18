@@ -35,8 +35,7 @@ module.exports = {
                     {model: db.user
                     }
                 ],
-                where: { articleId: articleIdParam },
-                order: [['id', 'DESC']]
+                where: { articleId: articleIdParam }
             }).then(commentaire =>{
                 const resObjt = commentaire.map(c => {
                     return Object.assign({}, {

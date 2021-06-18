@@ -34,7 +34,7 @@ export class ModifierMesInformationsPage implements OnInit {
     const id: number = +this.authService.getId();
     const categoryId = +this.authService.getCategoryId();
     const user = {
-      id: id,
+      id,
       loginName: this.form.loginName,
       email: this.form.email,
       category: categoryId,
@@ -44,20 +44,20 @@ export class ModifierMesInformationsPage implements OnInit {
 
     this.userService.updateUser(id, user).subscribe(
       async data => {
-      const toast = await this.toast.create({
-        message: 'Informations modifiées',
-        duration: 2000
+        const toast = await this.toast.create({
+          message: 'Informations modifiées',
+          duration: 2000
+        });
+        toast.present();
+        this.zone.run(() => this.router.navigateByUrl('home'));
+      },
+      error => {
+        this.toast.create({
+          message: 'Erreur:' + error,
+          duration: 2000
+        }).then(res => res.present());
+        console.log('ERROR=' + error);
       });
-      toast.present();
-      this.zone.run(() => this.router.navigateByUrl('home'));
-    },
-    error => {
-      this.toast.create({
-        message: 'Erreur:' + error,
-        duration: 2000
-      }).then(res => res.present());
-      console.log('ERROR=' + error);
-    });
   }
 
   async changePassword() {

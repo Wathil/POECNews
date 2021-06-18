@@ -45,7 +45,7 @@ export class GererArticlesPage implements OnInit {
   async handleButtonClick(id: number) {
     const alert = await this.alertController.create({
       header: 'Suppression',
-      message: 'Etes-vous sûr de supprimer cet article ?',
+      message: 'Etes-vous sûr de vouloir supprimer cet article ?',
       buttons: [
         {
           text: 'Non',
@@ -62,5 +62,4 @@ export class GererArticlesPage implements OnInit {
     });
     await alert.present();
   }
-
 }

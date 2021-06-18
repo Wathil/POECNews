@@ -46,7 +46,7 @@ export class GererCategoriesPage implements OnInit {
   async handleButtonClick(id: number) {
     const alert = await this.alertController.create({
       header: 'Suppression',
-      message: 'Etes-vous sûr de supprimer cette catégorie ?',
+      message: 'Etes-vous sûr de vouloir supprimer cette catégorie ?',
       buttons: [
         {
           text: 'Non',

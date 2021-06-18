@@ -22,7 +22,7 @@ export class GererRedacteursPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.reloadData()
+    this.reloadData();
   }
 
   reloadData() {
@@ -30,22 +30,22 @@ export class GererRedacteursPage implements OnInit {
       this.users = data;
     });
   }
-  
+
   delUser(id: number) {
     this.userService.deleteUser(id).subscribe(async data => {
-      let toast = await this.toast.create({
+      const toast = await this.toast.create({
         message: 'Rédacteur supprimé',
         duration: 3000
       });
       toast.present();
       this.reloadData();
-    })
+    });
   }
 
   async handleButtonClick(id: number) {
     const alert = await this.alertController.create({
       header: 'Suppression',
-      message: 'Etes-vous sûr de supprimer ce rédacteur ?',
+      message: 'Etes-vous sûr de vouloir supprimer ce rédacteur ?',
       buttons: [
         {
           text: 'Non',
@@ -55,12 +55,11 @@ export class GererRedacteursPage implements OnInit {
           text: 'Oui',
           cssClass: 'secondary',
           handler: () => {
-            this.delUser(id)
+            this.delUser(id);
           }
         }
       ]
     });
     await alert.present();
   }
-
 }
