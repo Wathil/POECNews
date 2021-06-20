@@ -1,5 +1,5 @@
 export class JwtResponse {
-    accessToken: string;
+    accessToken: string; // access token
     categoryId: string;
     id: string;
     loginName: string;

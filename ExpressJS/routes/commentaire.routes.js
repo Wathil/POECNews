@@ -1,4 +1,5 @@
 const controller = require("../controllers/commentaire.controller");
+const { authJwt } = require("../middleware");
 
 module.exports = function (router) {
 
@@ -11,10 +12,10 @@ module.exports = function (router) {
 
   router.get("/commentaires/:id", controller.getCommentaire);
 
-  router.post("/commentaires/add/", controller.addCommentaire); // ok
+  router.post("/commentaires/add/", [authJwt.verifyToken], controller.addCommentaire); // SECURE
 
-  router.delete("/commentaires/:id", controller.deleteCommentaire); // ok
+  router.delete("/commentaires/:id", [authJwt.verifyToken], controller.deleteCommentaire); // SECURE
 
-  router.put("/commentaires/:id", controller.updateCommentaire); // ok
+  router.put("/commentaires/:id", [authJwt.verifyToken], controller.updateCommentaire); // SECURE
 
 };

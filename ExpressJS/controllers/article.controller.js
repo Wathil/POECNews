@@ -69,6 +69,7 @@ module.exports = {
     },
     async getArticle(request, res) { // GET http://localhost:8080/articles/:id
         const id = request.params.id;
+        console.log("getArticle " + id);
         try {
             const articleCollection = await article.findOne({
                 where: { id: id }

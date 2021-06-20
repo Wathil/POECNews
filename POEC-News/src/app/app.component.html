@@ -3,7 +3,7 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
 
-        <ion-list *ngIf="role === 'administrateur'" id="inbox-list">
+        <ion-list *ngIf="this.authService.isAdministrateur(); else sinonRedacteur" id="inbox-list">
           <ion-list-header>
             <ion-label>Mon compte</ion-label>
           </ion-list-header>
@@ -18,71 +18,61 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+        </ion-list>
+        <ng-template #sinonRedacteur>
+          <ion-list *ngIf="this.authService.isRedacteur(); else sinonUtilisateur" id="inbox-list">
+            <ion-list-header>
+              <ion-label>Mon compte</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>{{this.authService.getLoginName()}}</ion-label>
+            </ion-item>
+            <br>
+            <ion-menu-toggle *ngFor="let p of liensRedacteur" auto-hide="false">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+                routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ng-template>
+        <ng-template #sinonUtilisateur>
+          <ion-list *ngIf="this.authService.isUtilisateur(); else sinonInvite" id="inbox-list">
+            <ion-list-header>
+              <ion-label>Mon compte</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>{{this.authService.getLoginName()}}</ion-label>
+            </ion-item>
+            <br>
+            <ion-menu-toggle *ngFor="let p of liensUtilisateur" auto-hide="false">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+                routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ng-template>
+        <ng-template #sinonInvite>
+          <ion-list id="inbox-list">
+            <ion-list-header>
+              <ion-label>Menu</ion-label>
+            </ion-list-header>
+            <br>
+            <ion-menu-toggle *ngFor="let p of lienDefault" auto-hide="false">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+                routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ng-template>
+
+        <ion-list *ngIf="this.authService.isConnected()" id="inbox-list">
           <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
-        </ion-list>
-
-        <ion-list *ngIf="role === 'redacteur'" id="inbox-list">
-          <ion-list-header>
-            <ion-label>Mon compte</ion-label>
-          </ion-list-header>
-          <ion-item>
-            <ion-label>{{this.authService.getLoginName()}}</ion-label>
-          </ion-item>
-          <br>
-          <ion-menu-toggle *ngFor="let p of liensRedacteur" auto-hide="false">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
-        </ion-list>
-
-        <ion-list *ngIf="role === 'utilisateur'" id="inbox-list">
-          <ion-list-header>
-            <ion-label>Mon compte</ion-label>
-          </ion-list-header>
-          <ion-item>
-            <ion-label>{{this.authService.getLoginName()}}</ion-label>
-          </ion-item>
-          <br>
-          <ion-menu-toggle *ngFor="let p of liensUtilisateur" auto-hide="false">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          <button mat-button color="primary" (click)="logout()">Se déconnecter</button>
-        </ion-list>
-
-        <ion-list *ngIf="role === 'invite'" id="inbox-list">
-          <ion-list-header>
-            <ion-label>Menu</ion-label>
-          </ion-list-header>
-          <br>
-          <ion-menu-toggle *ngFor="let p of lienDefault" auto-hide="false">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list *ngIf="!role" id="inbox-list">
-          <ion-list-header>
-            <ion-label>Menu</ion-label>
-          </ion-list-header>
-          <br>
-          <ion-menu-toggle *ngFor="let p of lienDefault" auto-hide="false">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
         </ion-list>
 
       </ion-content>

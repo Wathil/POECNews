@@ -1,4 +1,5 @@
 const controller = require("../controllers/category.controller");
+const { authJwt } = require("../middleware");
 
 module.exports = function (router) {
 
@@ -9,10 +10,10 @@ module.exports = function (router) {
 
   router.get("/categories/:id", controller.getCategory); // ok
 
-  router.post("/categories/add/", controller.addCategory); // ok
+  router.post("/categories/add/", [authJwt.verifyToken, authJwt.isRedacteur], controller.addCategory); // SECURE
 
-  router.delete("/categories/:id", controller.deleteCategory); // ok
+  router.delete("/categories/:id", [authJwt.verifyToken, authJwt.isRedacteur], controller.deleteCategory); // SECURE
 
-  router.put("/categories/:id", controller.updateCategory); // ok
+  router.put("/categories/:id", [authJwt.verifyToken, authJwt.isRedacteur], controller.updateCategory); // SECURE
 
 };

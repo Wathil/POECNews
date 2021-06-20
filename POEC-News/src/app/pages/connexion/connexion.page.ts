@@ -2,7 +2,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AuthLoginInfo } from 'src/app/auth/login-info';
 
@@ -19,8 +18,6 @@ export class ConnexionPage implements OnInit {
   });
 
   form: any = {};
-  isLoggedIn = false;
-  isLoginFailed = false;
   errorMessage = '';
   loginName = '';
   private loginInfo: AuthLoginInfo;
@@ -30,7 +27,6 @@ export class ConnexionPage implements OnInit {
     private toast: ToastController,
     private zone: NgZone,
     private router: Router,
-    private appComponent: AppComponent,
     private formBuilder: FormBuilder
   ) { }
 
@@ -38,8 +34,7 @@ export class ConnexionPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    if (this.authService.isLogged()) {
-      this.isLoggedIn = true;
+    if (this.authService.isConnected()) {
       this.loginName = this.authService.getLoginName();
     }
   }
@@ -53,15 +48,14 @@ export class ConnexionPage implements OnInit {
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       async jwtResponse => {
+        console.log("jwtResponse.accessToken=" + jwtResponse.accessToken);
         this.authService.setJwtResponse(jwtResponse);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
         const toast = await this.toast.create({
           message: 'Connexion réussie.',
           duration: 3000
         });
         toast.present();
-        this.appComponent.refreshRole();
+        //this.appComponent.refreshRole();
         if (this.authService.redirectUrl) {
           this.zone.run(() => this.router.navigateByUrl(this.authService.redirectUrl));
         }
@@ -70,13 +64,13 @@ export class ConnexionPage implements OnInit {
         }
       },
       async error => {
+        console.log("error=" + JSON.stringify(error));
         const toast = await this.toast.create({
           message: 'Email/Mot de passe incorrect',
           duration: 3000
         });
         toast.present();
-        this.errorMessage = error.error.message;
-        this.isLoginFailed = true;
+        this.errorMessage = error.message;
       }
     );
   }

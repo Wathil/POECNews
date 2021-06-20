@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    if (this.authService.isLogged()) {
+    if (this.authService.isConnected()) {
       this.info = {
         loginName: this.authService.getLoginName()
       };

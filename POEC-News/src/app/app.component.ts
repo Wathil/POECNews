@@ -37,23 +37,11 @@ export class AppComponent implements OnInit {
     { title: 'Connexion', url: 'connexion', icon: 'log-in' }
   ];
 
-  private role = 'invite'; // Valeur par défaut
   constructor(
     private authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
-  }
-
-  refreshRole() {
-    if (this.authService.isAdministrateur()) // ExpressJS auth.controller.js
-      {this.role = 'administrateur';}
-    else if (this.authService.isRedacteur()) // ExpressJS auth.controller.js
-      {this.role = 'redacteur';}
-    else if (this.authService.isUtilisateur()) // ExpressJS auth.controller.js
-      {this.role = 'utilisateur';}
-    else
-      {this.role = 'invite';}
   }
 
   logout() {
