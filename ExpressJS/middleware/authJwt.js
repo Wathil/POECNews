@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
-const db = require("../models");
-const userTable = db.user;
 
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
+
+  //console.log("req.headers=" + JSON.stringify(req.headers)); // "x-access-token":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjI0MTEzNzQwLCJleHAiOjE2MjQyMDAxNDB9.olcSOirBet8q70gF_i1CvrdbJBKcM0pl_uNCgBUNO1w"
 
   if (!token) {
     return res.status(403).send({
@@ -19,90 +19,66 @@ verifyToken = (req, res, next) => {
       });
     }
     req.userId = decoded.id;
+    req.role = decoded.role;
     next();
   });
 };
 
 isUtilisateur = (req, res, next) => {
-  userTable.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "utilisateur") {
-          next();
-          return;
-        }
-      }
+  if (req.role === "administrateur") {
+    next();
+    return;
+  }
 
-      res.status(403).send({
-        message: "Require utilisateur Role!"
-      });
-      return;
-    });
+  if (req.role === "redacteur") {
+    next();
+    return;
+  }
+
+  if (req.role === "utilisateur") {
+    next();
+    return;
+  }
+
+  res.status(403).send({
+    message: "Require utilisateur Role!"
   });
-};
-
-isAdministrateur = (req, res, next) => {
-  userTable.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "administrateur") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Require administrateur Role!"
-      });
-      return;
-    });
-  });
+  return;
 };
 
 isRedacteur = (req, res, next) => {
-  userTable.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "redacteur") {
-          next();
-          return;
-        }
-      }
+  if (req.role === "administrateur") {
+    next();
+    return;
+  }
 
-      res.status(403).send({
-        message: "Require rédacteur Role!"
-      });
-    });
+  if (req.role === "redacteur") {
+    next();
+    return;
+  }
+
+  res.status(403).send({
+    message: "Require redacteur Role!"
   });
+  return;
 };
 
-isRedacteurOrAdministrateur = (req, res, next) => {
-  userTable.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "redacteur") {
-          next();
-          return;
-        }
+isAdministrateur = (req, res, next) => {
+  if (req.role === "administrateur") {
+    next();
+    return;
+  }
 
-        if (roles[i].name === "administrateur") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Require rédacteur or administrateur Role!"
-      });
-    });
+  res.status(403).send({
+    message: "Require administrateur Role!"
   });
+  return;
 };
 
 const authJwt = {
   verifyToken: verifyToken,
   isUtilisateur: isUtilisateur,
   isAdministrateur: isAdministrateur,
-  isRedacteur: isRedacteur,
-  isRedacteurOrAdministrateur: isRedacteurOrAdministrateur
+  isRedacteur: isRedacteur
 };
 module.exports = authJwt;

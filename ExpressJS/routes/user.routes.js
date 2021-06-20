@@ -1,4 +1,5 @@
 const controller = require("../controllers/user.controller");
+const { authJwt } = require("../middleware");
 
 module.exports = function (router) {
 
@@ -13,13 +14,13 @@ module.exports = function (router) {
 
   router.get("/users/:id", controller.getUser); // ok
 
-  router.post("/users/add/", controller.addUser); // ok
+  router.post("/users/add/", [authJwt.verifyToken, authJwt.isAdministrateur], controller.addUser); // SECURE
 
-  router.delete("/users/:id", controller.deleteUser); // ok
+  router.delete("/users/:id", [authJwt.verifyToken, authJwt.isAdministrateur], controller.deleteUser); // SECURE
 
-  router.put("/users/:id", controller.updateUser); // ok
+  router.put("/users/:id", [authJwt.verifyToken, authJwt.isAdministrateur], controller.updateUser); // SECURE
 
-  router.put("/userswithpassword/:id", controller.updateUserWithPassword); // ok // http://localhost:8080/userswithpassword/:id
+  router.put("/userswithpassword/:id", [authJwt.verifyToken, authJwt.isAdministrateur], controller.updateUserWithPassword); // ok // http://localhost:8080/userswithpassword/:id
 
   router.post("/users/login/", controller.login);
 

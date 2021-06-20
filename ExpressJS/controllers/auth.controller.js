@@ -64,23 +64,25 @@ exports.signin = (req, res) => { // connexion login
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
-      });
-
       var lesRoles = [];
+      var idRoles = [];
       user.getRoles().then(roles => {
         for (let i = 0; i < roles.length; i++) {
           lesRoles.push(roles[i].name); // !
-          console.log("roles[i].name=" + roles[i].name);
+          idRoles.push(roles[i].id); //!
         }
+
+        var token = jwt.sign({ id: user.id, role: lesRoles[0] }, config.secret, { // accès direct roles
+          expiresIn: 86400 // 24 hours
+        });
+
         res.status(200).send({
           id: user.id,
           loginName: user.loginName,
           email: user.email,
           accredit: user.accredit,
           roles: lesRoles,
-          accessToken: token
+          accessToken: token // !
         });
       });
     })
