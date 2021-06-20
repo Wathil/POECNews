@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Article } from 'src/app/classes/Article';
 import { Commentaire } from 'src/app/classes/Commentaire';
@@ -38,6 +40,7 @@ export class ArticlePage implements OnInit {
     private zone: NgZone,
     private router: Router,
     private auth: AuthService,
+    private toast: ToastController
   ) { }
 
   ngOnInit() {
@@ -55,7 +58,6 @@ export class ArticlePage implements OnInit {
       }
       this.commentaireService.getCommentairesByArticleId(this.id).subscribe(com => {
         if (com) {
-          console.log(com);
           com.forEach(c => {
             if (c.resId == null) {
               this.coms.push(c);
@@ -67,6 +69,14 @@ export class ArticlePage implements OnInit {
           this.coms.sort((a, b) => b.id - a.id);
         }
       });
+    },
+    async error => {
+      const toast = await this.toast.create({
+        message: `Vous n'êtes pas autorisé à voir ce contenu.`,
+        duration: 3000
+      });
+      toast.present();
+      this.zone.run(() => this.router.navigateByUrl(`home`));
     });
     this.isRedacteur = this.auth.isRedacteur();
   }
@@ -78,7 +88,6 @@ export class ArticlePage implements OnInit {
         articleId: this.id,
         contenu: textComment
       });
-      console.log(this.commentaire);
 
       this.commentaireService.addCommentaire(sendComment).subscribe(newComment => {
         this.commentaire.nativeElement.value = '';
@@ -113,7 +122,6 @@ export class ArticlePage implements OnInit {
         contenu: textResponse,
         resId: comId
       });
-      console.log(this.commentaire);
 
       this.commentaireService.addCommentaire(sendResponse).subscribe(newComment => {
         this.response.nativeElement.value = '';

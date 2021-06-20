@@ -49,10 +49,27 @@ export class InscriptionUtilisateurPage implements OnInit {
           });
           toast.present();
         },
-        error => {
-          console.log(error);
-          this.errorMessage = error.message;
+        async err => {
+          console.log("reset=");
+          console.log("this.signupInfo.loginName=" + this.signupInfo.loginName);
+          this.form.loginName = this.signupInfo.loginName;
+          console.log("this.signupInfo.email=" + this.signupInfo.email);
+          this.form.email = this.signupInfo.email;
+          console.log("this.signupInfo.password=" + this.signupInfo.password);
+          this.form.password = this.signupInfo.password;
+          this.form.password2 = this.signupInfo.password;
+
+
+          console.log("error=" + JSON.stringify(err));
+          console.log(err);
+          this.errorMessage = err.error.message;
           this.isSignUpFailed = true;
+
+          let toast = await this.toast.create({
+            message: err.error.message,
+            duration: 3000
+          });
+          toast.present();
         }
       );
     }

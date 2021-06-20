@@ -6,11 +6,12 @@ import { JwtResponse } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
 import { SignUpInfo } from './signup-info';
 import { ChangePassword } from './ChangePassword';
+import { map, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' })
 };
-const TOKEN_KEY = 'AuthToken'; // save token
+const TOKEN_KEY = 'AuthToken'; // saved token
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  public saveToken(token: string) {
+  public saveToken(token: string) { // nerver called
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
@@ -37,14 +38,7 @@ export class AuthService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
-  // this.httpClient
-  // .get("data-url")
-  // .subscribe(
-  //   data => console.log('success', data),
-  //   error => console.log('oops', error)
-  // );
-
-  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
+  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> { // login => token
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
@@ -57,6 +51,8 @@ export class AuthService {
   }
 
   setJwtResponse(jwtResponse: JwtResponse) {
+    this.saveToken(jwtResponse.accessToken);
+
     Object.keys(jwtResponse.roles).map(key => console.log(jwtResponse.roles[key]));
 
     if (jwtResponse && jwtResponse.roles) {
@@ -83,8 +79,10 @@ export class AuthService {
     }
   }
 
-  public isLogged(): boolean {
-    return (this.userLogged != null);
+  isConnected() {
+    if (Boolean(this.getToken()))
+      return true;
+    return false;
   }
 
   public getId(): string {

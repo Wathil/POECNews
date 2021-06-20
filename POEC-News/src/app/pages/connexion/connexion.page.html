@@ -11,7 +11,7 @@
     <img class="logo" src="./assets/img/logo-POECNews.png">
   </ion-list>
 
-  <div *ngIf="isLoggedIn; else loggedOut">
+  <div *ngIf="this.authService.isConnected(); else loggedOut">
     Vous êtes connecté en tant que {{this.authService.getLoginName()}}.
   </div>
 

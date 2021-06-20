@@ -58,7 +58,6 @@ export class UserService {
       .pipe(
         map((res: any) => {
           //redacteur.id = res.id;
-          console.log("res=" + res);
           return res || {}
         }),
         catchError(this.errorMgmt)
